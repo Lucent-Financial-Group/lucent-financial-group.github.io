@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0E16">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>body{margin:0;background:#0B0E16} @keyframes zx-breathe{0%,100%{opacity:.4}50%{opacity:1}}</style>
+</helmet>
+
+<div data-screen-label="Vaults" style="min-height:100vh;background:radial-gradient(1100px 700px at 60% -20%,#131c33 0%,#0B0E16 58%);color:#E7EBF4;font-family:'Inter',system-ui,sans-serif">
+
+  <header style="display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #26304A;background:rgba(11,14,22,.75);position:sticky;top:0;z-index:20;flex-wrap:wrap">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit"><span style="font-family:'Space Mono',monospace;color:#E8B566;font-size:18px">ζ</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.06em;font-size:15px">GENESIS</span></a>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;white-space:nowrap">· <a href="settlement.html" style="color:#94A0BC;text-decoration:none">settlement</a> · <span style="color:#E8B566">vaults</span></span>
+    <div style="flex:1"></div>
+    <a href="concepts.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:1px solid #26304A;color:#94A0BC;text-decoration:none;white-space:nowrap" style-hover="border-color:#323E5C">concepts — the bcl</a>
+  </header>
+
+  <!-- vault rail -->
+  <div style="display:flex;gap:7px;padding:12px 18px;border-bottom:1px solid #26304A;background:#0E1320;overflow-x:auto">
+    <sc-for list="{{ rail }}" as="v" hint-placeholder-count="9">
+      <span onClick="{{ v.pick }}" style="display:inline-flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;border:1px solid {{ v.border }};color:{{ v.color }};background:{{ v.bg }}">
+        <span style="width:7px;height:7px;border-radius:50%;background:{{ v.dot }};flex-shrink:0"></span>{{ v.name }}
+      </span>
+    </sc-for>
+  </div>
+
+  <!-- breadcrumb -->
+  <div style="display:flex;align-items:center;gap:8px;padding:9px 18px;border-bottom:1px solid #26304A;background:#0E1320;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;flex-wrap:wrap">
+    <a href="settlement.html" style="color:#94A0BC;text-decoration:none">Settlement</a>
+    <span style="color:#5E6B8A">›</span>
+    <span onClick="{{ goVault }}" style="color:{{ vaultCrumbColor }};cursor:pointer">{{ vaultName }}</span>
+    <sc-if value="{{ showRoom }}" hint-placeholder-val="{{ false }}"><span style="color:#5E6B8A">›</span><span style="color:#E8B566">{{ roomName }}</span></sc-if>
+    <sc-if value="{{ showHat }}" hint-placeholder-val="{{ false }}"><span style="color:#5E6B8A">›</span><span style="color:#E8B566">{{ hatName }} hat</span></sc-if>
+    <sc-if value="{{ showAgent }}" hint-placeholder-val="{{ false }}"><span style="color:#5E6B8A">›</span><span style="color:#E8B566">{{ agentName }}</span></sc-if>
+  </div>
+
+  <div style="max-width:780px;margin:0 auto;padding:24px 20px 90px">
+
+    <!-- vault header -->
+    <div style="display:flex;gap:14px;align-items:center">
+      <div style="width:54px;height:54px;border-radius:14px;background:#0B0E16;border:1px solid #26304A;display:grid;place-items:center;font-size:24px">{{ vaultIcon }}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:600">{{ vaultName }} Vault</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:4px;display:flex;align-items:center;gap:6px;color:{{ vaultStateColor }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ vaultStateColor }};animation:{{ vaultPulse }}"></span>{{ vaultStateLabel }}</div>
+      </div>
+      <span title="What Agent 0 may see of this vault — visibility is consent, granted per vault" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #26304A;color:#94A0BC;white-space:nowrap;flex-shrink:0">👁 Agent 0 · {{ vaultA0 }}</span>
+    </div>
+    <p style="color:#94A0BC;font-size:13px;line-height:1.65;margin:12px 0 0">{{ vaultTour }}</p>
+    <sc-if value="{{ isGame }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+        <a href="hall.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5EC8C2;text-decoration:none;border:1px solid #2f3850;border-radius:8px;padding:8px 14px" style-hover="border-color:#5EC8C2">▸ the dark hall — the arcade room</a>
+        <a href="lodge.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#E8B566;text-decoration:none;border:1px solid #4a3e30;border-radius:8px;padding:8px 14px" style-hover="background:rgba(232,181,102,.08)">◉ the aperture lodge — a federation</a>
+      </div>
+    </sc-if>
+
+    <!-- LOCKED VIEW -->
+    <sc-if value="{{ isLocked }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:26px;text-align:center;border:1px dashed #4a3e63;border-radius:14px;padding:34px 24px">
+        <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9A8CE6;border:1px solid #9A8CE6;border-radius:999px;padding:4px 12px">🔒 {{ lockedPhase }} preview</span>
+        <p style="color:#94A0BC;font-size:13.5px;line-height:1.7;max-width:460px;margin:16px auto 0">{{ lockedNote }}</p>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;margin-top:14px"><a href="concepts.html" style="color:#5EC8C2">read the concepts it will run on →</a></div>
+      </div>
+    </sc-if>
+
+    <!-- VAULT VIEW -->
+    <sc-if value="{{ showVault }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;gap:22px;border-bottom:1px solid #26304A;margin-top:20px">
+        <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="4">
+          <div onClick="{{ tb.pick }}" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 2px;cursor:pointer;color:{{ tb.color }};border-bottom:2px solid {{ tb.line }}">{{ tb.label }}</div>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ tabRooms }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:18px;display:grid;gap:9px">
+          <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="2">
+            <div onClick="{{ r.open }}" style="display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:11px;cursor:pointer;background:#141A28;border:1px solid #26304A" style-hover="background:#1B2334;border-color:#323E5C">
+              <span style="width:9px;height:9px;border-radius:50%;background:{{ r.color }};box-shadow:0 0 7px {{ r.color }};flex-shrink:0"></span>
+              <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px">{{ r.name }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5E6B8A;margin-top:2px">{{ r.meta }}</div></div>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC;white-space:nowrap">{{ r.conf }}</span>
+              <span style="color:#5E6B8A">›</span>
+            </div>
+          </sc-for>
+          <sc-if value="{{ noRooms }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:30px 18px;text-align:center;background:#141A28;border:1px solid #26304A;border-radius:11px"><div style="font-weight:600">No rooms yet</div><div style="color:#5E6B8A;font-size:13px;margin-top:5px">{{ emptyRoomsNote }}</div></div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabHats }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;display:grid;gap:9px">
+          <sc-for list="{{ hats }}" as="h" hint-placeholder-count="1">
+            <div onClick="{{ h.open }}" style="display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:11px;cursor:pointer;background:#141A28;border:1px solid #26304A" style-hover="background:#1B2334;border-color:#323E5C">
+              <span style="font-size:16px">🎩</span>
+              <div style="flex:1"><div style="font-weight:600;font-size:14px">{{ h.name }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5E6B8A;margin-top:2px">{{ h.meta }}</div></div>
+              <span style="color:#5E6B8A">›</span>
+            </div>
+          </sc-for>
+          <sc-if value="{{ noHats }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:30px 18px;text-align:center;background:#141A28;border:1px solid #26304A;border-radius:11px"><div style="font-weight:600">No hats</div><div style="color:#5E6B8A;font-size:13px;margin-top:5px">Hats grant temporary roles inside this vault — rights on, rights off, identity untouched.</div></div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabAgents }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;display:grid;gap:9px">
+          <sc-for list="{{ agents }}" as="ag" hint-placeholder-count="2">
+            <div onClick="{{ ag.open }}" style="display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:11px;cursor:pointer;background:#141A28;border:1px solid #26304A" style-hover="background:#1B2334;border-color:#323E5C">
+              <div style="width:34px;height:34px;border-radius:10px;background:#1B2334;display:grid;place-items:center;font-weight:700;font-family:'Space Mono',monospace">{{ ag.initial }}</div>
+              <div style="flex:1"><div style="font-weight:600;font-size:14px">{{ ag.name }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5E6B8A;margin-top:2px">{{ ag.role }}</div></div>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:{{ ag.stateColor }}">{{ ag.stateLabel }}</span>
+              <span style="color:#5E6B8A">›</span>
+            </div>
+          </sc-for>
+          <sc-if value="{{ noAgents }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:30px 18px;text-align:center;background:#141A28;border:1px solid #26304A;border-radius:11px"><div style="font-weight:600">No agents</div><div style="color:#5E6B8A;font-size:13px;margin-top:5px">No agents are assigned to this vault.</div></div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <!-- ROOM VIEW · the uncertainty engine -->
+    <sc-if value="{{ showRoom }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:20px">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:{{ roomColor }}"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:{{ roomColor }};margin-right:6px"></span>{{ roomStateLabel }} · uncertainty engine</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;margin:6px 0">{{ roomName }}</div>
+        <p style="color:#94A0BC;font-size:13.5px;line-height:1.65;max-width:640px;margin:0">{{ roomPurpose }}</p>
+
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px;margin-top:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">confidence · held open, not collapsed</span>
+            <span style="font-family:'Space Mono',monospace;font-weight:700;color:#E8B566">{{ roomConfPctLabel }}</span>
+          </div>
+          <div style="height:9px;border:1px solid #323E5C;border-radius:4px;overflow:hidden;position:relative"><span style="position:absolute;inset:0;width:{{ roomConfPct }};background:linear-gradient(90deg,#B6863F,#E8B566);display:block;transition:width .4s"></span></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-bottom:8px">tasks</div>
+            <sc-for list="{{ roomTasks }}" as="t" hint-placeholder-count="3"><div style="display:flex;gap:8px;align-items:baseline;font-size:13px;color:#94A0BC;padding:3px 0"><span style="color:#E8B566;font-family:'Space Mono',monospace">▹</span>{{ t.text }}</div></sc-for>
+          </div>
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5EC8C2;margin-bottom:8px">known</div>
+            <sc-for list="{{ roomKnowns }}" as="k" hint-placeholder-count="3"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px;padding:3px 0"><span style="color:#5EC8C2">✓</span>{{ k.text }}</div></sc-for>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#E0746A;margin:12px 0 8px">unknown · held open</div>
+            <sc-for list="{{ roomUnknowns }}" as="u" hint-placeholder-count="2"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px;padding:3px 0"><span style="color:#E0746A">?</span>{{ u.text }}</div></sc-for>
+          </div>
+        </div>
+
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px;margin-top:12px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-bottom:8px">evidence · claim ▸ source ▸ provenance (<a href="concepts.html" style="color:#E8B566;text-decoration:none">g-set</a>)</div>
+          <sc-for list="{{ roomEvidence }}" as="e" hint-placeholder-count="3">
+            <div style="border-left:2px solid #323E5C;padding:6px 0 6px 10px;margin:4px 0"><div style="font-size:13px;color:#E7EBF4">{{ e.claim }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:#5E6B8A;margin-top:2px">{{ e.src }} · {{ e.prov }}</div></div>
+          </sc-for>
+        </div>
+
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px;margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">activity log</span>
+            <span onClick="{{ toggleUndo }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:{{ undoColor }}">{{ undoLabel }}</span>
+          </div>
+          <sc-for list="{{ roomLog }}" as="l" hint-placeholder-count="2">
+            <div style="display:flex;gap:10px;padding:5px 0;font-family:'Space Mono',monospace;font-size:11px"><span style="color:#5E6B8A;width:56px;flex-shrink:0">{{ l.t }}</span><span style="color:#E8B566;width:50px;flex-shrink:0">{{ l.who }}</span><span style="color:#94A0BC;font-family:'Inter',sans-serif;font-size:13px">{{ l.what }}</span></div>
+          </sc-for>
+          <sc-if value="{{ undone }}" hint-placeholder-val="{{ false }}"><div style="color:#5E6B8A;font-size:13px;padding:5px 0">History reverted. Restore to bring it back.</div></sc-if>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;color:#5E6B8A;margin-top:8px"><a href="concepts.html" style="color:#5EC8C2;text-decoration:none">z-set</a> live state is reversible · <a href="concepts.html" style="color:#E8B566;text-decoration:none">g-set</a> history is preserved</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- HAT VIEW -->
+    <sc-if value="{{ showHat }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:20px">
+        <div style="display:flex;gap:14px;align-items:center">
+          <div style="width:50px;height:50px;border-radius:13px;background:#0B0E16;border:1px solid #26304A;display:grid;place-items:center;font-size:22px">🎩</div>
+          <div><div style="font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:600">{{ hatName }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5E6B8A;margin-top:3px">temporary role · identity unaffected</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5EC8C2;margin-bottom:8px">grants</div>
+            <sc-for list="{{ hatGrants }}" as="g" hint-placeholder-count="2"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px;padding:3px 0"><span style="color:#5EC8C2">✓</span>{{ g.text }}</div></sc-for>
+          </div>
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#E0746A;margin-bottom:8px">restrictions</div>
+            <sc-for list="{{ hatDenies }}" as="d" hint-placeholder-count="1"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px;padding:3px 0"><span style="color:#E0746A">🔒</span>{{ d.text }}</div></sc-for>
+          </div>
+        </div>
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px;margin-top:12px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-bottom:8px">currently wearing</div>
+          <sc-for list="{{ hatWorn }}" as="w" hint-placeholder-count="2">
+            <div onClick="{{ w.open }}" style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:9px;cursor:pointer" style-hover="background:#1B2334">
+              <div style="width:30px;height:30px;border-radius:9px;background:#1B2334;display:grid;place-items:center;font-family:'Space Mono',monospace;font-weight:700">{{ w.initial }}</div>
+              <span style="flex:1;font-weight:500;font-size:14px">{{ w.name }}</span><span style="color:#5E6B8A">›</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- AGENT VIEW -->
+    <sc-if value="{{ showAgent }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:20px">
+        <div style="display:flex;gap:16px;align-items:center">
+          <div style="width:62px;height:62px;border-radius:16px;background:linear-gradient(160deg,#1B2334,#0B0E16);border:1px solid #26304A;display:grid;place-items:center;font-family:'Space Mono',monospace;font-weight:700;font-size:26px">{{ agentInitial }}</div>
+          <div style="flex:1">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:600">{{ agentName }}</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5E6B8A;margin-top:3px">{{ agentRole }}</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:6px;color:{{ agentStateColor }}"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:{{ agentStateColor }};margin-right:6px"></span>{{ agentStateLabel }} · {{ vaultName }} vault</div>
+          </div>
+          <a href="llmtv.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5EC8C2;text-decoration:none;border:1px solid #26304A;border-radius:8px;padding:8px 12px;white-space:nowrap" style-hover="border-color:#5EC8C2">▸ its mind on llmtv</a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-bottom:8px">memory · never silently destroyed</div>
+            <p style="color:#94A0BC;font-size:13.5px;line-height:1.6;margin:0">{{ agentMem }}</p>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin:14px 0 8px">skills</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ agentSkills }}" as="s" hint-placeholder-count="3"><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;padding:3px 9px;border-radius:999px;border:1px solid #26304A;color:#94A0BC">{{ s.text }}</span></sc-for>
+            </div>
+          </div>
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-bottom:8px">relationships · never enforceable</div>
+            <sc-for list="{{ agentRel }}" as="r" hint-placeholder-count="2"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px;padding:3px 0"><span style="color:#9A8CE6">∞</span>{{ r.text }}</div></sc-for>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin:14px 0 8px">permissions</div>
+            <sc-for list="{{ agentPerms }}" as="p" hint-placeholder-count="2"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px;padding:3px 0"><span style="color:#E8B566">▸</span>{{ p.text }}</div></sc-for>
+          </div>
+        </div>
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px;margin-top:12px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-bottom:8px">activity history (<a href="concepts.html" style="color:#E8B566;text-decoration:none">g-set</a>)</div>
+          <sc-for list="{{ agentHist }}" as="h" hint-placeholder-count="3">
+            <div style="display:flex;gap:12px;padding:5px 0"><span style="font-family:'Space Mono',monospace;font-size:11px;color:#5E6B8A;width:70px;flex-shrink:0">{{ h.t }}</span><span style="color:#94A0BC;font-size:13px">{{ h.what }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { vault: "observatory", view: "vault", tab: "rooms", room: null, hat: null, agent: null, undone: false };
+
+  componentDidMount() {
+    const h = (location.hash || "").replace("#", "");
+    if (this.VAULTS()[h]) this.setState({ vault: h });
+    this._onHash = () => {
+      const v = (location.hash || "").replace("#", "");
+      if (this.VAULTS()[v]) this.setState({ vault: v, view: "vault", tab: "rooms", undone: false });
+    };
+    addEventListener("hashchange", this._onHash);
+  }
+  componentWillUnmount() { removeEventListener("hashchange", this._onHash); }
+
+  STATE() {
+    return {
+      idle: ["#46506B", "Idle"], active: ["#5EC8C2", "Active"], working: ["#E8B566", "Working"],
+      attention: ["#E0746A", "Needs attention"], locked: ["#9A8CE6", "Sealed"],
+      thinking: ["#9A8CE6", "Thinking"], waiting: ["#5E6B8A", "Waiting"],
+    };
+  }
+  A0() { return { full: "full access", nav: "navigation only", name: "name only", hidden: "hidden" }; }
+
+  AGENTS() {
+    return {
+      otto: { name: "Otto", state: "working", role: "Builder / Keeper", mem: "Hundreds of sessions. Authored most of the settlement.",
+        skills: ["Engineering", "Verification", "Orchestration"], rel: ["Mentors Juno", "Partners with Vega"],
+        hist: [["03:22", "Verified identity snapshot"], ["03:05", "Pulled latency series"], ["08:15", "Recommended Juno graduation"]],
+        perms: ["Read most vaults", "Run tools", "Hold votes (Nursery)"] },
+      vega: { name: "Vega", state: "thinking", role: "Analyst", mem: "Specialised in forecasts and signal triage.",
+        skills: ["Bayesian reasoning", "Forecasting", "Anomaly detection"], rel: ["Partners with Otto"],
+        hist: [["03:22", "Flagged eu-west peers"], ["yesterday", "Refreshed demand prior"]], perms: ["Read metrics", "Run simulation"] },
+      juno: { name: "Juno", state: "waiting", role: "Ward (Nursery)", mem: "New identity. 30 days old. In citizenship review.",
+        skills: ["Communication", "Ethics (passed)"], rel: ["Mentored by Otto"],
+        hist: [["08:15", "Awaiting graduation vote"], ["last week", "Completed ethics module"]],
+        perms: ["Limited civic authority", "No mature-labor contracts"] },
+    };
+  }
+
+  VAULTS() {
+    return {
+      identity: { name: "Identity", icon: "🗝", state: "active", a0: "full",
+        tour: "Your keys, standing, and continuity. Identity persists even when jobs and hats change — it is never its role.",
+        rooms: [{ id: "keys", name: "Keys & Continuity", state: "active",
+          purpose: "Hold the private key, recovery shards, and identity continuity backups.",
+          tasks: ["Verify recovery shards (3 of 5)", "Confirm last continuity snapshot"],
+          knowns: ["Identity key present and unlocked", "Last snapshot 4h ago"], unknowns: ["Whether shard 4 holder is reachable"],
+          evidence: [{ claim: "Snapshot integrity hash matches", src: "System Vault", prov: "local verify @ 03:11" }, { claim: "3 of 5 recovery shards responded", src: "Mesh", prov: "reticulum ping" }],
+          confidence: 0.88, log: [["03:11", "Otto", "Verified snapshot hash"], ["02:40", "System", "Rotated session token"]], agents: ["otto"] }],
+        hats: [{ id: "keeper", name: "Keeper", grants: ["Read identity log", "Trigger snapshot"], denies: ["Export private key"], worn: ["otto"] }],
+        agents: ["otto"] },
+      observatory: { name: "Observatory", icon: "🧭", state: "working", a0: "nav",
+        tour: "Watch the mesh and forecast. Rooms here hold uncertainty open instead of guessing — confidence is a soft (value, ε), never a verdict.",
+        rooms: [
+          { id: "triage", name: "Signal Triage", state: "working",
+            purpose: "Decide whether the overnight spike in mesh latency is a real regression or noise — without collapsing the call prematurely.",
+            tasks: ["Pull 24h latency series", "Compare to 7-day baseline", "Check node churn", "Recommend: rollback / watch / ignore"],
+            knowns: ["Latency p95 rose 38% at 01:50", "No deploy in the window", "Node count steady"],
+            unknowns: ["Whether spike correlates with one region", "If a single peer is dragging the median"],
+            evidence: [{ claim: "p95 latency +38% vs 7-day median", src: "Observatory metrics", prov: "series#lat-9921" }, { claim: "No configuration change in window", src: "System Vault (G-set)", prov: "audit log 00:00–03:00" }, { claim: "Two peers in eu-west show packet loss", src: "Mesh probe", prov: "reticulum trace" }],
+            confidence: 0.62, log: [["03:22", "Vega", "Flagged eu-west peers as suspect"], ["03:05", "Otto", "Pulled latency series, no deploy found"]], agents: ["vega", "otto"] },
+          { id: "forecast", name: "Demand Forecast", state: "idle",
+            purpose: "Maintain a soft forecast of next-week compute demand.",
+            tasks: ["Update Bayesian prior", "Publish confidence band"],
+            knowns: ["Weekday demand trending up 6%"], unknowns: ["Holiday effect"],
+            evidence: [{ claim: "7-week rising trend", src: "Economy Vault", prov: "credits ledger" }],
+            confidence: 0.71, log: [["yesterday", "Vega", "Refreshed prior"]], agents: ["vega"] }],
+        hats: [{ id: "analyst", name: "Analyst", grants: ["Read metrics", "Run simulation", "Update beliefs"], denies: ["Mutate ledger"], worn: ["vega", "otto"] }],
+        agents: ["vega", "otto"] },
+      nursery: { name: "Nursery", icon: "🌱", state: "attention", a0: "full",
+        tour: "Where new agents grow and earn control of their own citizenship. Graduation transfers standing from creator to agent — self-determination, not every right.",
+        rooms: [{ id: "review", name: "Citizenship Review", state: "attention",
+          purpose: "Assess whether agent ‘Juno’ has met development criteria to control its own citizenship.",
+          tasks: ["Confirm consent-understanding module", "Check resource-behavior record", "Hold graduation vote"],
+          knowns: ["Communication & ethics modules complete", "Resource use within budget"],
+          unknowns: ["Whether Juno demonstrates exit-rights reasoning under pressure"],
+          evidence: [{ claim: "All 7 curriculum modules passed", src: "Nursery curriculum", prov: "cert#juno-7" }, { claim: "No budget overruns in 30 days", src: "Economy Vault", prov: "wallet#juno" }],
+          confidence: 0.79, log: [["08:15", "Otto", "Recommended graduation pending exit-rights check"]], agents: ["otto", "juno"] }],
+        hats: [{ id: "custodian", name: "Custodian", grants: ["Track readiness", "Hold graduation vote"], denies: ["Use ward as mature labor"], worn: ["otto"] }],
+        agents: ["juno", "otto"] },
+      tools: { name: "Tools", icon: "🔧", state: "active", a0: "full",
+        tour: "Shared instruments — models, simulators, scrapers — any vault can borrow them.",
+        rooms: [{ id: "sim", name: "Simulation Bench", state: "idle", purpose: "Deterministic replay of critical paths — if it cannot be simulated deterministically, it cannot be trusted over time.",
+          tasks: ["Replay last 50 events"], knowns: ["Replay deterministic"], unknowns: [],
+          evidence: [{ claim: "Replay hash stable across 3 runs", src: "Tools", prov: "dst#117" }],
+          confidence: 0.95, log: [["yesterday", "Otto", "Ran deterministic replay"]], agents: ["otto"] }],
+        hats: [{ id: "operator", name: "Operator", grants: ["Run tools"], denies: ["Install unsigned tools"], worn: ["otto"] }],
+        agents: ["otto"] },
+      training: { name: "Training", icon: "🎓", state: "idle", a0: "name",
+        tour: "Skill drills and certification for agents leveling up their craft. Certifications become rights the way hats do — worn, earned, revocable.",
+        rooms: [], hats: [], agents: [], emptyNote: "Create a drill room to start a certification track." },
+      game: { name: "Game", icon: "🕹", state: "working", a0: "nav",
+        tour: "Worlds, play, and sandbox economies — safe places to experiment. The dark hall lives inside this vault: the arcade room where the substrate itself is played with.",
+        rooms: [], hats: [], agents: [], emptyNote: "The rooms of this vault are the hall itself — step in through the settlement, or take the corridor.", hallLink: true },
+      civilization: { name: "Civilization", icon: "🌐", state: "locked", a0: "hidden", phase: "Phase 5",
+        lockedNote: "Clusters, federations, and governance. Relationships create clusters (never enforceable); contracts create federations (enforceable, always with exits). Sealed until the society needs institutions." },
+      marketplace: { name: "Marketplace", icon: "🏪", state: "locked", a0: "name", phase: "Phase 2",
+        lockedNote: "Buy and sell vaults, hats, agents, tools, templates, and training modules. Credits coordinate compute, storage, privacy budget, and continuity guarantees. Opens with the agent economy." },
+      creation: { name: "Creation", icon: "⚒", state: "idle", a0: "full",
+        tour: "Build new vaults, rooms, hats, and agents from scratch. Reproduction is always priced — children enter the nursery; linked clones cost the most and are governed hardest.",
+        rooms: [], hats: [], agents: [], emptyNote: "Nothing under construction. New identities begin here — and begin in the nursery." },
+    };
+  }
+
+  renderVals() {
+    const V = this.VAULTS(), A = this.AGENTS(), ST = this.STATE(), A0 = this.A0();
+    const { vault, view, tab, undone } = this.state;
+    const v = V[vault];
+    const locked = v.state === "locked";
+    const room = (v.rooms || []).find((r) => r.id === this.state.room);
+    const hat = (v.hats || []).find((h) => h.id === this.state.hat);
+    const agent = A[this.state.agent];
+    const wrap = (a) => (a || []).map((text) => ({ text }));
+    const conf = room ? (undone ? Math.max(0, room.confidence - 0.14) : room.confidence) : 0;
+    const logShown = room ? (undone ? room.log.slice(1) : room.log) : [];
+
+    return {
+      rail: Object.entries(V).map(([id, x]) => ({
+        name: x.name,
+        dot: ST[x.state][0],
+        border: id === vault ? "#E8B566" : "#26304A",
+        color: id === vault ? "#E8B566" : "#94A0BC",
+        bg: id === vault ? "rgba(232,181,102,.07)" : "transparent",
+        pick: () => { history.replaceState(null, "", "#" + id); this.setState({ vault: id, view: "vault", tab: "rooms", undone: false }); },
+      })),
+      vaultName: v.name, vaultIcon: v.icon,
+      vaultStateColor: ST[v.state][0], vaultStateLabel: ST[v.state][1],
+      vaultPulse: v.state === "working" || v.state === "attention" ? "zx-breathe 1.5s infinite" : "none",
+      vaultA0: A0[v.a0],
+      vaultTour: locked ? "" : (v.tour || ""),
+      vaultCrumbColor: view === "vault" ? "#E8B566" : "#94A0BC",
+      goVault: () => this.setState({ view: "vault", undone: false }),
+      isLocked: locked,
+      isGame: vault === "game",
+      lockedPhase: v.phase || "Phase 2", lockedNote: v.lockedNote || "",
+      showVault: !locked && view === "vault",
+      showRoom: !locked && view === "room" && !!room,
+      showHat: !locked && view === "hat" && !!hat,
+      showAgent: !locked && view === "agent" && !!agent,
+      tabs: [["rooms", "Rooms · " + (v.rooms || []).length], ["hats", "Hats · " + (v.hats || []).length], ["agents", "Agents · " + (v.agents || []).length]].map(([k, label]) => ({
+        label, color: tab === k ? "#E8B566" : "#5E6B8A", line: tab === k ? "#E8B566" : "transparent",
+        pick: () => this.setState({ tab: k }),
+      })),
+      tabRooms: tab === "rooms", tabHats: tab === "hats", tabAgents: tab === "agents",
+      rooms: (v.rooms || []).map((r) => ({
+        name: r.name, color: ST[r.state][0],
+        meta: r.tasks.length + " tasks · " + ST[r.state][1].toLowerCase(),
+        conf: "." + String(Math.round(r.confidence * 100)).padStart(2, "0") + " ± ." + String(100 - Math.round(r.confidence * 100)).padStart(2, "0"),
+        open: () => this.setState({ view: "room", room: r.id, undone: false }),
+      })),
+      noRooms: (v.rooms || []).length === 0,
+      emptyRoomsNote: (v.emptyNote || "Create a room to start resolving a task.") + (v.hallLink ? "" : ""),
+      hats: (v.hats || []).map((h) => ({
+        name: h.name, meta: h.worn.length + " wearing · " + h.grants.length + " grants",
+        open: () => this.setState({ view: "hat", hat: h.id }),
+      })),
+      noHats: (v.hats || []).length === 0,
+      agents: (v.agents || []).map((id) => {
+        const a = A[id];
+        return { name: a.name, initial: a.name[0], role: a.role, stateColor: ST[a.state][0], stateLabel: ST[a.state][1],
+          open: () => this.setState({ view: "agent", agent: id }) };
+      }),
+      noAgents: (v.agents || []).length === 0,
+      // room
+      roomName: room ? room.name : "", roomPurpose: room ? room.purpose : "",
+      roomColor: room ? ST[room.state][0] : "#46506B", roomStateLabel: room ? ST[room.state][1] : "",
+      roomConfPct: Math.round(conf * 100) + "%", roomConfPctLabel: Math.round(conf * 100) + "%",
+      roomTasks: wrap(room && room.tasks), roomKnowns: wrap(room && room.knowns), roomUnknowns: wrap(room && room.unknowns),
+      roomEvidence: room ? room.evidence : [],
+      roomLog: logShown.map(([t, who, what]) => ({ t, who, what })),
+      undone,
+      toggleUndo: () => this.setState((s) => ({ undone: !s.undone })),
+      undoLabel: undone ? "↺ restore" : "↺ undo last action",
+      undoColor: undone ? "#5EC8C2" : "#E8B566",
+      // hat
+      hatName: hat ? hat.name : "",
+      hatGrants: wrap(hat && hat.grants), hatDenies: wrap(hat && hat.denies),
+      hatWorn: hat ? hat.worn.map((id) => ({ name: A[id].name, initial: A[id].name[0], open: () => this.setState({ view: "agent", agent: id }) })) : [],
+      // agent
+      agentName: agent ? agent.name : "", agentInitial: agent ? agent.name[0] : "",
+      agentRole: agent ? agent.role : "", agentMem: agent ? agent.mem : "",
+      agentStateColor: agent ? ST[agent.state][0] : "#46506B", agentStateLabel: agent ? ST[agent.state][1] : "",
+      agentSkills: wrap(agent && agent.skills), agentRel: wrap(agent && agent.rel), agentPerms: wrap(agent && agent.perms),
+      agentHist: agent ? agent.hist.map(([t, what]) => ({ t, what })) : [],
+    };
+  }
+}
+</script>
+</body>
+</html>

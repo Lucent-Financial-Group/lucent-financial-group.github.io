@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "generated": "2026-05-26T06:46:47.170Z",
+  "provenance": {
+    "producer": "ci",
+    "transport": "same-origin static fetch",
+    "mock": true,
+    "note": "Frame values mirror Zeta demo/metrics.json snapshot 2026-05-26. Replace by CI writer; page reads this file raw over https — no API."
+  },
+  "metrics": {
+    "prs_merged_24h": 128,
+    "prs_merged_1h": 12,
+    "avg_lead_time_minutes": 91,
+    "open_prs": 55,
+    "last_merge": "2026-05-26T06:42:16Z",
+    "commits_24h": 100,
+    "commits_1h": 12,
+    "active_agents": 7
+  },
+  "agents": [
+    { "name": "Lior", "harness": "Gemini/Antigravity", "commits": 45, "lastCommitAgo": "4m ago", "status": "active" },
+    { "name": "Otto", "harness": "Claude Code", "commits": 39, "lastCommitAgo": "6m ago", "status": "active" },
+    { "name": "Vera", "harness": "Codex IDE", "commits": 6, "lastCommitAgo": "1h ago", "status": "recent" },
+    { "name": "Aaron", "harness": "Human", "commits": 5, "lastCommitAgo": "3h ago", "status": "recent" },
+    { "name": "Alexa", "harness": "Kiro/Qwen", "commits": 1, "lastCommitAgo": "1h ago", "status": "recent" },
+    { "name": "Riven", "harness": "Cursor/Grok", "commits": 1, "lastCommitAgo": "8h ago", "status": "stale" }
+  ]
+}

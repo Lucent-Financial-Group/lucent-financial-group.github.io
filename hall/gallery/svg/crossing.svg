@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-crossing">
+  <polyline id="strand-0" fill="none" stroke="#d62828" stroke-width="4" points="245,65 405,265"></polyline>
+  <polyline id="strand-1" fill="none" stroke="#2828d6" stroke-width="4" points="405,65 341,145"></polyline>
+  <polyline id="strand-1-r1" fill="none" stroke="#2828d6" stroke-width="4" points="309,185 245,265"></polyline>
+</svg>

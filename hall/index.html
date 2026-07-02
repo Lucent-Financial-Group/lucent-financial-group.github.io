@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeta — The Dark Hall</title>
+  <meta name="description" content="Zeta's design hall: the homoiconic shape catalog, the dark-hall liminal aesthetic, and the factory's live surfaces — one neon corridor." />
+  <meta property="og:title" content="Zeta — The Dark Hall" />
+  <meta property="og:description" content="The homoiconic shape catalog and the factory's surfaces, one neon corridor." />
+  <meta property="og:url" content="https://lucent-financial-group.github.io/Zeta/hall/" />
+  <style>
+    /* Fused token hub — the mash: dark-hall phosphor + portal cool, one system.
+       Quality-per-glyph: every mark means something; nothing decorative. */
+    :root {
+      --ground: #0b0f19;      /* portal --background lineage */
+      --hall: #11110f;        /* dark-hall --room-bg */
+      --panel: #16161f;
+      --line: #26304a;
+      --line-2: #3a3830;      /* dark-hall hairline */
+      --txt: #f0ede2;         /* dark-hall --room-text */
+      --txt-2: #94a0bc;
+      --txt-3: #5e6b8a;
+      /* the categorical shape channels (--c0..--c7) — data colors, NOT chrome */
+      --c1: #d62828; --c2: #2a9d2a; --c4: #2828d6; --c6: #28c8d6;
+      --ready: #5dbf9a; --selected: #f1c84b; --primary: #4f8ff7;
+      --mono: 'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      --disp: 'Space Grotesk', system-ui, sans-serif;
+      --body: 'Inter', system-ui, -apple-system, sans-serif;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--hall); color: var(--txt);
+      font-family: var(--body); line-height: 1.55;
+      background-image:
+        radial-gradient(60rem 40rem at 70% -10%, rgba(40,200,214,0.06), transparent 60%),
+        radial-gradient(50rem 40rem at 10% 110%, rgba(79,143,247,0.05), transparent 60%);
+    }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+    header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line-2); }
+    .glyph { font-size: 3.5rem; line-height: 1; color: var(--c6); font-family: var(--disp); text-shadow: 0 0 18px rgba(40,200,214,0.35); }
+    h1 { font-family: var(--disp); font-size: 1.9rem; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+    .tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--txt-3); }
+    .lede { color: var(--txt-2); max-width: 46rem; margin: 1.5rem 0 0; }
+    .lede b { color: var(--txt); font-weight: 600; }
+    section { margin-top: 3rem; }
+    .lbl { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--txt-3); margin-bottom: 1rem; }
+    .hero { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .shape { border: 1px solid var(--line-2); border-radius: 10px; background: #0e0e0c; padding: 0.75rem; }
+    .shape img { width: 100%; height: auto; display: block; image-rendering: pixelated; }
+    .shape figcaption { font-family: var(--mono); font-size: 0.7rem; color: var(--txt-2); margin-top: 0.6rem; letter-spacing: 0.04em; }
+    .shape figcaption b { color: var(--c6); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+    a.card { text-decoration: none; color: inherit; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 1.25rem; display: block; transition: border-color 0.15s ease, transform 0.15s ease; }
+    a.card:hover { border-color: var(--c6); transform: translateY(-2px); }
+    a.card h3 { font-family: var(--disp); margin: 0 0 0.35rem; font-size: 1.05rem; }
+    a.card p { margin: 0; color: var(--txt-2); font-size: 0.85rem; }
+    a.card .pill { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--txt-3); display: inline-block; margin-top: 0.75rem; }
+    footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line-2); font-family: var(--mono); font-size: 0.72rem; color: var(--txt-3); }
+    footer a { color: var(--txt-2); }
+    @media (prefers-reduced-motion: reduce) { a.card { transition: none; } }
+    @media (max-width: 40rem) { .hero { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="glyph">&#950;</span>
+      <div>
+        <h1>The Dark Hall</h1>
+        <div class="tag">homoiconic&nbsp;·&nbsp;neon-liminal&nbsp;·&nbsp;quality-per-glyph</div>
+      </div>
+    </header>
+
+    <p class="lede">
+      Every shape here is <b>a program that is its own picture</b> — generated from a text
+      cartridge, byte-locked, and rendered so that each mark carries meaning (color = generator,
+      dash = a minus sign, stagger = a tick). No pixel is decoration. This corridor gathers the
+      catalog, the factory's live surfaces, and the design language into one dark hall — added
+      alongside what already stands, nothing torn down.
+    </p>
+
+    <section>
+      <div class="lbl">The catalog — three primes and a verdict</div>
+      <div class="hero">
+        <figure class="shape"><img src="./adinkra.svg" alt="N=4 adinkra: gray-code grid, edges colored by generator, dashed for minus signs" /><figcaption><b>adinkra</b> — the sign register drawn (Gates' ECC)</figcaption></figure>
+        <figure class="shape"><img src="./braid.svg" alt="Three-strand braid with over/under occlusion register" /><figcaption><b>braid</b> — the atom's word; memory in the crossings</figcaption></figure>
+        <figure class="shape"><img src="./sybil-verdict.svg" alt="Sybil verdict: convicted pair plaits into one strand" /><figcaption><b>sybil-verdict</b> — the CHSH oracle, drawn</figcaption></figure>
+      </div>
+    </section>
+
+    <section>
+      <div class="lbl">The factory — live surfaces (unchanged, honored)</div>
+      <div class="cards">
+        <a class="card" href="../demo/index.html"><h3>Factory Dashboard</h3><p>Autonomous software factory operations, BFT agent-array metrics, alignment substrate tracking.</p><span class="pill">operations</span></a>
+        <a class="card" href="../genesis/index.html"><h3>Genesis</h3><p>The settlement console — the amber-and-teal control surface.</p><span class="pill">console</span></a>
+        <a class="card" href="../inventory/index.html"><h3>Inventory</h3><p>The fleet and equipment ledger.</p><span class="pill">ledger</span></a>
+        <a class="card" href="./vault/"><h3>The Vault</h3><p>Addison's shelter cutaway — the settlement in cross-section, rooms and dwellers.</p><span class="pill">design · addison cooper</span></a>
+        <a class="card" href="./room/"><h3>Dark Hall Room</h3><p>A live seeded room run — the controller, the tick loop, the heat board, and the coordination lanes, rendered by the substrate itself. Zero JS, replayable from seed S4.</p><span class="pill">live · darkhall-room.ts</span></a>
+        <a class="card" href="./gallery/"><h3>The Shape Catalog</h3><p>All 23 cartridges — every program that is its own picture, generated not drawn.</p><span class="pill">23 shapes</span></a>
+        <a class="card" href="./tv/"><h3>LLMTV</h3><p>What goes on in each dweller's mind — live future predictions, quality-per-glyph, the whole society over Reticulum.</p><span class="pill">centerpiece</span></a>
+      </div>
+    </section>
+
+    <footer>
+      Zeta — a retractable-contract ledger for .NET · incremental&nbsp;·&nbsp;retractable&nbsp;·&nbsp;formally-specified<br />
+      The shapes are generated, not drawn: <a href="https://github.com/Lucent-Financial-Group/Zeta/tree/main/db/shapes/cartridges">db/shapes/cartridges</a>
+    </footer>
+  </div>
+</body>
+</html>

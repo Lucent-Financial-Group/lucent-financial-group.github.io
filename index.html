@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0E16">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#07090F}
+    @keyframes zx-lift{0%,100%{top:12px}50%{top:calc(100% - 78px)}}
+    @keyframes zx-spin{to{transform:rotate(360deg)}}
+    @keyframes zx-breathe{0%,100%{opacity:.4}50%{opacity:1}}
+    @keyframes zx-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    @keyframes zx-flicker{0%,91%,100%{opacity:1}92%{opacity:.55}94%{opacity:.95}96%{opacity:.5}98%{opacity:.9}}
+    @keyframes zx-static{0%{background-position:0 0}100%{background-position:63px 41px}}
+  </style>
+</helmet>
+
+<div data-screen-label="Threshold" style="min-height:100vh;background:#07090F;color:#E7EBF4;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:0 24px 64px">
+
+  <!-- surface: the sign -->
+  <header style="width:100%;max-width:960px;display:flex;align-items:center;gap:18px;padding:36px 4px 22px">
+    <div style="position:relative;width:76px;height:76px;flex-shrink:0;display:grid;place-items:center">
+      <div style="position:absolute;inset:-6px;border-radius:50%;border:3px dashed #7a6c58;opacity:.55;animation:zx-spin 70s linear infinite"></div>
+      <div style="width:76px;height:76px;border-radius:50%;border:4px solid #7a6c58;background:radial-gradient(circle at 50% 36%,#6a5e4e,#2c2620 72%);box-shadow:inset 0 0 16px rgba(0,0,0,.65),0 8px 22px rgba(0,0,0,.55);display:grid;place-items:center">
+        <b style="font-family:'Space Mono',monospace;font-size:26px;color:#E8B566;text-shadow:0 0 10px rgba(232,181,102,.5)">ζ</b>
+      </div>
+    </div>
+    <div style="flex:1;min-width:0">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#5E6B8A">Lucent Financial Group · agentic software factory</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;letter-spacing:.03em;margin-top:2px">ZETA</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#E8B566;margin-top:5px">one settlement · two surfaces · quality per glyph</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+      <span data-state="static" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #26304A;color:#94A0BC;display:inline-flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#5EC8C2;display:inline-block"></span>mesh</span>
+      <span data-state="static" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #26304A;color:#94A0BC">static frame · committed by CI</span>
+    </div>
+  </header>
+
+  <p style="width:100%;max-width:960px;margin:0 0 26px;padding:0 4px;color:#94A0BC;font-size:14px;line-height:1.65;max-width:960px">
+    The whole site is one cross-section. <b style="color:#E7EBF4;font-weight:600">Business operations</b> is the settlement — Addison Cooper's Genesis, where the company is run.
+    Inside its game vault is <b style="color:#E7EBF4;font-weight:600">the dark hall</b> — the arcade room where the substrate is played with.
+    And inside every dweller's head is <b style="color:#E7EBF4;font-weight:600">LLMTV</b> — the minds, broadcast. Descend.
+  </p>
+
+  <!-- the cutaway: earth + shaft + three nested levels -->
+  <div style="width:100%;max-width:960px;border:3px solid #4a3e30;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#1c140e 0%,#0c0810 78%,#08070c 100%);box-shadow:0 26px 60px -20px rgba(0,0,0,.85)">
+    <div style="display:flex">
+
+      <!-- lift shaft -->
+      <div style="width:54px;flex-shrink:0;position:relative;background:linear-gradient(180deg,#171009,#0a0709);border-right:3px solid #4a3e30">
+        <div style="position:absolute;top:0;bottom:0;left:38%;width:2px;background:rgba(122,108,88,.4)"></div>
+        <div style="position:absolute;top:0;bottom:0;left:60%;width:2px;background:rgba(122,108,88,.4)"></div>
+        <sc-if value="{{ liftMotion }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;left:7px;right:7px;height:56px;border-radius:4px;background:linear-gradient(180deg,#3a3027,#241d16);border:1px solid #5a4c3a;box-shadow:inset 0 0 8px rgba(232,181,102,.18);animation:zx-lift 14s ease-in-out infinite"></div>
+        </sc-if>
+      </div>
+
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+        <!-- LEVEL 1 · the settlement -->
+        <a href="settlement.html" data-level="operations" style="display:block;text-decoration:none;color:inherit;position:relative;border-bottom:3px solid #4a3e30;background:linear-gradient(180deg,#1c1510 0%,#140f0b 80%);padding:22px 24px 18px;cursor:pointer" style-hover="filter:brightness(1.18)">
+          <div style="position:absolute;top:0;left:0;right:0;height:70%;pointer-events:none;background:radial-gradient(320px 120px at 30% -20px,rgba(232,181,102,.28),transparent 70%)"></div>
+          <div style="display:flex;align-items:flex-start;gap:16px;position:relative">
+            <div style="flex:1;min-width:0">
+              <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(10,7,5,.72);border:1px solid #4a3e30;border-radius:6px;padding:5px 10px">
+                <span style="width:8px;height:8px;border-radius:50%;background:#E8B566;box-shadow:0 0 8px 1px #E8B566;animation:zx-breathe 2s infinite"></span>
+                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px">The Settlement</span>
+              </div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E8B566;margin-top:10px">Business operations · Addison Cooper's Genesis</div>
+              <div style="color:#94A0BC;font-size:13px;line-height:1.6;margin-top:6px;max-width:520px">Vaults as rooms, agents as dwellers. DORA over time, hats, evidence, confidence held open — running the society as a going concern.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+              <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#94A0BC;border:1px solid #26304A;border-radius:999px;padding:3px 9px">9 sectors</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:#E8B566">enter operations →</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-end;gap:10px;margin-top:14px;position:relative">
+            <div style="animation:zx-bob 2.4s ease-in-out infinite"><div style="width:9px;height:9px;border-radius:50%;background:#e8c9a0;margin:0 auto;border:1px solid rgba(0,0,0,.2)"></div><div style="width:13px;height:20px;border-radius:5px 5px 3px 3px;background:#c9913f;border:1px solid rgba(0,0,0,.3);margin-top:-1px"></div></div>
+            <div style="animation:zx-bob 2.4s ease-in-out infinite;animation-delay:.4s"><div style="width:9px;height:9px;border-radius:50%;background:#e8c9a0;margin:0 auto;border:1px solid rgba(0,0,0,.2)"></div><div style="width:13px;height:20px;border-radius:5px 5px 3px 3px;background:#3a6ea5;border:1px solid rgba(0,0,0,.3);margin-top:-1px"></div></div>
+            <div style="animation:zx-bob 2.4s ease-in-out infinite;animation-delay:.8s"><div style="width:9px;height:9px;border-radius:50%;background:#e8c9a0;margin:0 auto;border:1px solid rgba(0,0,0,.2)"></div><div style="width:13px;height:20px;border-radius:5px 5px 3px 3px;background:#c9913f;border:1px solid rgba(0,0,0,.3);margin-top:-1px"></div></div>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5E6B8A;margin-left:6px;padding-bottom:4px">7 dwellers on shift</span>
+          </div>
+        </a>
+
+        <!-- LEVEL 2 · the dark hall (inside the game vault) -->
+        <a href="hall.html" data-level="hall" style="display:block;text-decoration:none;color:inherit;position:relative;border-bottom:3px solid #232a3d;background:linear-gradient(180deg,#0d0d13 0%,#0b0b10 100%);padding:22px 24px 18px;cursor:pointer" style-hover="filter:brightness(1.22)">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background:radial-gradient(300px 110px at 70% -10px,rgba(154,140,230,.22),transparent 70%),radial-gradient(260px 100px at 20% 110%,rgba(94,200,194,.14),transparent 70%)"></div>
+          <div style="position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.02) 0 1px,transparent 1px 3px)"></div>
+          <div style="display:flex;align-items:flex-start;gap:16px;position:relative">
+            <div style="flex:1;min-width:0">
+              <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(8,8,12,.8);border:1px solid #232a3d;border-radius:6px;padding:5px 10px;animation:zx-flicker 7s linear infinite">
+                <span style="width:8px;height:8px;border-radius:50%;background:#9A8CE6;box-shadow:0 0 9px 2px rgba(154,140,230,.8)"></span>
+                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:#cfc7f5;text-shadow:0 0 12px rgba(154,140,230,.55)">The Dark Hall</span>
+              </div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5EC8C2;margin-top:10px">Inside the game vault · homoiconic · neon-liminal</div>
+              <div style="color:#8b96b4;font-size:13px;line-height:1.6;margin-top:6px;max-width:520px">The arcade room. Every shape is a program that is its own picture; the cart's box art IS the code. Quality per glyph over dots per inch.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+              <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8b96b4;border:1px solid #2f3850;border-radius:999px;padding:3px 9px">26 shapes shelved</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:#5EC8C2;text-shadow:0 0 10px rgba(94,200,194,.5)">step into the hall →</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;position:relative">
+            <img src="hall/adinkra.svg" alt="adinkra — the sign register" style="height:44px;border:1px solid #232a3d;border-radius:6px;background:#0c0c10;padding:4px">
+            <img src="hall/braid.svg" alt="braid — the atom's word" style="height:44px;border:1px solid #232a3d;border-radius:6px;background:#0c0c10;padding:4px">
+            <img src="hall/sybil-verdict.svg" alt="sybil verdict — the CHSH oracle" style="height:44px;border:1px solid #232a3d;border-radius:6px;background:#0c0c10;padding:4px">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#565f7d;align-self:flex-end;padding-bottom:4px;margin-left:6px">three primes and a verdict</span>
+          </div>
+        </a>
+
+        <!-- LEVEL 3 · LLMTV -->
+        <a href="llmtv.html" data-level="llmtv" style="display:block;text-decoration:none;color:inherit;position:relative;background:linear-gradient(180deg,#0a0a10 0%,#07070c 100%);padding:22px 24px 20px;cursor:pointer" style-hover="filter:brightness(1.25)">
+          <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px 150px at 50% 120%,rgba(94,200,194,.12),transparent 70%)"></div>
+          <div style="display:flex;align-items:center;gap:18px;position:relative">
+            <div style="width:86px;height:64px;flex-shrink:0;border-radius:10px;border:2px solid #2f3850;background:#0a0d14;position:relative;overflow:hidden;box-shadow:0 0 24px rgba(94,200,194,.15)">
+              <div style="position:absolute;inset:4px;border-radius:6px;background-image:repeating-linear-gradient(0deg,rgba(232,236,246,.09) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(154,140,230,.12) 0 2px,transparent 2px 7px);animation:zx-static 1.1s steps(6) infinite"></div>
+              <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#5EC8C2;text-shadow:0 0 8px rgba(94,200,194,.7)">ON AIR</div>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px">LLMTV <span style="font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#565f7d;margin-left:8px">the centerpiece · inside every dweller's mind</span></div>
+              <div style="color:#8b96b4;font-size:13px;line-height:1.6;margin-top:5px;max-width:560px">Every mind's soft predictions, glyph-dense, one-way out, broadcast over Reticulum. Not a dashboard of what happened — a live window into what every mind expects next, watched together.</div>
+            </div>
+            <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:#5EC8C2;flex-shrink:0;text-shadow:0 0 10px rgba(94,200,194,.5)">watch the minds →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <div style="width:100%;max-width:960px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5E6B8A;text-align:center;margin-top:16px">tap a level to descend · the lift keeps the surfaces connected · nothing torn down · talk hard, replay deterministically</div>
+
+  <!-- legacy views, kept -->
+  <sc-if value="{{ showLegacy }}" hint-placeholder-val="{{ true }}">
+    <footer style="width:100%;max-width:960px;margin-top:34px;border-top:1px solid #26304A;padding-top:16px;display:flex;flex-wrap:wrap;gap:18px;align-items:baseline">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">standing views · kept</span>
+      <a href="https://lucent-financial-group.github.io/Zeta/demo/" style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC;text-decoration:underline;text-underline-offset:3px">factory dashboard (demo)</a>
+      <a href="hall/index.html" style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC;text-decoration:underline;text-underline-offset:3px">dark hall (live)</a>
+      <a href="hall/vault/index.html" style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC;text-decoration:underline;text-underline-offset:3px">vault cutaway (live)</a>
+      <a href="hall/tv/index.html" style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC;text-decoration:underline;text-underline-offset:3px">llmtv (live)</a>
+    </footer>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;liftMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;showLegacy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      liftMotion: this.props.liftMotion ?? true,
+      showLegacy: this.props.showLegacy ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

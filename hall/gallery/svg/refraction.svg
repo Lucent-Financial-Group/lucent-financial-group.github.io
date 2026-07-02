@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-refraction">
+  <polyline id="membrane" fill="none" stroke="#28c8d6" stroke-width="4" stroke-dasharray="8 6" points="25,165 605,165"></polyline>
+  <polyline id="ray-in" fill="none" stroke="#d6c828" stroke-width="4" points="85,25 225,165"></polyline>
+  <polyline id="ray-out" fill="none" stroke="#d6c828" stroke-width="4" points="225,165 465,285"></polyline>
+  <polyline id="ghost-unbent" fill="none" stroke="#d6c828" stroke-width="4" stroke-dasharray="8 6" points="225,165 365,305"></polyline>
+</svg>

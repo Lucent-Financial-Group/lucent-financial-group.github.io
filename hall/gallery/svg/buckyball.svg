@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-buckyball">
+  <polyline id="inside-room" fill="none" stroke="#28c8d6" stroke-width="4" points="165,115 213,150 194,205 136,205 117,150 165,115"></polyline>
+  <polyline id="inside-bound" fill="none" stroke="#2828d6" stroke-width="4" points="165,25 201,30 235,44 264,66 286,95 300,129 305,165 300,201 286,235 264,264 235,286 201,300 165,305 129,300 95,286 66,264 44,235 30,201 25,165 30,129 44,95 66,66 95,44 129,30 165,25"></polyline>
+  <polyline id="door-0" fill="none" stroke="#d6c828" stroke-width="4" points="165,165 230,76"></polyline>
+  <polyline id="door-1" fill="none" stroke="#d6c828" stroke-width="4" points="165,165 270,199"></polyline>
+  <polyline id="door-2" fill="none" stroke="#d6c828" stroke-width="4" points="165,165 165,275"></polyline>
+  <polyline id="door-3" fill="none" stroke="#d6c828" stroke-width="4" points="165,165 60,199"></polyline>
+  <polyline id="door-4" fill="none" stroke="#d6c828" stroke-width="4" points="165,165 100,76"></polyline>
+  <polyline id="self-door" fill="none" stroke="#d628d6" stroke-width="4" points="165,165 175,155 175,175 165,165"></polyline>
+  <polyline id="outside-room" fill="none" stroke="#28c8d6" stroke-width="4" points="485,115 533,150 514,205 456,205 437,150 485,115"></polyline>
+  <polyline id="ray-0" fill="none" stroke="#f0f0f0" stroke-width="4" points="485,115 485,3"></polyline>
+  <polyline id="ray-1" fill="none" stroke="#f0f0f0" stroke-width="4" points="533,150 635,119"></polyline>
+  <polyline id="ray-2" fill="none" stroke="#f0f0f0" stroke-width="4" points="514,205 597,320"></polyline>
+  <polyline id="ray-3" fill="none" stroke="#f0f0f0" stroke-width="4" points="456,205 373,320"></polyline>
+  <polyline id="ray-4" fill="none" stroke="#f0f0f0" stroke-width="4" points="437,150 5,15"></polyline>
+</svg>

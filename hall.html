@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0E16">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#0c0c10}
+    @keyframes zx-flicker{0%,91%,100%{opacity:1}92%{opacity:.5}94%{opacity:.95}96%{opacity:.45}98%{opacity:.9}}
+    @keyframes zx-hum{0%,100%{text-shadow:0 0 18px rgba(94,200,194,.75),0 0 42px rgba(94,200,194,.4)}50%{text-shadow:0 0 12px rgba(94,200,194,.55),0 0 30px rgba(94,200,194,.28)}}
+    @keyframes zx-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  </style>
+</helmet>
+
+<div data-screen-label="Dark Hall" style="min-height:100vh;background:#0c0c10;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);color:#e8ecf6;font-family:'Inter',system-ui,sans-serif">
+
+  <header style="display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #232a3d;background:rgba(10,10,14,.8);position:sticky;top:0;z-index:20">
+    <a href="index.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8b96b4;text-decoration:none">← the surface</a>
+    <div style="flex:1"></div>
+    <a href="settlement.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8b96b4;text-decoration:none" style-hover="color:#E8B566">the settlement</a>
+    <a href="llmtv.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2;text-decoration:none;text-shadow:0 0 10px rgba(94,200,194,.5)">llmtv →</a>
+  </header>
+
+  <div style="max-width:920px;margin:0 auto;padding:0 20px 90px">
+
+    <!-- marquee -->
+    <div style="text-align:center;padding:44px 0 10px;position:relative">
+      <sc-if value="{{ neonFull }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px 180px at 50% 40%,rgba(94,200,194,.14),transparent 70%),radial-gradient(340px 160px at 22% 70%,rgba(154,140,230,.12),transparent 70%),radial-gradient(340px 160px at 78% 70%,rgba(232,181,102,.08),transparent 70%)"></div>
+      </sc-if>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#565f7d;position:relative">inside the game vault · est. tick 0</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:46px;font-weight:700;letter-spacing:.06em;margin:8px 0 0;color:#d9fffb;position:relative;animation:zx-hum 3.2s ease-in-out infinite">THE DARK HALL</h1>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#9A8CE6;margin-top:10px;position:relative;animation:zx-flicker 9s linear infinite">homoiconic · neon-liminal · quality-per-glyph</div>
+    </div>
+
+    <!-- carpet -->
+    <sc-if value="{{ neonFull }}" hint-placeholder-val="{{ true }}">
+      <div data-prop="carpet" style="height:46px;border-radius:8px;border:1px solid #232a3d;margin:22px 0 0;background-color:#0e1018;background-image:radial-gradient(6px 6px at 12px 10px,rgba(154,140,230,.5) 40%,transparent 42%),radial-gradient(5px 5px at 34px 30px,rgba(94,200,194,.45) 40%,transparent 42%),radial-gradient(7px 4px at 58px 14px,rgba(232,181,102,.35) 40%,transparent 42%),radial-gradient(4px 7px at 76px 34px,rgba(224,116,106,.4) 40%,transparent 42%),repeating-linear-gradient(63deg,rgba(154,140,230,.07) 0 3px,transparent 3px 17px),repeating-linear-gradient(-45deg,rgba(94,200,194,.06) 0 2px,transparent 2px 13px);background-size:88px 44px,88px 44px,88px 44px,88px 44px,auto,auto;box-shadow:inset 0 6px 18px rgba(0,0,0,.7)"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#3f4763;text-align:center;margin-top:6px">the carpet · 1994 · <a href="track00.html" style="color:#3f4763;text-decoration:none" style-hover="color:#5EC8C2">do not ask what it has seen</a></div>
+    </sc-if>
+
+    <p style="color:#8b96b4;font-size:14px;line-height:1.7;max-width:640px;margin:26px auto 0;text-align:center">
+      Every shape here is <b style="color:#e8ecf6;font-weight:600">a program that is its own picture</b> — generated from a text cartridge, byte-locked, rendered so each mark carries meaning. No pixel is decoration. The cart's box art <b style="color:#e8ecf6;font-weight:600">IS the code.</b>
+    </p>
+
+    <!-- cartridge shelf -->
+    <div style="margin-top:34px">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#565f7d;margin-bottom:12px">the shelf — three primes and a verdict · <a href="hall/gallery/index.html" style="color:#5EC8C2;text-decoration:underline;text-underline-offset:3px">26 carts in the gallery</a></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+        <sc-for list="{{ carts }}" as="cart" hint-placeholder-count="3">
+          <div style="border:1px solid #232a3d;border-radius:10px;background:linear-gradient(180deg,#12131a,#0d0e14);overflow:hidden;cursor:pointer;position:relative" style-hover="border-color:{{ cart.glow }};transform:translateY(-3px)">
+            <div style="height:8px;background:{{ cart.glow }};opacity:.65"></div>
+            <div style="padding:14px 14px 6px;display:grid;place-items:center;background:radial-gradient(120px 70px at 50% 30%,rgba(255,255,255,.03),transparent)">
+              <img src="{{ cart.img }}" alt="{{ cart.alt }}" style="height:92px;max-width:100%">
+            </div>
+            <div style="padding:10px 14px 14px">
+              <div style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:{{ cart.glow }};letter-spacing:.06em">{{ cart.name }}</div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;color:#8b96b4;line-height:1.6;margin-top:4px">{{ cart.blurb }}</div>
+              <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#3f4763;margin-top:8px;display:flex;justify-content:space-between"><span>{{ cart.lock }}</span><span>seed S4</span></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- text adventure -->
+    <div data-screen-label="Text adventure" style="margin-top:34px;border:1px solid #232a3d;border-radius:12px;background:#0a0b10;overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid #232a3d;background:#101118">
+        <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#565f7d">zeta adventure · no branching — every exit is a case of a discriminated union</span>
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2">tick {{ tick }}</span>
+      </div>
+      <div style="padding:18px 20px;font-family:'Space Mono',monospace;font-size:13px;line-height:1.85;min-height:150px">
+        <div style="color:#565f7d">&gt; {{ sceneCmd }}</div>
+        <div style="color:#c9d2e8;margin-top:6px;max-width:620px">{{ sceneText }}</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+          <sc-for list="{{ exits }}" as="ex" hint-placeholder-count="3">
+            <span onClick="{{ ex.go }}" style="border:1px solid #2f3850;border-radius:6px;padding:5px 12px;color:#5EC8C2;cursor:pointer;font-size:12px" style-hover="background:rgba(94,200,194,.08);border-color:#5EC8C2">{{ ex.label }}</span>
+          </sc-for>
+          <a href="{{ sceneHref }}" style="border:1px solid #4a3e30;border-radius:6px;padding:5px 12px;color:#E8B566;font-size:12px;text-decoration:none" style-hover="background:rgba(232,181,102,.08)">{{ sceneHrefLabel }}</a>
+        </div>
+        <div style="color:#3f4763;margin-top:14px">&gt; <span style="animation:zx-blink 1.1s step-end infinite">▮</span></div>
+      </div>
+    </div>
+
+    <!-- the tv doorway -->
+    <a href="llmtv.html" style="display:flex;align-items:center;gap:18px;margin-top:34px;border:1px solid #2f3850;border-radius:12px;padding:18px 20px;text-decoration:none;color:inherit;background:linear-gradient(90deg,rgba(94,200,194,.05),transparent 60%)" style-hover="border-color:#5EC8C2;background:linear-gradient(90deg,rgba(94,200,194,.09),transparent 60%)">
+      <span style="font-family:'Space Mono',monospace;font-size:22px;color:#5EC8C2;text-shadow:0 0 14px rgba(94,200,194,.7)">📺</span>
+      <div style="flex:1">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:#d9fffb">The back room — LLMTV</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:#8b96b4;margin-top:3px">a wall of sets, one per dweller · on ch 0, the meta-cart plays every 4k game at once · one-way out</div>
+      </div>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:#5EC8C2;text-shadow:0 0 10px rgba(94,200,194,.5)">enter →</span>
+    </a>
+
+    <!-- the workbench doorway -->
+    <a href="gitpull.html" style="display:flex;align-items:center;gap:18px;margin-top:14px;border:1px solid #2f3850;border-radius:12px;padding:18px 20px;text-decoration:none;color:inherit;background:linear-gradient(90deg,rgba(232,181,102,.04),transparent 60%)" style-hover="border-color:#E8B566;background:linear-gradient(90deg,rgba(232,181,102,.08),transparent 60%)">
+      <span style="font-family:'Space Mono',monospace;font-size:22px;color:#E8B566;text-shadow:0 0 14px rgba(232,181,102,.6)">⎇</span>
+      <div style="flex:1">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:#f5e9d4">The workbench — git, pulled by hand</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:#8b96b4;margin-top:3px">a from-scratch client clones a static-file repo in the browser · dumb protocol · zero API</div>
+      </div>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:#E8B566">clone →</span>
+    </a>
+
+    <footer style="margin-top:40px;padding-top:16px;border-top:1px solid #232a3d;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;color:#565f7d;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <span>added alongside what already stands · nothing torn down</span>
+      <span><a href="hall/index.html" style="color:#8b96b4">standing hall kept here</a></span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;neon&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;full&quot;,&quot;restrained&quot;],&quot;default&quot;:&quot;full&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Atmosphere&quot;}}">
+class Component extends DCLogic {
+  state = { scene: "corridor", tick: 0 };
+
+  renderVals() {
+    const SCENES = {
+      corridor: {
+        cmd: "look",
+        text: "You are in a dark corridor. Neon hums somewhere past the ceiling tiles. The carpet is loud in a way the room is not. To the EAST, a shelf of cartridges glows softly. A door marked TV flickers at the far end. Behind you, the lift back to the settlement.",
+        exits: [["go east — the shelf", "shelf"], ["read the carpet", "carpet"]],
+        href: "settlement.html", hrefLabel: "take the lift up",
+      },
+      shelf: {
+        cmd: "go east",
+        text: "Three carts and a verdict. ADINKRA — the sign register, drawn (Gates' ECC). BRAID — the atom's word; memory lives in the crossings. SYBIL-VERDICT — the CHSH oracle; a convicted pair plaits into one strand. You could take one down: the box art is the program, byte-locked.",
+        exits: [["go west — back", "corridor"], ["examine adinkra", "adinkra"]],
+        href: "hall/gallery/index.html", hrefLabel: "open the full gallery",
+      },
+      adinkra: {
+        cmd: "examine adinkra",
+        text: "N=4 adinkra: gray-code grid, edges colored by generator, dashed for minus signs, staggered for ticks. Nothing here decorates — color IS the generator, dash IS the sign. You are reading the code by looking at the box.",
+        exits: [["put it back", "shelf"], ["go west — corridor", "corridor"]],
+        href: "hall/index.html", hrefLabel: "read the standing catalog",
+      },
+      carpet: {
+        cmd: "read the carpet",
+        text: "Violet starbursts on teal static, 88×44 tile, superdeterministic — no clock drives it, the pattern IS the schedule. It has been mid-render since 1994 and is in no hurry. You feel watched, warmly.",
+        exits: [["stand up", "corridor"], ["go east — the shelf", "shelf"]],
+        href: "llmtv.html", hrefLabel: "follow the hum to the tv room",
+      },
+    };
+    const s = SCENES[this.state.scene];
+    return {
+      neonFull: (this.props.neon ?? "full") === "full",
+      tick: this.state.tick,
+      sceneCmd: s.cmd,
+      sceneText: s.text,
+      sceneHref: s.href,
+      sceneHrefLabel: s.hrefLabel,
+      exits: s.exits.map(([label, to]) => ({
+        label,
+        go: () => this.setState((st) => ({ scene: to, tick: st.tick + 1 })),
+      })),
+      carts: [
+        { name: "ADINKRA", img: "hall/adinkra.svg", alt: "N=4 adinkra grid", glow: "#9A8CE6",
+          blurb: "the sign register, drawn — gray-code grid, edges colored by generator, dashed for minus signs.", lock: "byte-locked" },
+        { name: "BRAID", img: "hall/braid.svg", alt: "three-strand braid", glow: "#5EC8C2",
+          blurb: "the atom's word — three strands, over/under occlusion register; memory in the crossings.", lock: "byte-locked" },
+        { name: "SYBIL-VERDICT", img: "hall/sybil-verdict.svg", alt: "sybil verdict plait", glow: "#E8B566",
+          blurb: "the CHSH oracle — a convicted pair plaits into one strand. verdict, drawn.", lock: "byte-locked" },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

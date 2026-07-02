@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeta — The Vault (Addison's shelter cutaway)</title>
+  <meta name="description" content="Addison Cooper's Genesis shelter-cutaway vault, ported into the Dark Hall — a settlement cross-section of rooms and dwellers." />
+  <meta property="og:title" content="Zeta — The Vault" />
+  <meta property="og:url" content="https://lucent-financial-group.github.io/Zeta/hall/vault/" />
+  <style>
+    /* Addison Cooper's Genesis palette, preserved (docs/design/addison-genesis-initial). */
+    :root {
+      --ground:#0B0E16; --panel:#141A28; --panel2:#1B2334;
+      --line:#26304A; --line2:#323E5C;
+      --txt:#E7EBF4; --txt2:#94A0BC; --txt3:#5E6B8A;
+      --amber:#E8B566; --amber-d:#B6863F;
+      --teal:#5EC8C2; --red:#E0746A; --violet:#9A8CE6; --dim:#46506B;
+      --disp:'Space Grotesk',system-ui,sans-serif;
+      --body:'Inter',system-ui,sans-serif;
+      --mono:'Space Mono',ui-monospace,monospace;
+      color-scheme: dark;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:var(--body); color:var(--txt); background:var(--ground); }
+    a { color:var(--teal); }
+    .top { max-width:880px; margin:0 auto; padding:1.75rem 1.25rem 0.5rem; }
+    .crumb { font-family:var(--mono); font-size:0.66rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--txt3); }
+    .top h1 { font-family:var(--disp); font-size:1.5rem; margin:0.4rem 0 0.2rem; }
+    .top p { color:var(--txt2); margin:0.4rem 0 0; font-size:0.9rem; max-width:52rem; }
+    .top p b { color:var(--txt); }
+
+    /* ---- shelter cutaway (ported byte-faithful from Addison's reference) ---- */
+    .earth { width:100%; padding:1.5rem 0 5rem; position:relative;
+      background:
+        radial-gradient(900px 360px at 50% -50px,#3a2c20 0%,transparent 60%),
+        radial-gradient(680px 480px at 10% 42%,#241a12 0%,transparent 55%),
+        radial-gradient(680px 480px at 90% 72%,#241a12 0%,transparent 55%),
+        linear-gradient(180deg,#1c140e 0%,#100b07 100%); }
+    .earth::after { content:""; position:absolute; inset:0; pointer-events:none;
+      background:radial-gradient(1100px 680px at 50% 32%,transparent 58%,rgba(0,0,0,.55)); }
+    .sign { display:flex; align-items:center; gap:16px; max-width:880px; margin:0 auto; padding:20px 20px 14px; position:relative; z-index:2; }
+    .cogdoor { position:relative; width:84px; height:84px; border-radius:50%; flex-shrink:0; display:grid; place-items:center;
+      background:radial-gradient(circle at 50% 38%,#6a5e4e,#2c2620 72%); border:4px solid #7a6c58;
+      box-shadow:inset 0 0 16px rgba(0,0,0,.65),0 8px 22px rgba(0,0,0,.55); }
+    .cogdoor::before { content:""; position:absolute; inset:-9px; border-radius:50%;
+      background:repeating-conic-gradient(#7a6c58 0 7deg,transparent 7deg 18deg);
+      -webkit-mask:radial-gradient(circle,transparent 43px,#000 44px); mask:radial-gradient(circle,transparent 43px,#000 44px);
+      animation:spin 60s linear infinite; }
+    .cogdoor b { font-family:var(--mono); font-weight:700; font-size:26px; color:var(--amber); position:relative; z-index:2; text-shadow:0 0 10px rgba(232,181,102,.5); }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .sign .meta .nm { font-family:var(--disp); font-weight:700; font-size:1.15rem; }
+    .sign .meta .sub { font-family:var(--mono); font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--txt3); margin-top:2px; }
+
+    .vault { max-width:880px; margin:0 auto; position:relative; z-index:1; border:3px solid #4a3e30; border-radius:10px; overflow:hidden;
+      background:#0f0b08; box-shadow:0 26px 60px -20px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.03); }
+    .levels { display:flex; }
+    .shaft { width:50px; flex-shrink:0; position:relative; background:linear-gradient(180deg,#171009,#0c0806); border-right:3px solid #4a3e30; }
+    .shaft .cable { position:absolute; top:0; bottom:0; left:50%; width:2px; background:rgba(122,108,88,.4); }
+    .car { position:absolute; left:6px; right:6px; height:54px; border-radius:4px;
+      background:linear-gradient(180deg,#3a3027,#241d16); border:1px solid #5a4c3a;
+      box-shadow:inset 0 0 8px rgba(232,181,102,.18); animation:lift 13s ease-in-out infinite; }
+    .car::after { content:""; position:absolute; inset:8px; border:1px solid rgba(232,181,102,.25); border-radius:2px; }
+    @keyframes lift { 0%,100% { top:8px; } 50% { top:calc(100% - 62px); } }
+    .stack { flex:1; }
+    .floor { display:flex; min-height:160px; border-top:3px solid #4a3e30; }
+    .floor:first-child { border-top:none; }
+    .room { flex:1; position:relative; overflow:hidden; border-right:3px solid #4a3e30;
+      background:linear-gradient(180deg,#1c1510 0%,#140f0b 72%); }
+    .room:last-child { border-right:none; }
+    .room .light { position:absolute; top:0; left:0; right:0; height:72%; pointer-events:none;
+      background:radial-gradient(130px 96px at 50% -14px,var(--rc),transparent 70%); opacity:.42; }
+    .plaque { position:absolute; top:9px; left:9px; display:flex; align-items:center; gap:6px; z-index:3;
+      background:rgba(10,7,5,.72); border:1px solid #4a3e30; border-radius:6px; padding:4px 8px; }
+    .plaque .nm { font-family:var(--disp); font-weight:600; font-size:12px; color:var(--txt); }
+    .statuslight { position:absolute; top:11px; right:11px; width:9px; height:9px; border-radius:50%; z-index:3; box-shadow:0 0 8px 1px currentColor; }
+    .deck { position:absolute; left:0; right:0; bottom:0; height:28px; background:linear-gradient(180deg,#241a12,#140e09); border-top:2px solid #3a2e22; }
+    .equip { position:absolute; right:14px; bottom:32px; width:32px; height:30px; border-radius:4px; z-index:1;
+      border:1px solid #3a2e22; background:linear-gradient(180deg,#2a1f15,#1a130d); opacity:.85; }
+    .room.sealed { background:repeating-linear-gradient(45deg,#1a130d 0 14px,#15100b 14px 28px); }
+    .dwellers { position:absolute; left:0; right:0; bottom:28px; height:46px; display:flex; align-items:flex-end; gap:11px; padding-left:18px; z-index:2; }
+    .dweller { width:13px; height:30px; animation:bob 2.4s ease-in-out infinite; }
+    .dweller .h { width:9px; height:9px; border-radius:50%; background:#e8c9a0; margin:0 auto; border:1px solid rgba(0,0,0,.2); }
+    .dweller .b { width:13px; height:20px; border-radius:5px 5px 3px 3px; margin-top:-1px; border:1px solid rgba(0,0,0,.3); position:relative; }
+    .dweller .b::after { content:""; position:absolute; left:50%; top:3px; width:1px; height:8px; background:rgba(255,255,255,.28); transform:translateX(-50%); }
+    @keyframes bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
+    .credit { max-width:880px; margin:1.5rem auto 0; padding:0 1.25rem; font-family:var(--mono); font-size:0.72rem; color:var(--txt3); }
+    .credit b { color:var(--amber); }
+    @media (prefers-reduced-motion: reduce) { .cogdoor::before,.car,.dweller { animation:none !important; } }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="crumb"><a href="../">← the dark hall</a></div>
+    <h1>The Vault</h1>
+    <p>A settlement seen in cross-section — <b>rooms are vaults, dwellers are agents, the shaft is the lift between levels.</b> This is Addison Cooper's original Genesis design, ported into the hall as a live reference; the substrate becomes a screen.</p>
+  </div>
+
+  <div class="earth">
+    <div class="sign">
+      <div class="cogdoor"><b>&#950;</b></div>
+      <div class="meta"><div class="nm">Genesis Settlement</div><div class="sub">shelter cutaway · reference</div></div>
+    </div>
+
+    <div class="vault">
+      <div class="levels">
+        <div class="shaft"><span class="cable"></span><div class="car"></div></div>
+        <div class="stack">
+
+          <div class="floor">
+            <div class="room"><span class="light" style="--rc:rgba(94,200,194,.7)"></span><div class="plaque"><span class="nm">System</span></div><span class="statuslight" style="color:var(--teal)"></span>
+              <div class="dwellers"><div class="dweller" style="animation-delay:.0s"><div class="h"></div><div class="b" style="background:#5ec8c2"></div></div><div class="dweller" style="animation-delay:.5s"><div class="h"></div><div class="b" style="background:#4a5f6e"></div></div><div class="dweller" style="animation-delay:1.1s"><div class="h"></div><div class="b" style="background:#5ec8c2"></div></div></div>
+              <div class="equip"></div><div class="deck"></div></div>
+            <div class="room"><span class="light" style="--rc:rgba(232,181,102,.7)"></span><div class="plaque"><span class="nm">Economy</span></div><span class="statuslight" style="color:var(--amber)"></span>
+              <div class="dwellers"><div class="dweller" style="animation-delay:.3s"><div class="h"></div><div class="b" style="background:#e8b566"></div></div><div class="dweller" style="animation-delay:.9s"><div class="h"></div><div class="b" style="background:#b6863f"></div></div></div>
+              <div class="equip"></div><div class="deck"></div></div>
+          </div>
+
+          <div class="floor">
+            <div class="room"><span class="light" style="--rc:rgba(154,140,230,.7)"></span><div class="plaque"><span class="nm">Tools</span></div><span class="statuslight" style="color:var(--violet)"></span>
+              <div class="dwellers"><div class="dweller" style="animation-delay:.2s"><div class="h"></div><div class="b" style="background:#9a8ce6"></div></div><div class="dweller" style="animation-delay:.7s"><div class="h"></div><div class="b" style="background:#4a5f6e"></div></div><div class="dweller" style="animation-delay:1.3s"><div class="h"></div><div class="b" style="background:#9a8ce6"></div></div></div>
+              <div class="equip"></div><div class="deck"></div></div>
+            <div class="room"><span class="light" style="--rc:rgba(94,200,194,.7)"></span><div class="plaque"><span class="nm">Training</span></div><span class="statuslight" style="color:var(--teal)"></span>
+              <div class="dwellers"><div class="dweller" style="animation-delay:.4s"><div class="h"></div><div class="b" style="background:#5ec8c2"></div></div></div>
+              <div class="equip"></div><div class="deck"></div></div>
+          </div>
+
+          <div class="floor">
+            <div class="room sealed"><div class="plaque"><span class="nm">Marketplace</span></div><span class="statuslight" style="color:var(--dim)"></span><div class="deck"></div></div>
+            <div class="room"><span class="light" style="--rc:rgba(232,181,102,.55)"></span><div class="plaque"><span class="nm">Creation</span></div><span class="statuslight" style="color:var(--amber)"></span>
+              <div class="dwellers"><div class="dweller" style="animation-delay:.6s"><div class="h"></div><div class="b" style="background:#e8b566"></div></div><div class="dweller" style="animation-delay:1.0s"><div class="h"></div><div class="b" style="background:#5ec8c2"></div></div></div>
+              <div class="equip"></div><div class="deck"></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="credit">design: <b>Addison Cooper</b> — Genesis, 2026-06-20 · preserved reference, ported not rebuilt · <a href="https://github.com/Lucent-Financial-Group/Zeta/tree/main/docs/design/addison-genesis-initial">origin</a></div>
+  </div>
+</body>
+</html>

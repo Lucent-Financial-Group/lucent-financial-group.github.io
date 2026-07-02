@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-dynamicvalue">
+  <polyline id="tile-a" fill="none" stroke="#d62828" stroke-width="4" points="25,85 315,85 315,235 25,235 25,85"></polyline>
+  <polyline id="tile-b" fill="none" stroke="#2a9d2a" stroke-width="4" points="325,85 495,85 495,235 325,235 325,85"></polyline>
+  <polyline id="tile-c" fill="none" stroke="#2828d6" stroke-width="4" points="505,85 615,85 615,235 505,235 505,85"></polyline>
+</svg>

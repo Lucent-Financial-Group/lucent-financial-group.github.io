@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-sybil-verdict">
+  <polyline id="claim-0-r0" fill="none" stroke="#d62828" stroke-width="4" points="205,25 205,35 265,45 325,55 325,85"></polyline>
+  <polyline id="claim-0-r1" fill="none" stroke="#d62828" stroke-width="4" points="205,105 205,135 265,145 325,155 325,185"></polyline>
+  <polyline id="claim-0-r2" fill="none" stroke="#d62828" stroke-width="4" points="205,205 205,235 265,245 325,255 325,295"></polyline>
+  <polyline id="claim-1-r0" fill="none" stroke="#2828d6" stroke-width="4" points="325,25 325,35"></polyline>
+  <polyline id="claim-1-r1" fill="none" stroke="#2828d6" stroke-width="4" points="205,55 205,85 265,95 325,105 325,135"></polyline>
+  <polyline id="claim-1-r2" fill="none" stroke="#2828d6" stroke-width="4" points="205,155 205,185 265,195 325,205 325,235"></polyline>
+  <polyline id="claim-1-r3" fill="none" stroke="#2828d6" stroke-width="4" points="205,255 205,295"></polyline>
+  <polyline id="claim-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="445,25 445,295"></polyline>
+</svg>

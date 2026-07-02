@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-triboolean">
+  <polyline id="partial-unk-0-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,65 55,65"></polyline>
+  <polyline id="partial-unk-0-1" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,95 55,95"></polyline>
+  <polyline id="partial-unk-0-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,125 55,125"></polyline>
+  <polyline id="partial-unk-0-3" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,155 55,155"></polyline>
+  <polyline id="partial-unk-0-4" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,185 55,185"></polyline>
+  <polyline id="partial-unk-0-5" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,215 55,215"></polyline>
+  <polyline id="partial-unk-0-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,245 55,245"></polyline>
+  <polyline id="partial-unk-0-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="45,275 55,275"></polyline>
+  <polyline id="partial-unk-1-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="75,65 85,65"></polyline>
+  <polyline id="partial-unk-1-1" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="75,95 85,95"></polyline>
+  <polyline id="partial-unk-1-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="75,125 85,125"></polyline>
+  <polyline id="partial-lit-1-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="75,155 85,155"></polyline>
+  <polyline id="partial-unk-1-4" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="75,185 85,185"></polyline>
+  <polyline id="partial-unk-1-5" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="75,215 85,215"></polyline>
+  <polyline id="partial-unk-1-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="75,245 85,245"></polyline>
+  <polyline id="partial-unk-1-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="75,275 85,275"></polyline>
+  <polyline id="partial-unk-2-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="105,65 115,65"></polyline>
+  <polyline id="partial-unk-2-1" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="105,95 115,95"></polyline>
+  <polyline id="partial-lit-2-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="105,125 115,125"></polyline>
+  <polyline id="partial-lit-2-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="105,155 115,155"></polyline>
+  <polyline id="partial-lit-2-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="105,185 115,185"></polyline>
+  <polyline id="partial-unlit-2-5" fill="none" stroke="#d62828" stroke-width="4" points="105,215 105,215"></polyline>
+  <polyline id="partial-unk-2-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="105,245 115,245"></polyline>
+  <polyline id="partial-unk-2-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="105,275 115,275"></polyline>
+  <polyline id="partial-unk-3-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="135,65 145,65"></polyline>
+  <polyline id="partial-lit-3-1" fill="none" stroke="#2a9d2a" stroke-width="4" points="135,95 145,95"></polyline>
+  <polyline id="partial-lit-3-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="135,125 145,125"></polyline>
+  <polyline id="partial-lit-3-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="135,155 145,155"></polyline>
+  <polyline id="partial-lit-3-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="135,185 145,185"></polyline>
+  <polyline id="partial-lit-3-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="135,215 145,215"></polyline>
+  <polyline id="partial-unk-3-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="135,245 145,245"></polyline>
+  <polyline id="partial-unk-3-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="135,275 145,275"></polyline>
+  <polyline id="partial-unk-4-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="165,65 175,65"></polyline>
+  <polyline id="partial-unlit-4-1" fill="none" stroke="#d62828" stroke-width="4" points="165,95 165,95"></polyline>
+  <polyline id="partial-lit-4-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="165,125 175,125"></polyline>
+  <polyline id="partial-lit-4-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="165,155 175,155"></polyline>
+  <polyline id="partial-lit-4-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="165,185 175,185"></polyline>
+  <polyline id="partial-lit-4-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="165,215 175,215"></polyline>
+  <polyline id="partial-unk-4-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="165,245 175,245"></polyline>
+  <polyline id="partial-unk-4-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="165,275 175,275"></polyline>
+  <polyline id="partial-unk-5-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="195,65 205,65"></polyline>
+  <polyline id="partial-unk-5-1" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="195,95 205,95"></polyline>
+  <polyline id="partial-unlit-5-2" fill="none" stroke="#d62828" stroke-width="4" points="195,125 195,125"></polyline>
+  <polyline id="partial-lit-5-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="195,155 205,155"></polyline>
+  <polyline id="partial-lit-5-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="195,185 205,185"></polyline>
+  <polyline id="partial-lit-5-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="195,215 205,215"></polyline>
+  <polyline id="partial-unk-5-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="195,245 205,245"></polyline>
+  <polyline id="partial-unk-5-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="195,275 205,275"></polyline>
+  <polyline id="partial-unk-6-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="225,65 235,65"></polyline>
+  <polyline id="partial-unk-6-1" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="225,95 235,95"></polyline>
+  <polyline id="partial-unk-6-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="225,125 235,125"></polyline>
+  <polyline id="partial-unlit-6-3" fill="none" stroke="#d62828" stroke-width="4" points="225,155 225,155"></polyline>
+  <polyline id="partial-unk-6-4" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="225,185 235,185"></polyline>
+  <polyline id="partial-unk-6-5" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="225,215 235,215"></polyline>
+  <polyline id="partial-unk-6-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="225,245 235,245"></polyline>
+  <polyline id="partial-unk-6-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="225,275 235,275"></polyline>
+  <polyline id="partial-unk-7-0" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,65 265,65"></polyline>
+  <polyline id="partial-unk-7-1" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,95 265,95"></polyline>
+  <polyline id="partial-unk-7-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,125 265,125"></polyline>
+  <polyline id="partial-unk-7-3" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,155 265,155"></polyline>
+  <polyline id="partial-unk-7-4" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,185 265,185"></polyline>
+  <polyline id="partial-unk-7-5" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,215 265,215"></polyline>
+  <polyline id="partial-unk-7-6" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,245 265,245"></polyline>
+  <polyline id="partial-unk-7-7" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,275 265,275"></polyline>
+  <polyline id="full-lit-0-0" fill="none" stroke="#2a9d2a" stroke-width="4" points="365,65 375,65"></polyline>
+  <polyline id="full-lit-0-1" fill="none" stroke="#2a9d2a" stroke-width="4" points="365,95 375,95"></polyline>
+  <polyline id="full-lit-0-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="365,125 375,125"></polyline>
+  <polyline id="full-unlit-0-3" fill="none" stroke="#d62828" stroke-width="4" points="365,155 365,155"></polyline>
+  <polyline id="full-unlit-0-4" fill="none" stroke="#d62828" stroke-width="4" points="365,185 365,185"></polyline>
+  <polyline id="full-unlit-0-5" fill="none" stroke="#d62828" stroke-width="4" points="365,215 365,215"></polyline>
+  <polyline id="full-unlit-0-6" fill="none" stroke="#d62828" stroke-width="4" points="365,245 365,245"></polyline>
+  <polyline id="full-unlit-0-7" fill="none" stroke="#d62828" stroke-width="4" points="365,275 365,275"></polyline>
+  <polyline id="full-lit-1-0" fill="none" stroke="#2a9d2a" stroke-width="4" points="395,65 405,65"></polyline>
+  <polyline id="full-lit-1-1" fill="none" stroke="#2a9d2a" stroke-width="4" points="395,95 405,95"></polyline>
+  <polyline id="full-lit-1-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="395,125 405,125"></polyline>
+  <polyline id="full-lit-1-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="395,155 405,155"></polyline>
+  <polyline id="full-unlit-1-4" fill="none" stroke="#d62828" stroke-width="4" points="395,185 395,185"></polyline>
+  <polyline id="full-unlit-1-5" fill="none" stroke="#d62828" stroke-width="4" points="395,215 395,215"></polyline>
+  <polyline id="full-unlit-1-6" fill="none" stroke="#d62828" stroke-width="4" points="395,245 395,245"></polyline>
+  <polyline id="full-unlit-1-7" fill="none" stroke="#d62828" stroke-width="4" points="395,275 395,275"></polyline>
+  <polyline id="full-lit-2-0" fill="none" stroke="#2a9d2a" stroke-width="4" points="425,65 435,65"></polyline>
+  <polyline id="full-lit-2-1" fill="none" stroke="#2a9d2a" stroke-width="4" points="425,95 435,95"></polyline>
+  <polyline id="full-lit-2-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="425,125 435,125"></polyline>
+  <polyline id="full-lit-2-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="425,155 435,155"></polyline>
+  <polyline id="full-lit-2-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="425,185 435,185"></polyline>
+  <polyline id="full-unlit-2-5" fill="none" stroke="#d62828" stroke-width="4" points="425,215 425,215"></polyline>
+  <polyline id="full-unlit-2-6" fill="none" stroke="#d62828" stroke-width="4" points="425,245 425,245"></polyline>
+  <polyline id="full-unlit-2-7" fill="none" stroke="#d62828" stroke-width="4" points="425,275 425,275"></polyline>
+  <polyline id="full-unlit-3-0" fill="none" stroke="#d62828" stroke-width="4" points="455,65 455,65"></polyline>
+  <polyline id="full-lit-3-1" fill="none" stroke="#2a9d2a" stroke-width="4" points="455,95 465,95"></polyline>
+  <polyline id="full-lit-3-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="455,125 465,125"></polyline>
+  <polyline id="full-lit-3-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="455,155 465,155"></polyline>
+  <polyline id="full-lit-3-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="455,185 465,185"></polyline>
+  <polyline id="full-lit-3-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="455,215 465,215"></polyline>
+  <polyline id="full-unlit-3-6" fill="none" stroke="#d62828" stroke-width="4" points="455,245 455,245"></polyline>
+  <polyline id="full-unlit-3-7" fill="none" stroke="#d62828" stroke-width="4" points="455,275 455,275"></polyline>
+  <polyline id="full-unlit-4-0" fill="none" stroke="#d62828" stroke-width="4" points="485,65 485,65"></polyline>
+  <polyline id="full-unlit-4-1" fill="none" stroke="#d62828" stroke-width="4" points="485,95 485,95"></polyline>
+  <polyline id="full-lit-4-2" fill="none" stroke="#2a9d2a" stroke-width="4" points="485,125 495,125"></polyline>
+  <polyline id="full-lit-4-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="485,155 495,155"></polyline>
+  <polyline id="full-lit-4-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="485,185 495,185"></polyline>
+  <polyline id="full-lit-4-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="485,215 495,215"></polyline>
+  <polyline id="full-lit-4-6" fill="none" stroke="#2a9d2a" stroke-width="4" points="485,245 495,245"></polyline>
+  <polyline id="full-unlit-4-7" fill="none" stroke="#d62828" stroke-width="4" points="485,275 485,275"></polyline>
+  <polyline id="full-unlit-5-0" fill="none" stroke="#d62828" stroke-width="4" points="515,65 515,65"></polyline>
+  <polyline id="full-unlit-5-1" fill="none" stroke="#d62828" stroke-width="4" points="515,95 515,95"></polyline>
+  <polyline id="full-unlit-5-2" fill="none" stroke="#d62828" stroke-width="4" points="515,125 515,125"></polyline>
+  <polyline id="full-lit-5-3" fill="none" stroke="#2a9d2a" stroke-width="4" points="515,155 525,155"></polyline>
+  <polyline id="full-lit-5-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="515,185 525,185"></polyline>
+  <polyline id="full-lit-5-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="515,215 525,215"></polyline>
+  <polyline id="full-lit-5-6" fill="none" stroke="#2a9d2a" stroke-width="4" points="515,245 525,245"></polyline>
+  <polyline id="full-lit-5-7" fill="none" stroke="#2a9d2a" stroke-width="4" points="515,275 525,275"></polyline>
+  <polyline id="full-unlit-6-0" fill="none" stroke="#d62828" stroke-width="4" points="545,65 545,65"></polyline>
+  <polyline id="full-unlit-6-1" fill="none" stroke="#d62828" stroke-width="4" points="545,95 545,95"></polyline>
+  <polyline id="full-unlit-6-2" fill="none" stroke="#d62828" stroke-width="4" points="545,125 545,125"></polyline>
+  <polyline id="full-unlit-6-3" fill="none" stroke="#d62828" stroke-width="4" points="545,155 545,155"></polyline>
+  <polyline id="full-lit-6-4" fill="none" stroke="#2a9d2a" stroke-width="4" points="545,185 555,185"></polyline>
+  <polyline id="full-lit-6-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="545,215 555,215"></polyline>
+  <polyline id="full-lit-6-6" fill="none" stroke="#2a9d2a" stroke-width="4" points="545,245 555,245"></polyline>
+  <polyline id="full-lit-6-7" fill="none" stroke="#2a9d2a" stroke-width="4" points="545,275 555,275"></polyline>
+  <polyline id="full-unlit-7-0" fill="none" stroke="#d62828" stroke-width="4" points="575,65 575,65"></polyline>
+  <polyline id="full-unlit-7-1" fill="none" stroke="#d62828" stroke-width="4" points="575,95 575,95"></polyline>
+  <polyline id="full-unlit-7-2" fill="none" stroke="#d62828" stroke-width="4" points="575,125 575,125"></polyline>
+  <polyline id="full-unlit-7-3" fill="none" stroke="#d62828" stroke-width="4" points="575,155 575,155"></polyline>
+  <polyline id="full-unlit-7-4" fill="none" stroke="#d62828" stroke-width="4" points="575,185 575,185"></polyline>
+  <polyline id="full-lit-7-5" fill="none" stroke="#2a9d2a" stroke-width="4" points="575,215 585,215"></polyline>
+  <polyline id="full-lit-7-6" fill="none" stroke="#2a9d2a" stroke-width="4" points="575,245 585,245"></polyline>
+  <polyline id="full-lit-7-7" fill="none" stroke="#2a9d2a" stroke-width="4" points="575,275 585,275"></polyline>
+</svg>

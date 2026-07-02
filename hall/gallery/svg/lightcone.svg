@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-lightcone">
+  <polyline id="future-left" fill="none" stroke="#2828d6" stroke-width="4" points="325,165 185,25"></polyline>
+  <polyline id="future-right" fill="none" stroke="#2828d6" stroke-width="4" points="325,165 465,25"></polyline>
+  <polyline id="past-left" fill="none" stroke="#d62828" stroke-width="4" points="325,165 185,305"></polyline>
+  <polyline id="past-right" fill="none" stroke="#d62828" stroke-width="4" points="325,165 465,305"></polyline>
+</svg>

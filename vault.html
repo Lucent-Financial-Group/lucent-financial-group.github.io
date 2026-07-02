@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0E16">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>body{margin:0;background:#0B0E16} @keyframes zx-breathe{0%,100%{opacity:.4}50%{opacity:1}}</style>
+</helmet>
+
+<div data-screen-label="Observatory Vault" style="min-height:100vh;background:radial-gradient(1100px 700px at 60% -20%,#131c33 0%,#0B0E16 58%);color:#E7EBF4;font-family:'Inter',system-ui,sans-serif">
+
+  <header style="display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #26304A;background:rgba(11,14,22,.75);position:sticky;top:0;z-index:20">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit"><span style="font-family:'Space Mono',monospace;color:#E8B566;font-size:18px">ζ</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.06em;font-size:15px">GENESIS</span></a>
+    <div style="flex:1"></div>
+    <a href="settlement.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:1px solid #26304A;color:#94A0BC;text-decoration:none" style-hover="border-color:#323E5C">← settlement</a>
+  </header>
+
+  <!-- breadcrumb -->
+  <div style="display:flex;align-items:center;gap:8px;padding:9px 18px;border-bottom:1px solid #26304A;background:#0E1320;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em">
+    <a href="settlement.html" style="color:#94A0BC;text-decoration:none">Settlement</a>
+    <span style="color:#5E6B8A">›</span>
+    <span onClick="{{ goVault }}" style="color:{{ vaultCrumbColor }};cursor:pointer">Observatory</span>
+    <sc-if value="{{ showRoom }}" hint-placeholder-val="{{ false }}"><span style="color:#5E6B8A">›</span><span style="color:#E8B566">{{ roomName }}</span></sc-if>
+    <sc-if value="{{ showAgent }}" hint-placeholder-val="{{ false }}"><span style="color:#5E6B8A">›</span><span style="color:#E8B566">{{ agentName }}</span></sc-if>
+  </div>
+
+  <div style="max-width:760px;margin:0 auto;padding:24px 20px 90px">
+
+    <!-- vault header -->
+    <div style="display:flex;gap:14px;align-items:center">
+      <div style="width:54px;height:54px;border-radius:14px;background:#0B0E16;border:1px solid #26304A;display:grid;place-items:center;font-size:24px">🧭</div>
+      <div style="flex:1">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:600">Observatory Vault</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E8B566;margin-top:4px;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#E8B566;animation:zx-breathe 1.5s infinite"></span>Working</div>
+      </div>
+      <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #26304A;color:#94A0BC;white-space:nowrap;flex-shrink:0">👁 Agent 0 · navigation only</span>
+    </div>
+    <p style="color:#94A0BC;font-size:13px;line-height:1.6;margin:12px 0 0">Watch the mesh. Forecast. Rooms here hold uncertainty open instead of guessing — confidence is a soft (value, ε), never a verdict.</p>
+
+    <!-- VAULT VIEW -->
+    <sc-if value="{{ showVault }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;gap:22px;border-bottom:1px solid #26304A;margin-top:20px">
+        <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="4">
+          <div onClick="{{ tb.pick }}" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 2px;cursor:pointer;color:{{ tb.color }};border-bottom:2px solid {{ tb.line }}">{{ tb.label }}</div>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ tabRooms }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:18px;display:grid;gap:9px">
+          <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="2">
+            <div onClick="{{ r.open }}" style="display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:11px;cursor:pointer;background:#141A28;border:1px solid #26304A" style-hover="background:#1B2334;border-color:#323E5C">
+              <span style="width:9px;height:9px;border-radius:50%;background:{{ r.color }};box-shadow:0 0 7px {{ r.color }};flex-shrink:0"></span>
+              <div style="flex:1"><div style="font-weight:600;font-size:14px">{{ r.name }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5E6B8A;margin-top:2px">{{ r.meta }}</div></div>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC">{{ r.conf }}</span>
+              <span style="color:#5E6B8A">›</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabHats }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;display:grid;gap:9px">
+          <div style="padding:16px;border-radius:11px;background:#141A28;border:1px solid #26304A">
+            <div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px">🎩</span><span style="font-weight:600;font-size:14px">Analyst</span><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E6B8A">worn by vega · otto</span></div>
+            <div style="display:flex;gap:24px;margin-top:12px;flex-wrap:wrap">
+              <div><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5EC8C2;margin-bottom:6px">grants</div><div style="font-size:13px;color:#94A0BC;line-height:1.7">Read metrics<br>Run simulation<br>Update beliefs</div></div>
+              <div><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#E0746A;margin-bottom:6px">denies</div><div style="font-size:13px;color:#94A0BC;line-height:1.7">Mutate ledger</div></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabAgents }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;display:grid;gap:9px">
+          <sc-for list="{{ agents }}" as="ag" hint-placeholder-count="2">
+            <div onClick="{{ ag.open }}" style="display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:11px;cursor:pointer;background:#141A28;border:1px solid #26304A" style-hover="background:#1B2334;border-color:#323E5C">
+              <span style="width:9px;height:9px;border-radius:50%;background:{{ ag.color }};box-shadow:0 0 7px {{ ag.color }};flex-shrink:0"></span>
+              <div style="flex:1"><div style="font-weight:600;font-size:14px">{{ ag.name }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5E6B8A;margin-top:2px">{{ ag.role }}</div></div>
+              <span style="color:#5E6B8A">›</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <!-- ROOM VIEW -->
+    <sc-if value="{{ showRoom }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px 18px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">purpose</div>
+          <p style="font-size:13px;line-height:1.65;color:#E7EBF4;margin:8px 0 0">{{ roomPurpose }}</p>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-top:16px">tasks</div>
+          <div style="display:grid;gap:6px;margin-top:8px">
+            <sc-for list="{{ roomTasks }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;gap:8px;align-items:baseline;font-size:13px;color:#94A0BC"><span style="color:#E8B566;font-family:'Space Mono',monospace">▹</span>{{ t.text }}</div>
+            </sc-for>
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-top:16px">log</div>
+          <div style="display:grid;gap:6px;margin-top:8px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.5">
+            <sc-for list="{{ roomLog }}" as="l" hint-placeholder-count="2">
+              <div style="display:flex;gap:10px"><span style="color:#5E6B8A;flex-shrink:0">{{ l.t }}</span><span style="color:#5EC8C2;flex-shrink:0">{{ l.who }}</span><span style="color:#94A0BC">{{ l.what }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px 18px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">confidence · held open</span><span style="font-family:'Space Mono',monospace;font-size:12px;color:#E8B566">{{ roomConf }}</span></div>
+            <div style="height:9px;border:1px solid #323E5C;border-radius:4px;overflow:hidden;margin-top:10px;position:relative"><span style="position:absolute;inset:0;width:{{ roomConfPct }};background:linear-gradient(90deg,#B6863F,#E8B566);display:block"></span></div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:#5E6B8A;margin-top:8px">fill = value · empty = admitted uncertainty</div>
+          </div>
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px 18px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5EC8C2">knowns</div>
+            <div style="display:grid;gap:5px;margin-top:8px">
+              <sc-for list="{{ roomKnowns }}" as="k" hint-placeholder-count="3"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px"><span style="color:#5EC8C2">✓</span>{{ k.text }}</div></sc-for>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#9A8CE6;margin-top:14px">unknowns · held open</div>
+            <div style="display:grid;gap:5px;margin-top:8px">
+              <sc-for list="{{ roomUnknowns }}" as="u" hint-placeholder-count="2"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px"><span style="color:#9A8CE6">?</span>{{ u.text }}</div></sc-for>
+            </div>
+          </div>
+          <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px 18px">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">evidence · claim ▸ source ▸ provenance</div>
+            <div style="display:grid;gap:9px;margin-top:10px">
+              <sc-for list="{{ roomEvidence }}" as="e" hint-placeholder-count="3">
+                <div style="border-left:2px solid #323E5C;padding-left:10px"><div style="font-size:13px;color:#E7EBF4">{{ e.claim }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:#5E6B8A;margin-top:2px">{{ e.src }} · {{ e.prov }}</div></div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- AGENT VIEW -->
+    <sc-if value="{{ showAgent }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:18px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:46px;height:46px;border-radius:12px;background:#0B0E16;border:1px solid #323E5C;display:grid;place-items:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#E8B566">{{ agentInitial }}</div>
+            <div><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px">{{ agentName }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5E6B8A;margin-top:2px">{{ agentRole }}</div></div>
+          </div>
+          <p style="font-size:13px;line-height:1.6;color:#94A0BC;margin:12px 0 0">{{ agentMem }}</p>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-top:14px">skills</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+            <sc-for list="{{ agentSkills }}" as="s" hint-placeholder-count="3"><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;padding:3px 9px;border-radius:999px;border:1px solid #26304A;color:#94A0BC">{{ s.text }}</span></sc-for>
+          </div>
+          <a href="llmtv.html" style="display:inline-block;margin-top:16px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:#5EC8C2;text-decoration:none;border:1px solid #2f3850;border-radius:8px;padding:8px 12px" style-hover="background:rgba(94,200,194,.08)">▸ watch this mind on llmtv</a>
+        </div>
+        <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:18px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">recent history</div>
+          <div style="display:grid;gap:7px;margin-top:10px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.5">
+            <sc-for list="{{ agentHist }}" as="h" hint-placeholder-count="3"><div style="display:flex;gap:10px"><span style="color:#5E6B8A;flex-shrink:0">{{ h.t }}</span><span style="color:#94A0BC">{{ h.what }}</span></div></sc-for>
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;margin-top:16px">permissions</div>
+          <div style="display:grid;gap:5px;margin-top:8px">
+            <sc-for list="{{ agentPerms }}" as="p" hint-placeholder-count="2"><div style="font-size:13px;color:#94A0BC;display:flex;gap:8px"><span style="color:#E8B566">▸</span>{{ p.text }}</div></sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view: "vault", tab: "rooms", room: null, agent: null };
+
+  renderVals() {
+    const ROOMS = {
+      triage: {
+        name: "Signal Triage", color: "#E8B566", meta: "4 tasks · working", conf: ".62 ± .38",
+        confPct: "62%",
+        purpose: "Decide whether the overnight spike in mesh latency is a real regression or noise — without collapsing the call prematurely.",
+        tasks: ["Pull 24h latency series", "Compare to 7-day baseline", "Check node churn", "Recommend: rollback / watch / ignore"],
+        knowns: ["Latency p95 rose 38% at 01:50", "No deploy in the window", "Node count steady"],
+        unknowns: ["Whether spike correlates with one region", "If a single peer is dragging the median"],
+        evidence: [
+          { claim: "p95 latency +38% vs 7-day median", src: "Observatory metrics", prov: "series#lat-9921" },
+          { claim: "No configuration change in window", src: "System Vault (G-set)", prov: "audit log 00:00–03:00" },
+          { claim: "Two peers in eu-west show packet loss", src: "Mesh probe", prov: "reticulum trace" },
+        ],
+        log: [{ t: "03:22", who: "Vega", what: "Flagged eu-west peers as suspect" }, { t: "03:05", who: "Otto", what: "Pulled latency series, no deploy found" }],
+      },
+      forecast: {
+        name: "Demand Forecast", color: "#46506B", meta: "2 tasks · idle", conf: ".71 ± .29",
+        confPct: "71%",
+        purpose: "Maintain a soft forecast of next-week compute demand.",
+        tasks: ["Update Bayesian prior", "Publish confidence band"],
+        knowns: ["Weekday demand trending up 6%"],
+        unknowns: ["Holiday effect"],
+        evidence: [{ claim: "7-week rising trend", src: "Economy Vault", prov: "credits ledger" }],
+        log: [{ t: "yday", who: "Vega", what: "Refreshed prior" }],
+      },
+    };
+    const AGENTS = {
+      otto: { name: "Otto", initial: "O", color: "#E8B566", role: "Builder / Keeper · working",
+        mem: "Hundreds of sessions. Authored most of the settlement.",
+        skills: ["Engineering", "Verification", "Orchestration"],
+        hist: [{ t: "03:22", what: "Verified identity snapshot" }, { t: "03:05", what: "Pulled latency series" }, { t: "08:15", what: "Recommended Juno graduation" }],
+        perms: ["Read most vaults", "Run tools", "Hold votes (Nursery)"] },
+      vega: { name: "Vega", initial: "V", color: "#9A8CE6", role: "Analyst · thinking",
+        mem: "Specialised in forecasts and signal triage.",
+        skills: ["Bayesian reasoning", "Forecasting", "Anomaly detection"],
+        hist: [{ t: "03:22", what: "Flagged eu-west peers" }, { t: "yday", what: "Refreshed demand prior" }],
+        perms: ["Read metrics", "Run simulation"] },
+    };
+
+    const { view, tab } = this.state;
+    const room = ROOMS[this.state.room] || ROOMS.triage;
+    const agent = AGENTS[this.state.agent] || AGENTS.otto;
+    const wrap = (a) => a.map((text) => ({ text }));
+    const tabDef = [["rooms", "Rooms · 2"], ["hats", "Hats · 1"], ["agents", "Agents · 2"], ["settings", "Settings"]];
+
+    return {
+      showVault: view === "vault",
+      showRoom: view === "room",
+      showAgent: view === "agent",
+      vaultCrumbColor: view === "vault" ? "#E8B566" : "#94A0BC",
+      goVault: () => this.setState({ view: "vault" }),
+      tabs: tabDef.map(([k, label]) => ({
+        label,
+        color: tab === k ? "#E8B566" : "#5E6B8A",
+        line: tab === k ? "#E8B566" : "transparent",
+        pick: () => this.setState({ tab: k }),
+      })),
+      tabRooms: tab === "rooms" || tab === "settings",
+      tabHats: tab === "hats",
+      tabAgents: tab === "agents",
+      rooms: Object.entries(ROOMS).map(([id, r]) => ({
+        ...r, open: () => this.setState({ view: "room", room: id }),
+      })),
+      agents: Object.entries(AGENTS).map(([id, a]) => ({
+        ...a, role: a.role, open: () => this.setState({ view: "agent", agent: id }),
+      })),
+      roomName: room.name, roomPurpose: room.purpose, roomConf: room.conf, roomConfPct: room.confPct,
+      roomTasks: wrap(room.tasks), roomKnowns: wrap(room.knowns), roomUnknowns: wrap(room.unknowns),
+      roomEvidence: room.evidence, roomLog: room.log,
+      agentName: agent.name, agentInitial: agent.initial, agentRole: agent.role, agentMem: agent.mem,
+      agentSkills: wrap(agent.skills), agentHist: agent.hist, agentPerms: wrap(agent.perms),
+    };
+  }
+}
+</script>
+</body>
+</html>

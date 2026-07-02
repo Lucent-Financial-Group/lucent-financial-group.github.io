@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-kitaev-chain">
+  <polyline id="t-mode-0-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="65,85 65,95"></polyline>
+  <polyline id="t-mode-0-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="95,85 95,95"></polyline>
+  <polyline id="t-pair-0" fill="none" stroke="#28c8d6" stroke-width="4" points="65,85 75,65 95,85"></polyline>
+  <polyline id="t-mode-1-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="135,85 135,95"></polyline>
+  <polyline id="t-mode-1-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="165,85 165,95"></polyline>
+  <polyline id="t-pair-1" fill="none" stroke="#28c8d6" stroke-width="4" points="135,85 145,65 165,85"></polyline>
+  <polyline id="t-mode-2-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="205,85 205,95"></polyline>
+  <polyline id="t-mode-2-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="235,85 235,95"></polyline>
+  <polyline id="t-pair-2" fill="none" stroke="#28c8d6" stroke-width="4" points="205,85 215,65 235,85"></polyline>
+  <polyline id="t-mode-3-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="275,85 275,95"></polyline>
+  <polyline id="t-mode-3-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="305,85 305,95"></polyline>
+  <polyline id="t-pair-3" fill="none" stroke="#28c8d6" stroke-width="4" points="275,85 285,65 305,85"></polyline>
+  <polyline id="t-mode-4-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="345,85 345,95"></polyline>
+  <polyline id="t-mode-4-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="375,85 375,95"></polyline>
+  <polyline id="t-pair-4" fill="none" stroke="#28c8d6" stroke-width="4" points="345,85 355,65 375,85"></polyline>
+  <polyline id="t-mode-5-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="415,85 415,95"></polyline>
+  <polyline id="t-mode-5-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="445,85 445,95"></polyline>
+  <polyline id="t-pair-5" fill="none" stroke="#28c8d6" stroke-width="4" points="415,85 425,65 445,85"></polyline>
+  <polyline id="t-mode-6-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="485,85 485,95"></polyline>
+  <polyline id="t-mode-6-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="515,85 515,95"></polyline>
+  <polyline id="t-pair-6" fill="none" stroke="#28c8d6" stroke-width="4" points="485,85 495,65 515,85"></polyline>
+  <polyline id="t-mode-7-l" fill="none" stroke="#2a9d2a" stroke-width="4" points="555,85 555,95"></polyline>
+  <polyline id="t-mode-7-r" fill="none" stroke="#2a9d2a" stroke-width="4" points="585,85 585,95"></polyline>
+  <polyline id="t-pair-7" fill="none" stroke="#28c8d6" stroke-width="4" points="555,85 565,65 585,85"></polyline>
+  <polyline id="k-mode-0-l" fill="none" stroke="#2828d6" stroke-width="4" points="65,225 65,235"></polyline>
+  <polyline id="k-mode-0-r" fill="none" stroke="#2828d6" stroke-width="4" points="95,225 95,235"></polyline>
+  <polyline id="k-mode-1-l" fill="none" stroke="#2828d6" stroke-width="4" points="135,225 135,235"></polyline>
+  <polyline id="k-mode-1-r" fill="none" stroke="#2828d6" stroke-width="4" points="165,225 165,235"></polyline>
+  <polyline id="k-mode-2-l" fill="none" stroke="#2828d6" stroke-width="4" points="205,225 205,235"></polyline>
+  <polyline id="k-mode-2-r" fill="none" stroke="#2828d6" stroke-width="4" points="235,225 235,235"></polyline>
+  <polyline id="k-mode-3-l" fill="none" stroke="#2828d6" stroke-width="4" points="275,225 275,235"></polyline>
+  <polyline id="k-mode-3-r" fill="none" stroke="#2828d6" stroke-width="4" points="305,225 305,235"></polyline>
+  <polyline id="k-mode-4-l" fill="none" stroke="#2828d6" stroke-width="4" points="345,225 345,235"></polyline>
+  <polyline id="k-mode-4-r" fill="none" stroke="#2828d6" stroke-width="4" points="375,225 375,235"></polyline>
+  <polyline id="k-mode-5-l" fill="none" stroke="#2828d6" stroke-width="4" points="415,225 415,235"></polyline>
+  <polyline id="k-mode-5-r" fill="none" stroke="#2828d6" stroke-width="4" points="445,225 445,235"></polyline>
+  <polyline id="k-mode-6-l" fill="none" stroke="#2828d6" stroke-width="4" points="485,225 485,235"></polyline>
+  <polyline id="k-mode-6-r" fill="none" stroke="#2828d6" stroke-width="4" points="515,225 515,235"></polyline>
+  <polyline id="k-mode-7-l" fill="none" stroke="#2828d6" stroke-width="4" points="555,225 555,235"></polyline>
+  <polyline id="k-mode-7-r" fill="none" stroke="#2828d6" stroke-width="4" points="585,225 585,235"></polyline>
+  <polyline id="k-pair-0" fill="none" stroke="#28c8d6" stroke-width="4" points="95,225 115,205 135,225"></polyline>
+  <polyline id="k-pair-1" fill="none" stroke="#28c8d6" stroke-width="4" points="165,225 185,205 205,225"></polyline>
+  <polyline id="k-pair-2" fill="none" stroke="#28c8d6" stroke-width="4" points="235,225 255,205 275,225"></polyline>
+  <polyline id="k-pair-3" fill="none" stroke="#28c8d6" stroke-width="4" points="305,225 325,205 345,225"></polyline>
+  <polyline id="k-pair-4" fill="none" stroke="#28c8d6" stroke-width="4" points="375,225 395,205 415,225"></polyline>
+  <polyline id="k-pair-5" fill="none" stroke="#28c8d6" stroke-width="4" points="445,225 465,205 485,225"></polyline>
+  <polyline id="k-pair-6" fill="none" stroke="#28c8d6" stroke-width="4" points="515,225 535,205 555,225"></polyline>
+  <polyline id="end-mode-left" fill="none" stroke="#f0f0f0" stroke-width="4" stroke-dasharray="8 6" points="65,219 71,225 65,231 59,225 65,219"></polyline>
+  <polyline id="end-mode-right" fill="none" stroke="#f0f0f0" stroke-width="4" stroke-dasharray="8 6" points="585,219 591,225 585,231 579,225 585,219"></polyline>
+</svg>

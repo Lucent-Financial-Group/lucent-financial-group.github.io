@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-adinkra">
+  <polyline id="edge-0-0" fill="none" stroke="#d62828" stroke-width="4" points="125,45 255,45"></polyline>
+  <polyline id="edge-1-1" fill="none" stroke="#2a9d2a" stroke-width="4" stroke-dasharray="8 6" points="255,45 385,45"></polyline>
+  <polyline id="edge-2-0" fill="none" stroke="#d62828" stroke-width="4" points="385,45 515,45"></polyline>
+  <polyline id="edge-4-0" fill="none" stroke="#d62828" stroke-width="4" points="125,125 255,125"></polyline>
+  <polyline id="edge-5-1" fill="none" stroke="#2a9d2a" stroke-width="4" stroke-dasharray="8 6" points="255,125 385,125"></polyline>
+  <polyline id="edge-6-0" fill="none" stroke="#d62828" stroke-width="4" points="385,125 515,125"></polyline>
+  <polyline id="edge-12-0" fill="none" stroke="#d62828" stroke-width="4" points="125,205 255,205"></polyline>
+  <polyline id="edge-13-1" fill="none" stroke="#2a9d2a" stroke-width="4" stroke-dasharray="8 6" points="255,205 385,205"></polyline>
+  <polyline id="edge-14-0" fill="none" stroke="#d62828" stroke-width="4" points="385,205 515,205"></polyline>
+  <polyline id="edge-8-0" fill="none" stroke="#d62828" stroke-width="4" points="125,285 255,285"></polyline>
+  <polyline id="edge-9-1" fill="none" stroke="#2a9d2a" stroke-width="4" stroke-dasharray="8 6" points="255,285 385,285"></polyline>
+  <polyline id="edge-10-0" fill="none" stroke="#d62828" stroke-width="4" points="385,285 515,285"></polyline>
+  <polyline id="edge-0-2" fill="none" stroke="#2828d6" stroke-width="4" points="125,45 125,125"></polyline>
+  <polyline id="edge-1-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,45 255,125"></polyline>
+  <polyline id="edge-3-2" fill="none" stroke="#2828d6" stroke-width="4" points="385,45 385,125"></polyline>
+  <polyline id="edge-2-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="515,45 515,125"></polyline>
+  <polyline id="edge-4-3" fill="none" stroke="#28c8d6" stroke-width="4" stroke-dasharray="8 6" points="125,125 125,205"></polyline>
+  <polyline id="edge-5-3" fill="none" stroke="#28c8d6" stroke-width="4" points="255,125 255,205"></polyline>
+  <polyline id="edge-7-3" fill="none" stroke="#28c8d6" stroke-width="4" stroke-dasharray="8 6" points="385,125 385,205"></polyline>
+  <polyline id="edge-6-3" fill="none" stroke="#28c8d6" stroke-width="4" points="515,125 515,205"></polyline>
+  <polyline id="edge-8-2" fill="none" stroke="#2828d6" stroke-width="4" points="125,205 125,285"></polyline>
+  <polyline id="edge-9-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="255,205 255,285"></polyline>
+  <polyline id="edge-11-2" fill="none" stroke="#2828d6" stroke-width="4" points="385,205 385,285"></polyline>
+  <polyline id="edge-10-2" fill="none" stroke="#2828d6" stroke-width="4" stroke-dasharray="8 6" points="515,205 515,285"></polyline>
+</svg>

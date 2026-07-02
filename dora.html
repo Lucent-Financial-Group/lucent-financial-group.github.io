@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0E16">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>body{margin:0;background:#0B0E16}</style>
+</helmet>
+
+<div data-screen-label="DORA" style="min-height:100vh;background:radial-gradient(1100px 700px at 60% -20%,#131c33 0%,#0B0E16 58%);color:#E7EBF4;font-family:'Inter',system-ui,sans-serif">
+
+  <header style="display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #26304A;background:rgba(11,14,22,.75);position:sticky;top:0;z-index:20;flex-wrap:wrap">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit"><span style="font-family:'Space Mono',monospace;color:#E8B566;font-size:18px">ζ</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.06em;font-size:15px">GENESIS</span></a>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A;white-space:nowrap">· <a href="settlement.html" style="color:#94A0BC;text-decoration:none">settlement</a> · <span style="color:#E8B566">dora</span></span>
+    <div style="flex:1"></div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #26304A;white-space:nowrap;flex-shrink:0;color:{{ sourceColor }};display:inline-flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:{{ sourceColor }};display:inline-block"></span>{{ sourceChip }}</span>
+  </header>
+
+  <div style="max-width:920px;margin:0 auto;padding:26px 20px 90px">
+
+    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5E6B8A">the going concern · observatory</div>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;margin:4px 0 6px">DORA, over time</h1>
+    <p style="color:#94A0BC;font-size:14px;line-height:1.65;max-width:620px;margin:0">
+      Every frame here is a <b style="color:#E7EBF4;font-weight:600">JSON file committed by CI</b> — this page fetches <span style="font-family:'Space Mono',monospace;font-size:12px;color:#5EC8C2">data/metrics-history.json</span> from its own origin. No API tokens, no GraphQL, no rate limits. The history is the ledger of frames; the chart is just the ledger, drawn.
+    </p>
+
+    <!-- headline tiles -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px">
+      <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:14px 16px"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">deploy freq · PRs/24h</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#E8B566;margin-top:4px">{{ curPrs }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2;margin-top:2px">{{ prsDelta }}</div></div>
+      <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:14px 16px"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">lead time · avg</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#5EC8C2;margin-top:4px">{{ curLead }}<span style="font-size:14px;color:#94A0BC">m</span></div><div style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2;margin-top:2px">{{ leadDelta }}</div></div>
+      <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:14px 16px"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">commits · 24h</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;margin-top:4px">{{ curCommits }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:#5E6B8A;margin-top:2px">last merge {{ lastMerge }}</div></div>
+      <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:14px 16px"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">open PRs</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#9A8CE6;margin-top:4px">{{ curOpen }}</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:#5E6B8A;margin-top:2px">queue held open</div></div>
+    </div>
+
+    <!-- charts -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+
+      <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">PRs merged / day · {{ frameCount }} frames</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#E8B566">peak {{ prsPeak }}</span></div>
+        <div style="display:flex;align-items:flex-end;gap:5px;height:130px;margin-top:14px">
+          <sc-for list="{{ prsBars }}" as="b" hint-placeholder-count="14">
+            <div title="{{ b.title }}" style="flex:1;height:{{ b.h }};background:{{ b.bg }};border-radius:3px 3px 0 0;box-shadow:{{ b.glow }}"></div>
+          </sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:9px;color:#5E6B8A;margin-top:8px"><span>{{ firstDate }}</span><span>{{ midDate }}</span><span>{{ lastDate }}</span></div>
+      </div>
+
+      <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">lead time, minutes · lower is better</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2">now {{ curLead }}m</span></div>
+        <div style="display:flex;align-items:flex-end;gap:5px;height:130px;margin-top:14px">
+          <sc-for list="{{ leadBars }}" as="b" hint-placeholder-count="14">
+            <div title="{{ b.title }}" style="flex:1;height:{{ b.h }};background:{{ b.bg }};border-radius:3px 3px 0 0;box-shadow:{{ b.glow }}"></div>
+          </sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:9px;color:#5E6B8A;margin-top:8px"><span>{{ firstDate }}</span><span>{{ midDate }}</span><span>{{ lastDate }}</span></div>
+      </div>
+    </div>
+
+    <!-- the roster -->
+    <div style="background:#141A28;border:1px solid #26304A;border-radius:12px;margin-top:12px;overflow:hidden">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 18px;border-bottom:1px solid #26304A">
+        <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5E6B8A">dwellers on shift · commits, 24h</span>
+        <a href="llmtv.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;color:#5EC8C2;text-decoration:none">watch their minds on llmtv →</a>
+      </div>
+      <sc-for list="{{ roster }}" as="a" hint-placeholder-count="6">
+        <div style="display:grid;grid-template-columns:110px 130px 1fr 90px 90px;gap:14px;align-items:center;padding:11px 18px;border-bottom:1px solid #1b2334">
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:{{ a.color }};box-shadow:0 0 6px {{ a.color }};flex-shrink:0"></span><span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px">{{ a.name }}</span></div>
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:#5E6B8A;letter-spacing:.04em">{{ a.harness }}</span>
+          <div style="height:8px;border:1px solid #26304A;border-radius:3px;overflow:hidden;position:relative"><span style="position:absolute;inset:0;width:{{ a.pct }};background:{{ a.color }};display:block;opacity:.85"></span></div>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC;text-align:right">{{ a.commits }} commits</span>
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:#5E6B8A;text-align:right">{{ a.ago }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:22px;border:1px dashed #323E5C;border-radius:12px;padding:14px 18px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.7;color:#5E6B8A">
+      <span style="color:#5EC8C2;letter-spacing:.14em;text-transform:uppercase;font-size:9px;display:block;margin-bottom:4px">provenance · honest by construction</span>
+      {{ provenanceLine }}
+      <span style="display:block;margin-top:6px;color:#46506B">contract: CI appends frames to <span style="color:#94A0BC">data/metrics-history.json</span> on main · page fetches same-origin · future: the whole repo pulled by the in-browser git client over the dumb protocol (<span style="color:#94A0BC">/repo.git/</span>, static files only).</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    source: "embedded",
+    mock: true,
+    updated: "2026-05-26",
+    frames: [
+      { t: "2026-05-13", prs_merged_24h: 62, avg_lead_time_minutes: 140, commits_24h: 58, open_prs: 61 },
+      { t: "2026-05-14", prs_merged_24h: 74, avg_lead_time_minutes: 132, commits_24h: 66, open_prs: 58 },
+      { t: "2026-05-15", prs_merged_24h: 81, avg_lead_time_minutes: 121, commits_24h: 71, open_prs: 60 },
+      { t: "2026-05-16", prs_merged_24h: 58, avg_lead_time_minutes: 125, commits_24h: 54, open_prs: 63 },
+      { t: "2026-05-17", prs_merged_24h: 90, avg_lead_time_minutes: 110, commits_24h: 79, open_prs: 59 },
+      { t: "2026-05-18", prs_merged_24h: 102, avg_lead_time_minutes: 104, commits_24h: 88, open_prs: 57 },
+      { t: "2026-05-19", prs_merged_24h: 96, avg_lead_time_minutes: 99, commits_24h: 84, open_prs: 58 },
+      { t: "2026-05-20", prs_merged_24h: 88, avg_lead_time_minutes: 108, commits_24h: 80, open_prs: 60 },
+      { t: "2026-05-21", prs_merged_24h: 110, avg_lead_time_minutes: 95, commits_24h: 92, open_prs: 56 },
+      { t: "2026-05-22", prs_merged_24h: 97, avg_lead_time_minutes: 97, commits_24h: 85, open_prs: 57 },
+      { t: "2026-05-23", prs_merged_24h: 121, avg_lead_time_minutes: 92, commits_24h: 98, open_prs: 55 },
+      { t: "2026-05-24", prs_merged_24h: 105, avg_lead_time_minutes: 96, commits_24h: 90, open_prs: 56 },
+      { t: "2026-05-25", prs_merged_24h: 118, avg_lead_time_minutes: 94, commits_24h: 96, open_prs: 55 },
+      { t: "2026-05-26", prs_merged_24h: 128, avg_lead_time_minutes: 91, commits_24h: 100, open_prs: 55 },
+    ],
+  };
+
+  componentDidMount() {
+    fetch("data/metrics-history.json")
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+      .then((j) => {
+        if (!j || !Array.isArray(j.frames) || !j.frames.length) throw new Error("bad shape");
+        this.setState({
+          frames: j.frames,
+          source: "fetched",
+          mock: !!(j.provenance && j.provenance.mock),
+          updated: (j.updated || "").slice(0, 10) || this.state.updated,
+        });
+      })
+      .catch(() => this.setState({ source: "unreachable" }));
+  }
+
+  renderVals() {
+    const { frames, source, mock, updated } = this.state;
+    const last = frames[frames.length - 1];
+    const prsMax = Math.max(...frames.map((f) => f.prs_merged_24h));
+    const leadMax = Math.max(...frames.map((f) => f.avg_lead_time_minutes));
+    const leadMin = Math.min(...frames.map((f) => f.avg_lead_time_minutes));
+    const median = (arr) => { const s = [...arr].sort((a, b) => a - b); return s[Math.floor(s.length / 2)]; };
+    const prsMed7 = median(frames.slice(-7).map((f) => f.prs_merged_24h));
+    const short = (t) => { const d = new Date(t + "T00:00:00Z"); return isNaN(d) ? t : d.toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" }).toLowerCase(); };
+
+    const prsBars = frames.map((f, i) => {
+      const hot = f.prs_merged_24h >= prsMax * 0.78;
+      const isLast = i === frames.length - 1;
+      return {
+        h: Math.max(4, Math.round((f.prs_merged_24h / prsMax) * 100)) + "%",
+        bg: hot ? "linear-gradient(180deg,#E8B566,#B6863F)" : "linear-gradient(180deg,#B6863F,#7a5a2a)",
+        glow: isLast ? "0 0 14px rgba(232,181,102,.35)" : "none",
+        title: f.t + " — " + f.prs_merged_24h + " PRs",
+      };
+    });
+    const leadBars = frames.map((f, i) => {
+      const v = f.avg_lead_time_minutes;
+      const good = v <= leadMin * 1.05;
+      const ok = v <= leadMin * 1.2;
+      const isLast = i === frames.length - 1;
+      return {
+        h: Math.max(4, Math.round((v / leadMax) * 100)) + "%",
+        bg: good ? "linear-gradient(180deg,#5EC8C2,#3a6e6a)" : ok ? "linear-gradient(180deg,#4a7d79,#2a3350)" : "linear-gradient(180deg,#3d4a68,#2a3350)",
+        glow: isLast ? "0 0 14px rgba(94,200,194,.3)" : "none",
+        title: f.t + " — " + v + "m",
+      };
+    });
+
+    const chipBySource = {
+      fetched: { text: mock ? "live fetch · data/ (mock frames)" : "live · data/ same-origin", color: "#5EC8C2" },
+      embedded: { text: "embedded frame · fetch pending", color: "#E8B566" },
+      unreachable: { text: "offline · embedded frame", color: "#E8B566" },
+    };
+    const chip = chipBySource[source];
+    const provBySource = {
+      fetched: "source: data/metrics-history.json · fetched same-origin over https · " + frames.length + " frames · updated " + updated + (mock ? " · frames are a MOCK extension of the real 2026-05-26 snapshot — CI writer replaces them (provenance.mock=false)." : " · real CI frames."),
+      embedded: "source: embedded fallback frame (2026-05-26 snapshot) · same-origin fetch in flight.",
+      unreachable: "source: embedded fallback frame (2026-05-26 snapshot) · data/metrics-history.json unreachable — page stays honest and says so instead of pretending.",
+    };
+
+    const maxC = 45;
+    const mkA = (name, harness, commits, ago, status) => ({
+      name, harness, commits, ago,
+      pct: Math.max(3, Math.round((commits / maxC) * 100)) + "%",
+      color: status === "active" ? "#5EC8C2" : status === "recent" ? "#E8B566" : "#46506B",
+    });
+
+    return {
+      sourceChip: chip.text,
+      sourceColor: chip.color,
+      provenanceLine: provBySource[source],
+      frameCount: frames.length,
+      prsPeak: prsMax,
+      curPrs: last.prs_merged_24h,
+      curLead: last.avg_lead_time_minutes,
+      curCommits: last.commits_24h,
+      curOpen: last.open_prs,
+      lastMerge: "4m ago",
+      prsDelta: (last.prs_merged_24h >= prsMed7 ? "▲ +" : "▼ ") + (last.prs_merged_24h - prsMed7) + " vs 7-frame median",
+      leadDelta: "▼ −" + (frames[0].avg_lead_time_minutes - last.avg_lead_time_minutes) + "m over " + frames.length + " frames",
+      firstDate: short(frames[0].t),
+      midDate: short(frames[Math.floor(frames.length / 2)].t),
+      lastDate: short(last.t),
+      prsBars, leadBars,
+      roster: [
+        mkA("Lior", "Gemini/Antigravity", 45, "4m ago", "active"),
+        mkA("Otto", "Claude Code", 39, "6m ago", "active"),
+        mkA("Vera", "Codex IDE", 6, "1h ago", "recent"),
+        mkA("Aaron", "Human", 5, "3h ago", "recent"),
+        mkA("Alexa", "Kiro/Qwen", 1, "1h ago", "recent"),
+        mkA("Riven", "Cursor/Grok", 1, "8h ago", "stale"),
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

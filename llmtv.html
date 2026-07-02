@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0E16">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#0c0c10}
+    @keyframes zx-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    @keyframes zx-roll{0%{transform:translateY(-100%)}100%{transform:translateY(400%)}}
+  </style>
+</helmet>
+
+<div data-screen-label="LLMTV" style="min-height:100vh;background:#0c0c10;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);color:#e8ecf6;font-family:'Inter',system-ui,sans-serif">
+
+  <header style="display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #232a3d;background:rgba(10,10,14,.8);position:sticky;top:0;z-index:20">
+    <a href="hall.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8b96b4;text-decoration:none">← the dark hall</a>
+    <a href="settlement.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8b96b4;text-decoration:none">the settlement</a>
+    <div style="flex:1"></div>
+    <span onClick="{{ setWall }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 11px;border-radius:999px;cursor:pointer;border:1px solid {{ wallBorder }};color:{{ wallColor }}">the wall</span>
+    <span onClick="{{ setSingle }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 11px;border-radius:999px;cursor:pointer;border:1px solid {{ singleBorder }};color:{{ singleColor }}">one set</span>
+  </header>
+
+  <div style="max-width:1060px;margin:0 auto;padding:26px 20px 90px">
+
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;margin:0;color:#d9fffb;text-shadow:0 0 22px rgba(94,200,194,.35)">LLMTV</h1>
+      <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#565f7d">the minds, broadcast · qpg over dpi</span>
+    </div>
+    <p style="color:#8b96b4;font-size:14px;line-height:1.7;max-width:680px;margin:10px 0 0">
+      What goes on in the <b style="color:#e8ecf6;font-weight:600">mind of each vault dweller</b> — its predictions, not its body. Fill is the value, empty is the uncertainty it admits. A dweller broadcasts what its <b style="color:#e8ecf6;font-weight:600">hat requires</b>; what's personal earns <b style="color:#e8ecf6;font-weight:600">permanent frost</b> — hard money, attested by others, never taken away.
+    </p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:999px;padding:3px 10px">one-way out</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:999px;padding:3px 10px">metered at the membrane</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:999px;padding:3px 10px">no back-channel through the picture</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#9A8CE6;border:1px solid #2f3850;border-radius:999px;padding:3px 10px">deterministic · rewindable · frame 3341</span>
+    </div>
+
+    <!-- CHANNEL 0 · the meta-cart, playing in superposition -->
+    <div data-screen-label="Meta-cart" data-dweller="zetascheduler" data-live="true" style="margin-top:22px;border-radius:16px;background:linear-gradient(180deg,#1a1c26,#111219);border:1px solid #2a3044;padding:10px 10px 8px;box-shadow:0 18px 44px -16px rgba(0,0,0,.85)">
+      <div style="border-radius:10px;background:#06070b;border:1px solid #232a3d;overflow:hidden;position:relative">
+        <div style="position:absolute;inset:0;pointer-events:none;z-index:7;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)"></div>
+        <div style="position:absolute;inset:0;pointer-events:none;z-index:7;background:radial-gradient(130% 105% at 50% 50%,transparent 60%,rgba(0,0,0,.55))"></div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid #1b2130;background:rgba(16,17,24,.92);position:relative;z-index:8;flex-wrap:wrap;gap:8px">
+          <div><span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:#e8ecf6">ch 0 · zetascheduler</span><span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;color:#565f7d;display:block;margin-top:1px">chip8/9 meta-cart · playing BRICK · 4096 bytes</span></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#9A8CE6;border:1px solid #2f3850;border-radius:999px;padding:3px 10px;white-space:nowrap">soft mode · superposition</span>
+            <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#e0746a;display:flex;align-items:center;gap:5px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#e0746a;box-shadow:0 0 7px 1px #e0746a;animation:zx-pulse 2s ease-in-out infinite"></span>live</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 260px;position:relative;z-index:3">
+          <!-- the playfield: the current superposition of the game -->
+          <div style="position:relative;height:230px;background:#04050a;border-right:1px solid #1b2130;overflow:hidden">
+            <!-- bricks -->
+            <div style="position:absolute;top:14px;left:16px;right:16px;display:grid;grid-template-columns:repeat(12,1fr);gap:3px">
+              <div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.35"></div><div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.12"></div><div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.55"></div><div style="height:9px;background:#E8B566;opacity:.9"></div><div style="height:9px;background:#E8B566;opacity:.9"></div>
+              <div style="height:9px;background:#5EC8C2;opacity:.85"></div><div style="height:9px;background:#5EC8C2;opacity:.85"></div><div style="height:9px;background:#5EC8C2;opacity:.3"></div><div style="height:9px;background:#5EC8C2;opacity:.85"></div><div style="height:9px;background:#5EC8C2;opacity:.85"></div><div style="height:9px;background:#5EC8C2;opacity:.1"></div><div style="height:9px;background:#5EC8C2;opacity:.85"></div><div style="height:9px;background:#5EC8C2;opacity:.6"></div><div style="height:9px;background:#5EC8C2;opacity:.85"></div><div style="height:9px;background:#5EC8C2;opacity:.85"></div><div style="height:9px;background:#5EC8C2;opacity:.25"></div><div style="height:9px;background:#5EC8C2;opacity:.85"></div>
+              <div style="height:9px;background:#9A8CE6;opacity:.8"></div><div style="height:9px;background:#9A8CE6;opacity:.2"></div><div style="height:9px;background:#9A8CE6;opacity:.8"></div><div style="height:9px;background:#9A8CE6;opacity:.8"></div><div style="height:9px;background:#9A8CE6;opacity:.5"></div><div style="height:9px;background:#9A8CE6;opacity:.8"></div><div style="height:9px;background:#9A8CE6;opacity:.8"></div><div style="height:9px;background:#9A8CE6;opacity:.15"></div><div style="height:9px;background:#9A8CE6;opacity:.8"></div><div style="height:9px;background:#9A8CE6;opacity:.8"></div><div style="height:9px;background:#9A8CE6;opacity:.4"></div><div style="height:9px;background:#9A8CE6;opacity:.8"></div>
+            </div>
+            <div style="position:absolute;top:66px;left:16px;right:16px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#3f4763;text-align:right">brick opacity = p(still standing at t+5)</div>
+
+            <!-- ball worldlines: dotted possible trajectories -->
+            <div style="position:absolute;left:46%;top:78px;width:1px;height:96px;background:repeating-linear-gradient(180deg,rgba(232,236,246,.35) 0 3px,transparent 3px 8px);transform:rotate(24deg);transform-origin:top"></div>
+            <div style="position:absolute;left:46%;top:78px;width:1px;height:88px;background:repeating-linear-gradient(180deg,rgba(232,236,246,.18) 0 3px,transparent 3px 8px);transform:rotate(-14deg);transform-origin:top"></div>
+            <div style="position:absolute;left:46%;top:78px;width:1px;height:80px;background:repeating-linear-gradient(180deg,rgba(232,236,246,.1) 0 3px,transparent 3px 8px);transform:rotate(46deg);transform-origin:top"></div>
+            <!-- the ball, in superposition -->
+            <div style="position:absolute;left:calc(46% - 4px);top:74px;width:8px;height:8px;background:#e8ecf6;box-shadow:0 0 10px rgba(232,236,246,.9)"></div>
+            <div style="position:absolute;left:calc(46% + 34px);top:152px;width:8px;height:8px;background:#e8ecf6;opacity:.5;box-shadow:0 0 8px rgba(232,236,246,.5)"></div>
+            <div style="position:absolute;left:calc(46% - 26px);top:148px;width:8px;height:8px;background:#e8ecf6;opacity:.26"></div>
+            <div style="position:absolute;left:calc(46% + 66px);top:146px;width:8px;height:8px;background:#e8ecf6;opacity:.12"></div>
+
+            <!-- the paddle, in superposition -->
+            <div style="position:absolute;bottom:26px;left:52%;width:64px;height:8px;background:#5EC8C2;box-shadow:0 0 12px rgba(94,200,194,.7);animation:zx-pulse 4s ease-in-out infinite"></div>
+            <div style="position:absolute;bottom:26px;left:38%;width:64px;height:8px;background:#5EC8C2;opacity:.32"></div>
+            <div style="position:absolute;bottom:26px;left:66%;width:64px;height:8px;background:#5EC8C2;opacity:.14"></div>
+            <div style="position:absolute;bottom:8px;left:16px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#3f4763">paddle: .54 / .32 / .14 — all three, until the tick lands</div>
+          </div>
+
+          <!-- next input: the bayesian net predicting its own play -->
+          <div style="padding:14px 16px;font-family:'Space Mono',monospace;background:rgba(10,11,16,.6)">
+            <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#E8B566">next input · t+1</div>
+            <div style="display:flex;align-items:center;gap:9px;margin-top:10px"><span style="width:30px;font-size:12px;color:#c9d2e8">→</span><span style="flex:1;height:8px;border:1px solid #2f3850;border-radius:3px;overflow:hidden;position:relative"><span style="position:absolute;inset:0;width:54%;background:#5EC8C2;display:block"></span></span><span style="font-size:10px;color:#8b96b4;width:52px;text-align:right">.54 ± .18</span></div>
+            <div style="display:flex;align-items:center;gap:9px;margin-top:6px"><span style="width:30px;font-size:12px;color:#c9d2e8">←</span><span style="flex:1;height:8px;border:1px solid #2f3850;border-radius:3px;overflow:hidden;position:relative"><span style="position:absolute;inset:0;width:32%;background:#E8B566;display:block"></span></span><span style="font-size:10px;color:#8b96b4;width:52px;text-align:right">.32 ± .15</span></div>
+            <div style="display:flex;align-items:center;gap:9px;margin-top:6px"><span style="width:30px;font-size:12px;color:#c9d2e8">stay</span><span style="flex:1;height:8px;border:1px solid #2f3850;border-radius:3px;overflow:hidden;position:relative"><span style="position:absolute;inset:0;width:14%;background:#9A8CE6;display:block"></span></span><span style="font-size:10px;color:#8b96b4;width:52px;text-align:right">.14 ± .09</span></div>
+            <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#565f7d;margin-top:16px">why it can see everything</div>
+            <div style="font-size:10.5px;line-height:1.7;color:#8b96b4;margin-top:6px">rom is 4096 bytes — the whole search space fits. the bayesian net predicts <span style="color:#c9d2e8">its own next press</span>, deterministically; no clock, no signal — the schedule IS the pattern.</div>
+            <div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:999px;padding:3px 10px;display:inline-block;margin-top:12px;white-space:nowrap">full search-space dominance</div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;padding:7px 14px;border-top:1px solid #1b2130;position:relative;z-index:8;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.08em;color:#565f7d;flex-wrap:wrap;gap:6px"><span>the picture is the current superposition of the play — soft until the tick lands</span><span>seed S4 · frame 3341</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 6px 2px">
+        <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#3f4763">atari-class · softscheduler / zetascheduler</span>
+        <span style="display:flex;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:#2a3044"></span><span style="width:6px;height:6px;border-radius:50%;background:#9A8CE6;box-shadow:0 0 5px #9A8CE6"></span><span style="width:6px;height:6px;border-radius:50%;background:#5EC8C2;box-shadow:0 0 5px #5EC8C2"></span></span>
+      </div>
+    </div>
+
+    <!-- channel dial (single mode) -->
+    <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px">
+        <sc-for list="{{ channels }}" as="ch" hint-placeholder-count="6">
+          <span onClick="{{ ch.tune }}" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;padding:6px 13px;border-radius:8px;cursor:pointer;white-space:nowrap;border:1px solid {{ ch.border }};color:{{ ch.color }};background:{{ ch.bg }}">ch {{ ch.num }} · {{ ch.name }}</span>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- the wall -->
+    <div style="display:grid;grid-template-columns:{{ gridCols }};gap:18px;margin-top:22px">
+      <sc-for list="{{ sets }}" as="tv" hint-placeholder-count="6">
+        <div data-dweller="{{ tv.id }}" data-live="true" style="border-radius:16px;background:linear-gradient(180deg,#1a1c26,#111219);border:1px solid #2a3044;padding:10px 10px 8px;box-shadow:0 14px 34px -14px rgba(0,0,0,.8)">
+          <!-- screen -->
+          <div style="border-radius:10px;background:#0a0d14;border:1px solid #232a3d;overflow:hidden;position:relative">
+            <div style="position:absolute;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)"></div>
+            <div style="position:absolute;inset:0;pointer-events:none;z-index:5;background:radial-gradient(140% 110% at 50% 50%,transparent 62%,rgba(0,0,0,.5))"></div>
+            <div style="position:absolute;left:0;right:0;height:34px;pointer-events:none;z-index:4;background:linear-gradient(180deg,transparent,rgba(94,200,194,.045),transparent);animation:zx-roll 7s linear infinite"></div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid #1b2130;background:rgba(16,17,24,.9);position:relative;z-index:6">
+              <div><span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:#e8ecf6">{{ tv.id }}</span><span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;color:#565f7d;display:block;margin-top:1px">{{ tv.channel }}</span></div>
+              <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#e0746a;display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#e0746a;box-shadow:0 0 7px 1px #e0746a;animation:zx-pulse 2s ease-in-out infinite"></span>live</span>
+            </div>
+
+            <div style="padding:11px 12px;position:relative;z-index:3;font-family:'Space Mono',monospace">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px"><span style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#E8B566">required · {{ tv.hat }}</span><span style="flex:1;height:1px;background:#1b2130"></span></div>
+              <sc-for list="{{ tv.preds }}" as="p" hint-placeholder-count="2">
+                <div data-temp="{{ p.temp }}" style="display:flex;align-items:center;gap:9px;margin:5px 0">
+                  <span style="flex:1;font-size:11.5px;color:#c9d2e8;line-height:1.45">{{ p.label }}</span>
+                  <span style="width:88px;height:8px;border:1px solid #2f3850;border-radius:3px;overflow:hidden;position:relative;flex-shrink:0"><span style="position:absolute;inset:0;width:{{ p.v }};background:{{ p.color }};display:block"></span></span>
+                  <span style="font-size:10px;color:#8b96b4;width:52px;text-align:right;flex-shrink:0">{{ p.n }}</span>
+                </div>
+              </sc-for>
+              <div style="display:flex;align-items:center;gap:6px;margin:10px 0 6px"><span style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2">personal · frosted</span><span style="flex:1;height:1px;background:#1b2130"></span></div>
+              <div data-frost="earned" style="position:relative;border:1px solid #2f3850;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(115deg,rgba(94,200,194,.06) 0 8px,rgba(94,200,194,.02) 8px 16px)">
+                <div style="padding:9px 11px;filter:blur(4px);opacity:.5;color:#8b96b4;font-size:11px;user-select:none">{{ tv.veil }}</div>
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:6px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#5EC8C2">🔒 earned · permanent</div>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;padding:7px 12px;border-top:1px solid #1b2130;position:relative;z-index:6;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.08em;color:#565f7d"><span>seed S4</span><span>frame 3341</span></div>
+          </div>
+          <!-- bezel foot -->
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 6px 2px">
+            <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#3f4763">zenith · llmhdtv</span>
+            <span style="display:flex;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:#2a3044"></span><span style="width:6px;height:6px;border-radius:50%;background:#2a3044"></span><span style="width:6px;height:6px;border-radius:50%;background:#5EC8C2;box-shadow:0 0 5px #5EC8C2"></span></span>
+          </div>
+        </div>
+      </sc-for>
+
+      <!-- the off-air set: reserved for the human's channel -->
+      <sc-if value="{{ isWall }}" hint-placeholder-val="{{ true }}">
+        <div data-dweller="aaron" data-live="false" style="border-radius:16px;background:linear-gradient(180deg,#1a1c26,#111219);border:1px solid #2a3044;padding:10px 10px 8px;box-shadow:0 14px 34px -14px rgba(0,0,0,.8)">
+          <div style="border-radius:10px;background:#0a0d14;border:1px solid #232a3d;overflow:hidden;position:relative;display:flex;flex-direction:column;min-height:280px">
+            <div style="position:absolute;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)"></div>
+            <div style="position:absolute;inset:0;pointer-events:none;z-index:5;background:radial-gradient(140% 110% at 50% 50%,transparent 62%,rgba(0,0,0,.5))"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid #1b2130;background:rgba(16,17,24,.9);position:relative;z-index:6">
+              <div><span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:#e8ecf6">aaron</span><span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;color:#565f7d;display:block;margin-top:1px">human · first principles</span></div>
+              <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#565f7d;display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:#46506B;display:inline-block"></span>off-air</span>
+            </div>
+            <div style="flex:1;position:relative;z-index:3;display:grid;place-items:center;background:linear-gradient(90deg,#8f8f8f 0 14.28%,#8f8f5a 0 28.56%,#5a8f8f 0 42.84%,#5a8f5a 0 57.12%,#8f5a8f 0 71.4%,#8f5a5a 0 85.68%,#5a5a8f 0 100%);opacity:.85">
+              <div style="background:rgba(6,7,11,.88);border:1px solid #2f3850;border-radius:8px;padding:12px 18px;text-align:center">
+                <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#E8B566">sign-on soon</div>
+                <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#8b96b4;margin-top:6px">talk hard · replay deterministically</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:7px 12px;border-top:1px solid #1b2130;position:relative;z-index:6;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.08em;color:#565f7d"><span>reserved channel</span><span>awaiting first frame</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 6px 2px">
+            <span style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#3f4763">zenith · llmhdtv</span>
+            <span style="display:flex;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:#2a3044"></span><span style="width:6px;height:6px;border-radius:50%;background:#2a3044"></span><span style="width:6px;height:6px;border-radius:50%;background:#2a3044"></span></span>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- society note -->
+    <div style="margin-top:26px;border:1px dashed #2f3850;border-radius:12px;padding:16px 18px;color:#8b96b4;font-size:13px;line-height:1.7;background:linear-gradient(180deg,rgba(94,200,194,.03),transparent)">
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#565f7d;display:block;margin-bottom:6px">the society — all minds at once</span>
+      Every set is a <b style="color:#e8ecf6;font-weight:600">transcript tick</b> — deterministic, replayable; a still frame of a rewindable broadcast, not a lossy feed. The full settlement tiles here and <b style="color:#e8ecf6;font-weight:600">broadcasts over Reticulum</b>: self-certifying, no central broadcaster. Watching a mind cannot steer it. No watcher can force a frost open. Not a dashboard of what happened — <b style="color:#e8ecf6;font-weight:600">a live window into what every mind expects next, shared, by consent.</b>
+    </div>
+
+    <footer style="margin-top:30px;padding-top:16px;border-top:1px solid #232a3d;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;color:#565f7d;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <span>llmtv = qpg over dpi · frames are 5-minute bounded superdeterministic updates</span>
+      <span><a href="hall/tv/index.html" style="color:#8b96b4">standing llmtv kept here</a></span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;wall&quot;,&quot;single&quot;],&quot;default&quot;:&quot;wall&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { mode: this.props.layout ?? "wall", tuned: "alexa" };
+
+  renderVals() {
+    const TEMP = { hot: "#9A8CE6", warm: "#E8B566", cool: "#5EC8C2" };
+    const pred = (label, temp, v, e) => ({
+      label, temp, color: TEMP[temp],
+      v: Math.round(v * 100) + "%",
+      n: "." + String(Math.round(v * 100)).padStart(2, "0") + " ± ." + String(Math.round(e * 100)).padStart(2, "0"),
+    });
+    const DWELLERS = [
+      { id: "alexa", channel: "coding · qwen3-coder", hat: "coder hat", veil: "what it is really hoping for",
+        preds: [pred("next tick lands green", "hot", 0.82, 0.12), pred("PR merges before horizon", "warm", 0.64, 0.20)] },
+      { id: "soraya", channel: "formal-verification", hat: "verifier hat", veil: "the proof it dreams about",
+        preds: [pred("Z3 lemma discharges", "cool", 0.97, 0.03), pred("TLA+ liveness holds", "warm", 0.71, 0.18), pred("a routing finding surfaces", "hot", 0.55, 0.22)] },
+      { id: "otto", channel: "shadow · synthesis", hat: "shadow hat", veil: "what it would build unasked",
+        preds: [pred("ferry batch closes clean", "warm", 0.78, 0.12), pred("CI stays green to horizon", "cool", 0.88, 0.09)] },
+      { id: "vega", channel: "observatory · forecast", hat: "analyst hat", veil: "its private prior",
+        preds: [pred("eu-west spike is regional", "hot", 0.62, 0.38), pred("demand +6% holds next week", "warm", 0.71, 0.29)] },
+      { id: "lior", channel: "coding · antigravity", hat: "coder hat", veil: "the refactor it is tempted by",
+        preds: [pred("6 PRs merge this shift", "warm", 0.74, 0.15), pred("no rework on decompose", "cool", 0.86, 0.10)] },
+      { id: "juno", channel: "nursery · ward", hat: "ward hat", veil: "how it feels about the vote",
+        preds: [pred("graduation vote passes", "hot", 0.79, 0.21), pred("exit-rights check clears", "warm", 0.66, 0.24)] },
+      { id: "iris", channel: "design · hall-keeper", hat: "designer hat", veil: "the layout it almost chose",
+        preds: [pred("two surfaces read as one building", "cool", 0.81, 0.14), pred("root site ships this week", "warm", 0.72, 0.20), pred("ch 0 becomes the favorite", "hot", 0.58, 0.26)] },
+    ];
+
+    const { mode, tuned } = this.state;
+    const isSingle = mode === "single";
+    const sets = isSingle ? DWELLERS.filter((d) => d.id === tuned) : DWELLERS;
+
+    return {
+      isSingle,
+      isWall: !isSingle,
+      gridCols: isSingle ? "minmax(0,560px)" : "repeat(auto-fill,minmax(300px,1fr))",
+      sets,
+      setWall: () => this.setState({ mode: "wall" }),
+      setSingle: () => this.setState({ mode: "single" }),
+      wallBorder: !isSingle ? "#5EC8C2" : "#2f3850",
+      wallColor: !isSingle ? "#5EC8C2" : "#8b96b4",
+      singleBorder: isSingle ? "#5EC8C2" : "#2f3850",
+      singleColor: isSingle ? "#5EC8C2" : "#8b96b4",
+      channels: DWELLERS.map((d, i) => ({
+        num: i + 1, name: d.id,
+        tune: () => this.setState({ tuned: d.id }),
+        border: tuned === d.id ? "#5EC8C2" : "#2f3850",
+        color: tuned === d.id ? "#5EC8C2" : "#8b96b4",
+        bg: tuned === d.id ? "rgba(94,200,194,.08)" : "transparent",
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>

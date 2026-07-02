@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-softvalue">
+  <polyline id="r1-value" fill="none" stroke="#d62828" stroke-width="4" points="85,55 365,55"></polyline>
+  <polyline id="r2-value" fill="none" stroke="#2a9d2a" stroke-width="4" points="85,135 365,135"></polyline>
+  <polyline id="r2-conf" fill="none" stroke="#2a9d2a" stroke-width="4" points="85,155 385,155"></polyline>
+  <polyline id="r2-uncertainty" fill="none" stroke="#2a9d2a" stroke-width="4" stroke-dasharray="8 6" points="385,155 485,155"></polyline>
+  <polyline id="r3-value" fill="none" stroke="#28c8d6" stroke-width="4" points="85,235 365,235"></polyline>
+  <polyline id="r3-conf" fill="none" stroke="#28c8d6" stroke-width="4" points="85,255 425,255"></polyline>
+  <polyline id="r3-uncertainty" fill="none" stroke="#28c8d6" stroke-width="4" stroke-dasharray="8 6" points="425,255 485,255"></polyline>
+</svg>

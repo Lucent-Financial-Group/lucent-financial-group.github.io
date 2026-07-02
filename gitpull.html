@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0E16">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>body{margin:0;background:#0c0c10} @keyframes zx-blink{0%,49%{opacity:1}50%,100%{opacity:0}} @keyframes zx-pulse{0%,100%{opacity:1}50%{opacity:.35}}</style>
+</helmet>
+
+<div data-screen-label="Edge Cell" style="min-height:100vh;background:#0c0c10;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);color:#e8ecf6;font-family:'Inter',system-ui,sans-serif">
+
+  <header style="display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid #232a3d;background:rgba(10,10,14,.8);position:sticky;top:0;z-index:20;flex-wrap:wrap">
+    <a href="hall.html" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8b96b4;text-decoration:none">← the dark hall</a>
+    <div style="flex:1"></div>
+    <sc-if value="{{ hasInterrupts }}" hint-placeholder-val="{{ false }}">
+      <span onClick="{{ service }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #E8B566;white-space:nowrap;color:#E8B566;cursor:pointer;display:inline-flex;align-items:center;gap:6px;animation:zx-pulse 1.6s ease-in-out infinite" style-hover="background:rgba(232,181,102,.1)">⚡ {{ interruptLabel }} · service now</span>
+    </sc-if>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid #2f3850;white-space:nowrap;color:{{ statusColor }};display:inline-flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:{{ statusColor }};display:inline-block"></span>{{ statusText }}</span>
+  </header>
+
+  <div style="max-width:1020px;margin:0 auto;padding:26px 20px 90px">
+
+    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#565f7d">the workbench · a zeta edge node · unreliable storage &amp; compute, embraced</div>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;margin:4px 0 6px;color:#d9fffb">the yin/yang cell</h1>
+    <p style="color:#8b96b4;font-size:14px;line-height:1.7;max-width:720px;margin:0">
+      One cell of the zeta database, living in a browser. <b style="color:#e8ecf6;font-weight:600">Yang</b>: the immutable origin, cloned over static files, self-certifying. <b style="color:#e8ecf6;font-weight:600">Yin</b>: local commits in a content-addressed overlay. The worktree is <b style="color:#e8ecf6;font-weight:600">DagFS</b> (after <span style="font-family:'Space Mono',monospace;font-size:12px;color:#5EC8C2">src/Core/DagFs.fs</span>): paths are links to content addresses — the same node may live under many paths, and edits choose <b style="color:#e8ecf6;font-weight:600">local</b> (copy-on-write fork) or <b style="color:#e8ecf6;font-weight:600">everywhere</b> (shared-object update). Upstream pushes arrive as <b style="color:#e8ecf6;font-weight:600">soft interrupts</b>, serviced at earliest convenience — never mid-thought. Integrity: the real <span style="font-family:'Space Mono',monospace;font-size:12px;color:#5EC8C2">@zeta/merkle</span> oracle, unmodified.
+    </p>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap">
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:#5EC8C2;border:1px solid #2f3850;border-radius:8px;padding:7px 12px">{{ repoLabel }}</span>
+      <span onClick="{{ clone }}" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#0c0c10;background:#5EC8C2;border-radius:8px;padding:8px 16px;cursor:pointer;font-weight:700" style-hover="box-shadow:0 0 18px rgba(94,200,194,.5)">{{ cloneLabel }}</span>
+      <sc-if value="{{ hasYin }}" hint-placeholder-val="{{ false }}">
+        <span onClick="{{ resetYin }}" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9A8CE6;border:1px solid #2f3850;border-radius:8px;padding:7px 12px;cursor:pointer" style-hover="border-color:#9A8CE6">drop yin · resync yang</span>
+      </sc-if>
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d">{{ summary }}</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;align-items:start">
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <!-- event log -->
+        <div style="border:1px solid #232a3d;border-radius:12px;background:#0a0b10;overflow:hidden">
+          <div style="padding:9px 14px;border-bottom:1px solid #232a3d;background:#101118;display:flex;justify-content:space-between"><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#565f7d">event log · the cell is a fold over this</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2">seq {{ seq }}</span></div>
+          <div style="padding:12px 16px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.85;max-height:280px;overflow-y:auto;display:flex;flex-direction:column-reverse">
+            <div>
+            <sc-for list="{{ lines }}" as="ln" hint-placeholder-count="4">
+              <div style="display:flex;gap:9px;align-items:baseline"><span style="color:#3f4763;flex-shrink:0;width:26px;text-align:right">{{ ln.seq }}</span><span style="color:{{ ln.color }};flex-shrink:0">{{ ln.tag }}</span><span style="color:#c9d2e8;word-break:break-all">{{ ln.text }}</span></div>
+            </sc-for>
+            <div style="color:#3f4763">&gt; <span style="animation:zx-blink 1.1s step-end infinite">▮</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- log -->
+        <div style="border:1px solid #232a3d;border-radius:12px;background:#0a0b10;overflow:hidden">
+          <div style="padding:9px 14px;border-bottom:1px solid #232a3d;background:#101118;display:flex;justify-content:space-between"><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#565f7d">git log · every commit a bounded tick</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2">{{ logCount }} commits</span></div>
+          <sc-for list="{{ logEntries }}" as="c" hint-placeholder-count="3">
+            <div onClick="{{ c.checkout }}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #14161f;cursor:pointer;background:{{ c.bg }}" style-hover="background:#12141d">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:{{ c.shaColor }};flex-shrink:0">{{ c.shaShort }}</span>
+              <div style="flex:1;min-width:0"><div style="font-size:12.5px;color:#e8ecf6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.msg }}</div><div style="font-family:'Space Mono',monospace;font-size:9px;color:#565f7d;margin-top:1px">{{ c.meta }}</div></div>
+              <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:{{ c.badgeColor }};flex-shrink:0">{{ c.badge }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- dagfs stats -->
+        <div style="border:1px solid #232a3d;border-radius:12px;background:#12131a;padding:14px 16px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px"><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#565f7d">dagfs · multi-parent, content-addressed</span><span style="font-family:'Space Mono',monospace;font-size:9px;color:#9A8CE6">after src/Core/DagFs.fs</span></div>
+          <div style="display:flex;gap:20px;margin-top:10px;font-family:'Space Mono',monospace">
+            <div><div style="font-size:20px;color:#e8ecf6;font-weight:700">{{ pathCount }}</div><div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#565f7d">links (paths)</div></div>
+            <div><div style="font-size:20px;color:#5EC8C2;font-weight:700">{{ nodeCount }}</div><div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#565f7d">nodes (dedup)</div></div>
+            <div style="flex:1;min-width:0"><div style="font-size:10.5px;color:#8b96b4;line-height:1.6">{{ sharedNote }}</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <!-- worktree -->
+        <div style="border:1px solid #232a3d;border-radius:12px;background:#0a0b10;overflow:hidden">
+          <div style="padding:9px 14px;border-bottom:1px solid #232a3d;background:#101118;display:flex;justify-content:space-between"><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#565f7d">the worktree · paths → content addresses</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2">{{ fileCount }} links</span></div>
+          <sc-for list="{{ files }}" as="f" hint-placeholder-count="3">
+            <div onClick="{{ f.open }}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #14161f;cursor:pointer;background:{{ f.bg }}" style-hover="background:#12141d">
+              <span style="font-family:'Space Mono',monospace;color:{{ f.dotColor }};font-size:12px">{{ f.dot }}</span>
+              <span style="font-family:'Space Mono',monospace;font-size:12px;color:#e8ecf6;flex:1">{{ f.path }}<span style="color:#9A8CE6;font-size:10px;margin-left:8px">{{ f.sharedTag }}</span></span>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d">{{ f.size }} B</span>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#5EC8C2">✓</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- merkle oracle -->
+        <div style="border:1px solid #232a3d;border-radius:12px;background:#12131a;padding:14px 16px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px"><span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#565f7d">@zeta/merkle · the parity oracle, live</span><span style="font-family:'Space Mono',monospace;font-size:9px;color:#9A8CE6">xxh3-128 · f#/c#/rust/ts byte-identical</span></div>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;color:#E8B566;margin-top:10px;word-break:break-all">root {{ merkleRoot }}</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10.5px;color:#8b96b4;margin-top:8px;line-height:1.7">{{ proofText }}</div>
+        </div>
+
+        <!-- the mesh -->
+        <div data-screen-label="Mesh" style="border:1px solid #232a3d;border-radius:12px;background:#12131a;padding:14px 16px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#565f7d">the mesh · reticulum-shaped discovery</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:{{ aliveColor }}">{{ aliveLabel }}</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;font-family:'Space Mono',monospace">
+            <span style="font-size:10px;color:#E8B566;border:1px solid #4a3e30;border-radius:999px;padding:3px 10px;white-space:nowrap">this tab · {{ selfId }}</span>
+            <span style="font-size:10px;color:#5EC8C2;border:1px solid #2f3850;border-radius:999px;padding:3px 10px;white-space:nowrap">tabs · broadcastchannel · live</span>
+            <span style="font-size:10px;color:{{ wsColor }};border:1px solid #2f3850;border-radius:999px;padding:3px 10px;white-space:nowrap">ws gateway · {{ wsStatus }}</span>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <input value="{{ wsUrl }}" onChange="{{ onWsUrl }}" placeholder="wss://your-rns-gateway (optional)" style="flex:1;background:#0a0b10;border:1px solid #2f3850;border-radius:7px;color:#e8ecf6;padding:7px 10px;font-family:'Space Mono',monospace;font-size:10.5px;outline:none">
+            <span onClick="{{ wsConnect }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:7px;padding:7px 12px;cursor:pointer;white-space:nowrap" style-hover="border-color:#5EC8C2">{{ wsLabel }}</span>
+          </div>
+          <div style="margin-top:12px">
+            <sc-for list="{{ meshPeers }}" as="p" hint-placeholder-count="1">
+              <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid #1b2130;font-family:'Space Mono',monospace">
+                <span style="width:8px;height:8px;border-radius:50%;background:{{ p.color }};box-shadow:0 0 6px {{ p.color }};flex-shrink:0"></span>
+                <span style="font-size:11px;color:#e8ecf6">{{ p.id }}</span>
+                <span style="font-size:10px;color:#9A8CE6">{{ p.tag }}</span>
+                <span style="flex:1"></span>
+                <span style="font-size:10px;color:#8b96b4">head {{ p.head }}</span>
+                <span style="font-size:10px;color:#565f7d">{{ p.ago }}</span>
+              </div>
+            </sc-for>
+            <sc-if value="{{ noPeers }}" hint-placeholder-val="{{ true }}">
+              <div style="font-family:'Space Mono',monospace;font-size:10.5px;color:#565f7d;padding:7px 0;border-top:1px solid #1b2130;line-height:1.7">no peers yet — <a href="gitpull.html" target="_blank" style="color:#5EC8C2">spawn a sibling tab</a> and watch it appear, or <span onClick="{{ simulatePeer }}" style="color:#E8B566;text-decoration:underline;text-underline-offset:3px;cursor:pointer">simulate a beacon</span>.</div>
+            </sc-if>
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:9.5px;color:#565f7d;margin-top:10px;line-height:1.7">beacons fold LWW-by-seq — commutative + idempotent, arrival order irrelevant · a closing tab sends <span style="color:#8b96b4">dark</span> · one living node anywhere = zeta alive · <a href="gitpull.html" target="_blank" style="color:#5EC8C2">spawn sibling tab</a></div>
+        </div>
+
+        <!-- yin commit box -->
+        <sc-if value="{{ dirty }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid #4a3e63;border-radius:12px;background:rgba(154,140,230,.05);padding:14px 16px">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#9A8CE6">yin · uncommitted change in {{ selPath }}</div>
+            <sc-if value="{{ selShared }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap">
+                <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#565f7d">this node is multi-parent — edit mode:</span>
+                <span onClick="{{ modeLocal }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;cursor:pointer;border:1px solid {{ localBorder }};color:{{ localColor }}">editLocal · cow fork</span>
+                <span onClick="{{ modeEvery }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;cursor:pointer;border:1px solid {{ everyBorder }};color:{{ everyColor }}">editEverywhere · {{ shareCount }} paths follow</span>
+              </div>
+            </sc-if>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <input value="{{ msg }}" onChange="{{ onMsg }}" placeholder="commit message" style="flex:1;background:#0a0b10;border:1px solid #2f3850;border-radius:8px;color:#e8ecf6;padding:9px 12px;font-family:'Space Mono',monospace;font-size:12px;outline:none">
+              <span onClick="{{ commitYin }}" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#0c0c10;background:#9A8CE6;border-radius:8px;padding:9px 16px;cursor:pointer;font-weight:700;white-space:nowrap" style-hover="box-shadow:0 0 18px rgba(154,140,230,.5)">commit to yin</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <!-- file viewer / editor -->
+    <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px solid #232a3d;border-radius:12px;background:#0a0b10;overflow:hidden;margin-top:14px">
+        <div style="padding:9px 14px;border-bottom:1px solid #232a3d;background:#101118;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center">
+          <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2">{{ selPath }} <span style="color:#9A8CE6">{{ dirtyLabel }}</span><span style="color:#9A8CE6;text-transform:none;letter-spacing:0">{{ alsoAt }}</span></span>
+          <span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input value="{{ linkPath }}" onChange="{{ onLinkPath }}" placeholder="link this node at another path…" style="background:#0a0b10;border:1px solid #2f3850;border-radius:7px;color:#e8ecf6;padding:6px 10px;font-family:'Space Mono',monospace;font-size:10.5px;outline:none;width:220px">
+            <span onClick="{{ addLink }}" style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:7px;padding:6px 10px;cursor:pointer;white-space:nowrap" style-hover="border-color:#5EC8C2">+ link</span>
+            <span style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d;word-break:break-all">blob {{ selShaShort }}</span>
+          </span>
+        </div>
+        <textarea value="{{ selText }}" onChange="{{ onEdit }}" spellCheck="{{ false }}" style="display:block;width:100%;box-sizing:border-box;margin:0;padding:14px 16px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.7;color:#c9d2e8;background:transparent;border:none;outline:none;min-height:220px;resize:vertical"></textarea>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:24px;border:1px dashed #2f3850;border-radius:12px;padding:14px 18px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.8;color:#565f7d">
+      <span style="color:#5EC8C2;letter-spacing:.14em;text-transform:uppercase;font-size:9px;display:block;margin-bottom:4px">the cell, fully grown</span>
+      first-class event store over z-sets/g-sets with rx queries — the event log above is the seed. plugins live IN the store and hot-swap with zero downtime; schema and fs-metadata evolve the same way (append, never break). pulls are forced: the poller watches yang and raises a <span style="color:#E8B566">soft interrupt</span>, serviced at earliest convenience — <span onClick="{{ simulatePush }}" style="color:#E8B566;text-decoration:underline;text-underline-offset:3px;cursor:pointer">simulate an upstream push</span> to watch it fire. when real code lands on the repo, the service worker pulls the new shell and the page updates itself: the browser is the agents' unreliable edge — storage and compute that may vanish, and the cell stays coherent anyway.
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    lines: [], files: [], log: [], head: null, originHead: null, realRef: null, checkedOut: null,
+    status: "idle", sel: null, edits: {}, msg: "", linkPath: "", bytes: 0, gets: 0, seq: 0,
+    merkleRoot: "…", proofText: "clone first", yinCount: 0, interrupts: [], editMode: "local",
+    peers: {}, wsUrl: "", wsStatus: "off", meshSeq: 0, now: Date.now(),
+  };
+  store = new Map();
+  merkle = null;
+  LS_KEY = "zeta-edge-yin-v1";
+
+  componentDidMount() {
+    import("./edge/merkle.js").then((m) => {
+      this.merkle = m;
+      if (this.state.files.length) this.runMerkle(this.state.files); // clone may have won the race
+    }).catch(() => {});
+    this.clone();
+    this.poller = setInterval(() => this.poll(), 15000);
+    // --- the mesh: per-tab identity + BroadcastChannel transport + beacon cadence ---
+    this.nodeId = sessionStorage.getItem("zeta-edge-nodeid") ||
+      [...crypto.getRandomValues(new Uint8Array(4))].map((b) => b.toString(16).padStart(2, "0")).join("");
+    sessionStorage.setItem("zeta-edge-nodeid", this.nodeId);
+    try {
+      this.chan = new BroadcastChannel("zeta-mesh");
+      this.chan.onmessage = (e) => this.fold(e.data, "tabs");
+    } catch (_) { this.chan = null; }
+    this.beacon = setInterval(() => this.announce(), 5000);
+    this.announce();
+    this.darkHandler = () => this.sendMesh({ v: 1, kind: "dark", id: this.nodeId, seq: ++this.meshSeqN });
+    this.meshSeqN = 0;
+    addEventListener("pagehide", this.darkHandler);
+  }
+  componentWillUnmount() {
+    clearInterval(this.poller); clearInterval(this.beacon);
+    if (this.darkHandler) { this.darkHandler(); removeEventListener("pagehide", this.darkHandler); }
+    if (this.chan) this.chan.close();
+    if (this.ws) try { this.ws.close(); } catch (_) {}
+  }
+
+  sendMesh(msg) {
+    if (this.chan) try { this.chan.postMessage(msg); } catch (_) {}
+    if (this.ws && this.ws.readyState === 1) try { this.ws.send(JSON.stringify(msg)); } catch (_) {}
+  }
+  announce() {
+    this.meshSeqN = (this.meshSeqN || 0) + 1;
+    this.sendMesh({ v: 1, kind: "beacon", id: this.nodeId, seq: this.meshSeqN,
+      head: this.state.head || "", yin: this.state.yinCount, t: Date.now() });
+    this.setState({ now: Date.now() }); // reflow last-seen labels; prune is pure render
+  }
+  // commutative + idempotent fold: LWW by (seq) per id — arrival order irrelevant by construction
+  fold(msg, via) {
+    if (!msg || msg.id === this.nodeId) return;
+    if (typeof msg === "string") { try { msg = JSON.parse(msg); } catch (_) { return; } }
+    this.setState((s) => {
+      const cur = s.peers[msg.id];
+      if (cur && cur.seq >= msg.seq) return null; // idempotent: replays and reorders are no-ops
+      if (msg.kind === "dark") {
+        if (!cur) return null;
+        this.log("mesh", msg.id + " went dark (announced, not vanished)", "#8b96b4");
+        const peers = { ...s.peers }; delete peers[msg.id];
+        return { peers };
+      }
+      if (msg.kind !== "beacon") return null;
+      if (!cur) this.log("mesh", "peer " + msg.id + " discovered via " + (via || "mesh") + " · head " + String(msg.head).slice(0, 7) + "…", "#5EC8C2");
+      return { peers: { ...s.peers, [msg.id]: { seq: msg.seq, head: msg.head || "", yin: msg.yin || 0, seen: Date.now(), sim: !!msg.sim } } };
+    });
+  }
+  simulatePeer() {
+    const id = "sim-" + [...crypto.getRandomValues(new Uint8Array(2))].map((b) => b.toString(16).padStart(2, "0")).join("");
+    this.fold({ v: 1, kind: "beacon", id, seq: 1, head: this.state.originHead || "", yin: 0, t: Date.now(), sim: true }, "sim");
+  }
+  wsConnect() {
+    const url = this.state.wsUrl.trim();
+    if (this.ws) { try { this.ws.close(); } catch (_) {} this.ws = null; this.setState({ wsStatus: "off" }); if (!url) return; }
+    if (!url) { this.log("mesh", "no gateway url — tabs transport stays primary", "#8b96b4"); return; }
+    try {
+      this.setState({ wsStatus: "connecting" });
+      this.ws = new WebSocket(url);
+      this.ws.onopen = () => { this.setState({ wsStatus: "open" }); this.log("mesh", "ws gateway open · " + url, "#5EC8C2"); this.announce(); };
+      this.ws.onmessage = (e) => this.fold(e.data, "ws");
+      this.ws.onerror = () => { this.setState({ wsStatus: "error" }); this.log("mesh", "ws gateway error · " + url + " (honest: unreachable)", "#e0746a"); };
+      this.ws.onclose = () => this.setState({ wsStatus: "off" });
+    } catch (err) { this.setState({ wsStatus: "error" }); this.log("mesh", "ws: " + String(err.message || err), "#e0746a"); }
+  }
+
+  log(tag, text, color) {
+    this.setState((s) => ({ seq: s.seq + 1, lines: [...s.lines, { seq: s.seq + 1, tag, text, color: color || "#565f7d" }] }));
+  }
+  enc(s) { return new TextEncoder().encode(s); }
+  dec(b) { return new TextDecoder().decode(b); }
+  async sha1(bytes) {
+    const d = await crypto.subtle.digest("SHA-1", bytes);
+    return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+  cat(...arrs) {
+    const out = new Uint8Array(arrs.reduce((n, a) => n + a.length, 0)); let o = 0;
+    for (const a of arrs) { out.set(a, o); o += a.length; } return out;
+  }
+  async putObject(type, content, flags) {
+    const full = this.cat(this.enc(type + " " + content.length + "\0"), content);
+    const sha = await this.sha1(full);
+    this.store.set(sha, { type, content, yin: true, ...(flags || {}) });
+    return sha;
+  }
+  async loadObject(base, sha) {
+    if (this.store.has(sha)) return this.store.get(sha);
+    const url = base + "/objects/" + sha.slice(0, 2) + "/" + sha.slice(2);
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("404 " + url);
+    const raw = await res.arrayBuffer();
+    const inflated = new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream("deflate"))).arrayBuffer());
+    const hex = await this.sha1(inflated);
+    const ok = hex === sha;
+    const nul = inflated.indexOf(0);
+    const type = this.dec(inflated.slice(0, nul)).split(" ")[0];
+    const content = inflated.slice(nul + 1);
+    this.setState((s) => ({ bytes: s.bytes + raw.byteLength, gets: s.gets + 1 }));
+    this.log("GET", sha.slice(0, 7) + "… ← " + raw.byteLength + " B zlib → " + type + " · sha " + (ok ? "✓" : "✗"), ok ? "#5EC8C2" : "#e0746a");
+    if (!ok) throw new Error("integrity failure " + sha);
+    const obj = { type, content };
+    this.store.set(sha, obj);
+    return obj;
+  }
+  parseCommit(content) {
+    const text = this.dec(content);
+    return {
+      tree: (/tree ([0-9a-f]{40})/.exec(text) || [])[1],
+      parent: (/parent ([0-9a-f]{40})/.exec(text) || [])[1] || null,
+      author: (/author ([^<]+)</.exec(text) || [, "?"])[1].trim(),
+      time: parseInt((/author [^>]+> (\d+)/.exec(text) || [, "0"])[1], 10),
+      msg: (text.split("\n\n")[1] || "").trim(),
+    };
+  }
+  parseTree(content) {
+    const out = []; let i = 0;
+    while (i < content.length) {
+      const sp = content.indexOf(32, i);
+      const mode = this.dec(content.slice(i, sp));
+      const nul = content.indexOf(0, sp);
+      const name = this.dec(content.slice(sp + 1, nul));
+      const sha = [...content.slice(nul + 1, nul + 21)].map((b) => b.toString(16).padStart(2, "0")).join("");
+      out.push({ mode, name, sha });
+      i = nul + 21;
+    }
+    return out;
+  }
+  base() { return this.props.repoBase ?? "repo.git"; }
+
+  loadYin() {
+    try {
+      const j = JSON.parse(localStorage.getItem(this.LS_KEY) || "null");
+      if (!j || !j.head) return null;
+      for (const [sha, rec] of Object.entries(j.objects)) {
+        this.store.set(sha, { type: rec.type, content: Uint8Array.from(atob(rec.b64), (c) => c.charCodeAt(0)), yin: true, sim: !!rec.sim });
+      }
+      return j.head;
+    } catch (_) { return null; }
+  }
+  saveYin(head) {
+    const objects = {};
+    for (const [sha, o] of this.store.entries()) {
+      if (!o.yin) continue; // sim commits persist too — a yin chain may descend from one
+      objects[sha] = { type: o.type, sim: !!o.sim, b64: btoa(String.fromCharCode(...o.content)) };
+    }
+    localStorage.setItem(this.LS_KEY, JSON.stringify({ head, objects }));
+  }
+
+  async walkLog(head) {
+    const out = []; let sha = head;
+    while (sha && out.length < 60) {
+      const o = await this.loadObject(this.base(), sha);
+      const c = this.parseCommit(o.content);
+      out.push({ sha, ...c, yin: !!o.yin && !o.sim, sim: !!o.sim });
+      sha = c.parent;
+    }
+    return out;
+  }
+  async materialize(commitSha) {
+    const cObj = await this.loadObject(this.base(), commitSha);
+    const c = this.parseCommit(cObj.content);
+    const files = [];
+    const walk = async (sha, prefix) => {
+      const t = await this.loadObject(this.base(), sha);
+      for (const e of this.parseTree(t.content)) {
+        if (e.mode === "40000") await walk(e.sha, prefix + e.name + "/");
+        else {
+          const b = await this.loadObject(this.base(), e.sha);
+          files.push({ path: prefix + e.name, sha: e.sha, size: b.content.length, text: this.dec(b.content) });
+        }
+      }
+    };
+    await walk(c.tree, "");
+    return files;
+  }
+  async refresh(head, checkedOut) {
+    const log = await this.walkLog(head);
+    const files = await this.materialize(checkedOut || head);
+    const yinCount = log.filter((l) => l.yin).length;
+    this.setState({
+      log, files, head, checkedOut: checkedOut || head, yinCount, edits: {},
+      sel: this.state.sel && files.some((f) => f.path === this.state.sel) ? this.state.sel : (files[0] ? files[0].path : null),
+    });
+    await this.runMerkle(files);
+  }
+  async runMerkle(files) {
+    if (!this.merkle) { this.setState({ merkleRoot: "oracle loading…", proofText: "" }); return; }
+    try {
+      const sorted = [...files].sort((a, b) => (a.path < b.path ? -1 : 1));
+      const leaves = sorted.map((f) => this.cat(this.enc(f.path + "\0"), this.enc(this.state.edits[f.path] ?? f.text)));
+      const tree = new this.merkle.MerkleTree(leaves);
+      const root = tree.root();
+      const selIdx = Math.max(0, sorted.findIndex((f) => f.path === this.state.sel));
+      const steps = tree.proof(selIdx);
+      const ok = this.merkle.verifyProof(leaves[selIdx], steps, root);
+      this.setState({
+        merkleRoot: this.merkle.toHex(root),
+        proofText: "inclusion proof · " + (sorted[selIdx] ? sorted[selIdx].path : "") + " · " + steps.length + " sibling steps (O(log n)) · verifyProof → " + (ok ? "✓ true" : "✗ FALSE"),
+      });
+    } catch (err) { this.setState({ merkleRoot: "error", proofText: String(err) }); }
+  }
+
+  async clone() {
+    this.store = new Map();
+    this.setState({ lines: [], files: [], log: [], sel: null, edits: {}, bytes: 0, gets: 0, status: "cloning", yinCount: 0, interrupts: [] });
+    try {
+      const base = this.base();
+      this.log("GET", base + "/HEAD", "#E8B566");
+      const head = (await (await fetch(base + "/HEAD")).text()).trim();
+      const refPath = head.startsWith("ref: ") ? head.slice(5) : "refs/heads/main";
+      this.log("←", head, "#8b96b4");
+      this.log("GET", base + "/" + refPath, "#E8B566");
+      const originHead = (await (await fetch(base + "/" + refPath)).text()).trim();
+      this.log("←", originHead.slice(0, 7) + "… (yang)", "#8b96b4");
+      const yinHead = this.loadYin();
+      if (yinHead && this.store.has(yinHead)) this.log("yin", "overlay found · head " + yinHead.slice(0, 7) + "… (persisted)", "#9A8CE6");
+      this.setState({ originHead, realRef: originHead, status: "done" });
+      try {
+        await this.refresh(yinHead && this.store.has(yinHead) ? yinHead : originHead, null);
+      } catch (e) {
+        this.log("warn", "yin overlay unresolvable (" + String(e.message || e) + ") — falling back to yang", "#E8B566");
+        localStorage.removeItem(this.LS_KEY);
+        await this.refresh(originHead, null);
+      }
+      this.log("ok", "cell coherent · dagfs linked · oracle root computed", "#5EC8C2");
+    } catch (err) {
+      this.log("err", String((err && err.message) || err), "#e0746a");
+      this.setState({ status: "error" });
+    }
+  }
+
+  async poll() {
+    try {
+      const base = this.base();
+      const head = (await (await fetch(base + "/HEAD", { cache: "no-store" })).text()).trim();
+      const refPath = head.startsWith("ref: ") ? head.slice(5) : "refs/heads/main";
+      const ref = (await (await fetch(base + "/" + refPath, { cache: "no-store" })).text()).trim();
+      if (this.state.realRef && ref !== this.state.realRef) {
+        this.setState((s) => ({ realRef: ref, interrupts: [...s.interrupts, { kind: "pull", head: ref }] }));
+        this.log("⚡", "yang moved → " + ref.slice(0, 7) + "… · soft interrupt raised (pull queued, serviced at convenience)", "#E8B566");
+      }
+    } catch (_) { /* offline is a normal state for an edge cell */ }
+  }
+
+  async simulatePush() {
+    // build a simulated upstream commit on top of current yang (marked sim; never persisted)
+    const originHead = this.state.originHead;
+    const o = await this.loadObject(this.base(), originHead);
+    const c = this.parseCommit(o.content);
+    const t = Math.floor(Date.now() / 1000);
+    const txt = "tree " + c.tree + "\nparent " + originHead + "\nauthor ci <ci@yang.sim> " + t + " +0000\ncommitter ci <ci@yang.sim> " + t + " +0000\n\nsim: upstream frame (simulated push)\n";
+    const sha = await this.putObject("commit", this.enc(txt), { sim: true });
+    this.setState((s) => ({ interrupts: [...s.interrupts, { kind: "pull", head: sha, sim: true }] }));
+    this.log("⚡", "SIMULATED upstream push → " + sha.slice(0, 7) + "… · soft interrupt raised", "#E8B566");
+  }
+
+  async service() {
+    const intr = this.state.interrupts;
+    if (!intr.length) return;
+    const newYang = intr[intr.length - 1].head;
+    this.log("int", "servicing " + intr.length + " interrupt(s) · pulling yang " + newYang.slice(0, 7) + "…", "#E8B566");
+    // re-parent yin chain onto the new yang head (trees are content-addressed — the rebase is cheap)
+    const log = this.state.log;
+    const yinChain = [];
+    for (const c of log) { if (c.yin) yinChain.push(c); else break; }
+    let newHead = newYang;
+    for (const c of yinChain.reverse()) {
+      const t = Math.floor(Date.now() / 1000);
+      const txt = "tree " + c.tree + "\nparent " + newHead + "\nauthor " + c.author + " <you@edge.cell> " + t + " +0000\ncommitter " + c.author + " <you@edge.cell> " + t + " +0000\n\n" + c.msg + "\n";
+      newHead = await this.putObject("commit", this.enc(txt));
+    }
+    if (yinChain.length) { this.saveYin(newHead); this.log("yin", "re-parented " + yinChain.length + " yin commit(s) onto new yang · content-addressed rebase", "#9A8CE6"); }
+    this.setState({ interrupts: [], originHead: newYang });
+    await this.refresh(newHead, null);
+    this.log("ok", "interrupt serviced · cell coherent again", "#5EC8C2");
+  }
+
+  linksOf(files) {
+    const byNode = {};
+    for (const f of files) (byNode[this.state.edits[f.path] != null ? "dirty:" + f.path : f.sha] = byNode[f.sha] || []).push(f.path);
+    return byNode;
+  }
+
+  async commitYin() {
+    const { sel, edits, files, head, editMode } = this.state;
+    if (!sel || edits[sel] == null) return;
+    const selFile = files.find((f) => f.path === sel);
+    const sharing = files.filter((f) => f.sha === selFile.sha).map((f) => f.path);
+    const everywhere = editMode === "everywhere" && sharing.length > 1;
+    const targets = everywhere ? sharing : [sel];
+    const msg = this.state.msg.trim() || (everywhere ? "yin: editEverywhere " + selFile.sha.slice(0, 7) + " (" + targets.length + " paths)" : "yin: editLocal " + sel);
+    const blobSha = await this.putObject("blob", this.enc(edits[sel]));
+    await this.commitTree(files.map((f) => ({ path: f.path, sha: targets.includes(f.path) ? blobSha : f.sha })), head, msg);
+  }
+
+  async addLink() {
+    const { sel, files, head, linkPath } = this.state;
+    const p = linkPath.trim().replace(/^\/+/, "");
+    if (!sel || !p || files.some((f) => f.path === p)) return;
+    const selFile = files.find((f) => f.path === sel);
+    const msg = "yin: link " + selFile.sha.slice(0, 7) + " at " + p + " (multi-parent)";
+    await this.commitTree(files.map((f) => ({ path: f.path, sha: f.sha })).concat([{ path: p, sha: selFile.sha }]), head, msg);
+    this.setState({ linkPath: "" });
+  }
+
+  async commitTree(entries, parent, msg) {
+    const hexToBytes = (hex) => { const o = new Uint8Array(20); for (let i = 0; i < 20; i++) o[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16); return o; };
+    const mk = async (ents) => {
+      ents.sort((a, b) => (a.sortKey < b.sortKey ? -1 : 1));
+      let parts = [];
+      for (const e of ents) parts.push(this.enc(e.mode + " " + e.name + "\0"), hexToBytes(e.sha));
+      return this.putObject("tree", this.cat(...parts));
+    };
+    // group into nested trees (one level of folders is enough for this repo shape)
+    const byDir = {};
+    for (const e of entries) {
+      const i = e.path.indexOf("/");
+      const dir = i < 0 ? "" : e.path.slice(0, i);
+      const name = i < 0 ? e.path : e.path.slice(i + 1);
+      (byDir[dir] = byDir[dir] || []).push({ mode: "100644", name, sha: e.sha, sortKey: name });
+    }
+    const rootEnts = [];
+    for (const [dir, ents] of Object.entries(byDir)) {
+      if (dir === "") for (const e of ents) rootEnts.push(e);
+      else rootEnts.push({ mode: "40000", name: dir, sha: await mk(ents), sortKey: dir + "/" });
+    }
+    const treeSha = await mk(rootEnts);
+    const t = Math.floor(Date.now() / 1000);
+    const txt = "tree " + treeSha + "\nparent " + parent + "\nauthor dweller <you@edge.cell> " + t + " +0000\ncommitter dweller <you@edge.cell> " + t + " +0000\n\n" + msg + "\n";
+    const cSha = await this.putObject("commit", this.enc(txt));
+    this.saveYin(cSha);
+    this.log("yin", "commit " + cSha.slice(0, 7) + "… · " + msg, "#9A8CE6");
+    this.setState({ msg: "" });
+    await this.refresh(cSha, null);
+  }
+
+  resetYin() {
+    localStorage.removeItem(this.LS_KEY);
+    this.log("yin", "overlay dropped · resyncing to yang", "#9A8CE6");
+    this.clone();
+  }
+
+  renderVals() {
+    const { lines, files, log, status, sel, edits, bytes, gets, head, checkedOut, yinCount, merkleRoot, proofText, msg, seq, interrupts, editMode, linkPath } = this.state;
+    const selFile = files.find((f) => f.path === sel);
+    const dirty = !!(sel && edits[sel] != null && selFile && edits[sel] !== selFile.text);
+    const shareMap = {};
+    for (const f of files) (shareMap[f.sha] = shareMap[f.sha] || []).push(f.path);
+    const nodeCount = Object.keys(shareMap).length;
+    const sharedNodes = Object.entries(shareMap).filter(([, ps]) => ps.length > 1);
+    const selSharing = selFile ? shareMap[selFile.sha] : [];
+    const chips = {
+      idle: ["ready", "#8b96b4"], cloning: ["cloning · static GETs", "#E8B566"],
+      done: [yinCount ? "yin +" + yinCount + " ahead of yang" : "synced with yang · verified", yinCount ? "#9A8CE6" : "#5EC8C2"],
+      error: ["failed — see trace", "#e0746a"],
+    };
+    return {
+      statusText: chips[status][0], statusColor: chips[status][1],
+      hasInterrupts: interrupts.length > 0,
+      interruptLabel: interrupts.length + " soft interrupt" + (interrupts.length > 1 ? "s" : "") + " · pull queued",
+      service: () => this.service(),
+      simulatePush: () => this.simulatePush(),
+      repoLabel: this.base() + " · dumb http · polled 15s",
+      clone: () => this.clone(), cloneLabel: status === "cloning" ? "cloning…" : "re-pull yang",
+      hasYin: yinCount > 0, resetYin: () => this.resetYin(),
+      summary: gets ? gets + " GETs · " + bytes + " B · 0 API calls" : "",
+      lines, seq,
+      logCount: log.length,
+      logEntries: log.map((c) => ({
+        shaShort: c.sha.slice(0, 7),
+        shaColor: c.sim ? "#e0746a" : c.yin ? "#9A8CE6" : "#E8B566",
+        msg: c.msg,
+        meta: c.author + " · tick " + c.time,
+        badge: c.sha === checkedOut ? "HEAD" : c.sim ? "sim" : c.yin ? "yin" : "yang",
+        badgeColor: c.sha === checkedOut ? "#5EC8C2" : c.sim ? "#e0746a" : c.yin ? "#9A8CE6" : "#565f7d",
+        bg: c.sha === checkedOut ? "#12141d" : "transparent",
+        checkout: async () => { await this.refresh(head, c.sha); this.log("co", "checkout " + c.sha.slice(0, 7) + "… · worktree rewound", "#E8B566"); },
+      })),
+      fileCount: files.length,
+      pathCount: files.length,
+      nodeCount,
+      sharedNote: sharedNodes.length
+        ? sharedNodes.map(([sha, ps]) => sha.slice(0, 7) + "… lives at " + ps.join(" + ")).join(" · ")
+        : "no shared nodes yet — open a file and link it at a second path; identical content is ONE node under many parents.",
+      files: files.map((f) => {
+        const isDirty = edits[f.path] != null && edits[f.path] !== f.text;
+        const shared = shareMap[f.sha].length > 1;
+        return {
+          path: f.path, size: f.size,
+          sharedTag: shared ? "⧉ ×" + shareMap[f.sha].length : "",
+          dot: isDirty ? "●" : "▸", dotColor: isDirty ? "#9A8CE6" : "#5EC8C2",
+          bg: f.path === sel ? "#12141d" : "transparent",
+          open: () => { this.setState({ sel: f.path }, () => this.runMerkle(this.state.files)); },
+        };
+      }),
+      hasSel: !!selFile,
+      selPath: selFile ? selFile.path : "",
+      selShaShort: selFile ? selFile.sha.slice(0, 12) + "…" : "",
+      alsoAt: selSharing && selSharing.length > 1 ? "  ·  also at: " + selSharing.filter((p) => p !== sel).join(", ") : "",
+      selText: selFile ? (edits[sel] ?? selFile.text) : "",
+      onEdit: (e) => { const v = e.target.value; this.setState((s) => ({ edits: { ...s.edits, [sel]: v } })); },
+      dirty, dirtyLabel: dirty ? "· edited, uncommitted " : "",
+      selShared: selSharing && selSharing.length > 1,
+      shareCount: selSharing ? selSharing.length : 0,
+      modeLocal: () => this.setState({ editMode: "local" }),
+      modeEvery: () => this.setState({ editMode: "everywhere" }),
+      localBorder: editMode === "local" ? "#9A8CE6" : "#2f3850", localColor: editMode === "local" ? "#9A8CE6" : "#8b96b4",
+      everyBorder: editMode === "everywhere" ? "#9A8CE6" : "#2f3850", everyColor: editMode === "everywhere" ? "#9A8CE6" : "#8b96b4",
+      msg, onMsg: (e) => this.setState({ msg: e.target.value }),
+      commitYin: () => this.commitYin(),
+      linkPath, onLinkPath: (e) => this.setState({ linkPath: e.target.value }),
+      addLink: () => this.addLink(),
+      merkleRoot, proofText,
+      // --- mesh ---
+      selfId: this.nodeId || "…",
+      aliveLabel: "zeta alive · " + (1 + Object.values(this.state.peers).filter((p) => Date.now() - p.seen < 16000).length) + " node(s)",
+      aliveColor: "#5EC8C2",
+      wsUrl: this.state.wsUrl, onWsUrl: (e) => this.setState({ wsUrl: e.target.value }),
+      wsConnect: () => this.wsConnect(),
+      wsStatus: this.state.wsStatus,
+      wsColor: this.state.wsStatus === "open" ? "#5EC8C2" : this.state.wsStatus === "error" ? "#e0746a" : "#565f7d",
+      wsLabel: this.state.wsStatus === "open" ? "disconnect" : "connect",
+      meshPeers: Object.entries(this.state.peers).map(([id, p]) => {
+        const fresh = Date.now() - p.seen < 16000;
+        return {
+          id, tag: p.sim ? "sim" : (p.yin ? "yin +" + p.yin : ""),
+          head: (p.head || "").slice(0, 7) + "…",
+          ago: fresh ? "alive" : Math.round((Date.now() - p.seen) / 1000) + "s ago",
+          color: p.sim ? "#E8B566" : fresh ? "#5EC8C2" : "#46506B",
+        };
+      }),
+      noPeers: Object.keys(this.state.peers).length === 0,
+      simulatePeer: () => this.simulatePeer(),
+    };
+  }
+}
+</script>
+</body>
+</html>

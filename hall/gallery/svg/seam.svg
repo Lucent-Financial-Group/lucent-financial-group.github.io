@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" data-cartridge="shape-seam">
+  <polyline id="left-cloth" fill="none" stroke="#2a9d2a" stroke-width="4" points="5,5 275,5 275,315 5,315 5,5"></polyline>
+  <polyline id="right-cloth" fill="none" stroke="#2828d6" stroke-width="4" points="365,5 635,5 635,315 365,315 365,5"></polyline>
+  <polyline id="stitch-0" fill="none" stroke="#d628d6" stroke-width="4" points="275,5 365,15"></polyline>
+  <polyline id="stitch-1" fill="none" stroke="#d628d6" stroke-width="4" points="365,45 275,55"></polyline>
+  <polyline id="stitch-2" fill="none" stroke="#d628d6" stroke-width="4" points="275,85 365,95"></polyline>
+  <polyline id="stitch-3" fill="none" stroke="#d628d6" stroke-width="4" points="365,125 275,135"></polyline>
+  <polyline id="stitch-4" fill="none" stroke="#d628d6" stroke-width="4" points="275,165 365,175"></polyline>
+  <polyline id="stitch-5" fill="none" stroke="#d628d6" stroke-width="4" points="365,205 275,215"></polyline>
+  <polyline id="stitch-6" fill="none" stroke="#d628d6" stroke-width="4" points="275,245 365,255"></polyline>
+  <polyline id="stitch-7" fill="none" stroke="#d628d6" stroke-width="4" points="365,285 275,295"></polyline>
+</svg>
