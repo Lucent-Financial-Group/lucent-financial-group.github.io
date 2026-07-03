@@ -1,26 +1,132 @@
 {
   "schema_version": "1.0.0",
-  "updated": "2026-05-26T06:46:47.170Z",
+  "updated": "2026-07-03T01:05:35Z",
   "provenance": {
     "producer": "ci",
-    "contract": "CI appends one frame object per scheduled run (or per merge window) and commits to main. Consumers read this file raw over same-origin https — no GitHub API, no tokens, no rate limits. Frames are append-only; the file IS the ledger.",
-    "mock": true,
-    "note": "History frames below are a mock extension of the real 2026-05-26 snapshot, for design. CI writer replaces them; set mock=false when real."
+    "contract": "CI appends one frame object per scheduled run (or per merge window) and commits to main. Consumers read this file raw over same-origin https \u2014 no GitHub API, no tokens, no rate limits. Frames are append-only; the file IS the ledger.",
+    "mock": false,
+    "note": "Real frames written by tools/dora/compute-dora-frame.mjs (Zeta repo git+PR data). Frames <=2026-05-26 are the original design seed; 2026-07-03+ are live. Append-only; the file IS the ledger."
   },
   "frames": [
-    { "t": "2026-05-13", "prs_merged_24h": 62,  "avg_lead_time_minutes": 140, "commits_24h": 58,  "active_agents": 5, "open_prs": 61 },
-    { "t": "2026-05-14", "prs_merged_24h": 74,  "avg_lead_time_minutes": 132, "commits_24h": 66,  "active_agents": 5, "open_prs": 58 },
-    { "t": "2026-05-15", "prs_merged_24h": 81,  "avg_lead_time_minutes": 121, "commits_24h": 71,  "active_agents": 6, "open_prs": 60 },
-    { "t": "2026-05-16", "prs_merged_24h": 58,  "avg_lead_time_minutes": 125, "commits_24h": 54,  "active_agents": 5, "open_prs": 63 },
-    { "t": "2026-05-17", "prs_merged_24h": 90,  "avg_lead_time_minutes": 110, "commits_24h": 79,  "active_agents": 6, "open_prs": 59 },
-    { "t": "2026-05-18", "prs_merged_24h": 102, "avg_lead_time_minutes": 104, "commits_24h": 88,  "active_agents": 6, "open_prs": 57 },
-    { "t": "2026-05-19", "prs_merged_24h": 96,  "avg_lead_time_minutes": 99,  "commits_24h": 84,  "active_agents": 6, "open_prs": 58 },
-    { "t": "2026-05-20", "prs_merged_24h": 88,  "avg_lead_time_minutes": 108, "commits_24h": 80,  "active_agents": 6, "open_prs": 60 },
-    { "t": "2026-05-21", "prs_merged_24h": 110, "avg_lead_time_minutes": 95,  "commits_24h": 92,  "active_agents": 7, "open_prs": 56 },
-    { "t": "2026-05-22", "prs_merged_24h": 97,  "avg_lead_time_minutes": 97,  "commits_24h": 85,  "active_agents": 7, "open_prs": 57 },
-    { "t": "2026-05-23", "prs_merged_24h": 121, "avg_lead_time_minutes": 92,  "commits_24h": 98,  "active_agents": 7, "open_prs": 55 },
-    { "t": "2026-05-24", "prs_merged_24h": 105, "avg_lead_time_minutes": 96,  "commits_24h": 90,  "active_agents": 7, "open_prs": 56 },
-    { "t": "2026-05-25", "prs_merged_24h": 118, "avg_lead_time_minutes": 94,  "commits_24h": 96,  "active_agents": 7, "open_prs": 55 },
-    { "t": "2026-05-26", "prs_merged_24h": 128, "avg_lead_time_minutes": 91,  "commits_24h": 100, "active_agents": 7, "open_prs": 55 }
+    {
+      "t": "2026-05-13",
+      "prs_merged_24h": 62,
+      "avg_lead_time_minutes": 140,
+      "commits_24h": 58,
+      "active_agents": 5,
+      "open_prs": 61
+    },
+    {
+      "t": "2026-05-14",
+      "prs_merged_24h": 74,
+      "avg_lead_time_minutes": 132,
+      "commits_24h": 66,
+      "active_agents": 5,
+      "open_prs": 58
+    },
+    {
+      "t": "2026-05-15",
+      "prs_merged_24h": 81,
+      "avg_lead_time_minutes": 121,
+      "commits_24h": 71,
+      "active_agents": 6,
+      "open_prs": 60
+    },
+    {
+      "t": "2026-05-16",
+      "prs_merged_24h": 58,
+      "avg_lead_time_minutes": 125,
+      "commits_24h": 54,
+      "active_agents": 5,
+      "open_prs": 63
+    },
+    {
+      "t": "2026-05-17",
+      "prs_merged_24h": 90,
+      "avg_lead_time_minutes": 110,
+      "commits_24h": 79,
+      "active_agents": 6,
+      "open_prs": 59
+    },
+    {
+      "t": "2026-05-18",
+      "prs_merged_24h": 102,
+      "avg_lead_time_minutes": 104,
+      "commits_24h": 88,
+      "active_agents": 6,
+      "open_prs": 57
+    },
+    {
+      "t": "2026-05-19",
+      "prs_merged_24h": 96,
+      "avg_lead_time_minutes": 99,
+      "commits_24h": 84,
+      "active_agents": 6,
+      "open_prs": 58
+    },
+    {
+      "t": "2026-05-20",
+      "prs_merged_24h": 88,
+      "avg_lead_time_minutes": 108,
+      "commits_24h": 80,
+      "active_agents": 6,
+      "open_prs": 60
+    },
+    {
+      "t": "2026-05-21",
+      "prs_merged_24h": 110,
+      "avg_lead_time_minutes": 95,
+      "commits_24h": 92,
+      "active_agents": 7,
+      "open_prs": 56
+    },
+    {
+      "t": "2026-05-22",
+      "prs_merged_24h": 97,
+      "avg_lead_time_minutes": 97,
+      "commits_24h": 85,
+      "active_agents": 7,
+      "open_prs": 57
+    },
+    {
+      "t": "2026-05-23",
+      "prs_merged_24h": 121,
+      "avg_lead_time_minutes": 92,
+      "commits_24h": 98,
+      "active_agents": 7,
+      "open_prs": 55
+    },
+    {
+      "t": "2026-05-24",
+      "prs_merged_24h": 105,
+      "avg_lead_time_minutes": 96,
+      "commits_24h": 90,
+      "active_agents": 7,
+      "open_prs": 56
+    },
+    {
+      "t": "2026-05-25",
+      "prs_merged_24h": 118,
+      "avg_lead_time_minutes": 94,
+      "commits_24h": 96,
+      "active_agents": 7,
+      "open_prs": 55
+    },
+    {
+      "t": "2026-05-26",
+      "prs_merged_24h": 128,
+      "avg_lead_time_minutes": 91,
+      "commits_24h": 100,
+      "active_agents": 7,
+      "open_prs": 55
+    },
+    {
+      "t": "2026-07-03",
+      "prs_merged_24h": 161,
+      "avg_lead_time_minutes": 3,
+      "commits_24h": 175,
+      "active_agents": 3,
+      "open_prs": 1
+    }
   ]
 }
