@@ -1,0 +1,56 @@
+# Writes one real DORA frame to this site's live data, on a schedule — TOKEN-FREE.
+#
+# dora.html serves data/metrics-history.json + data/metrics.json same-origin (the browser
+# never calls the GitHub API). THIS job is the CI writer. It lives in the pages repo so it can
+# write with the built-in GITHUB_TOKEN (contents:write to itself — no secret), and it READS
+# Zeta's public PR/commit data (public repos need no auth beyond the token it already has).
+# The writer scripts live in the Zeta repo (single source of truth); we check Zeta out to run
+# them. Append-only; the file IS the ledger.
+name: dora-frame
+on:
+  schedule:
+    - cron: "17 6 * * *" # daily ~06:17 UTC
+  workflow_dispatch: {}
+
+concurrency:
+  group: dora-frame
+  cancel-in-progress: false
+
+permissions:
+  contents: write # write the frame back to this (pages) repo
+
+jobs:
+  write-frame:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout the pages repo (self — the write target)
+        uses: actions/checkout@v4
+
+      - name: Checkout Zeta (public — its git history + the writer scripts)
+        uses: actions/checkout@v4
+        with:
+          repository: Lucent-Financial-Group/Zeta
+          path: zeta
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Compute the frame from Zeta git+PR data
+        working-directory: zeta
+        env:
+          GH_TOKEN: ${{ github.token }} # reads Zeta's PUBLIC data — no extra scope needed
+        run: |
+          git fetch -q origin main || true
+          node tools/dora/compute-dora-frame.mjs --repo Lucent-Financial-Group/Zeta --window-hours 24 > /tmp/dora-frame.json
+          echo "frame:"; cat /tmp/dora-frame.json
+
+      - name: Apply the frame and commit to this repo
+        run: |
+          python3 zeta/tools/dora/apply-frame.py /tmp/dora-frame.json data/metrics-history.json data/metrics.json
+          if git diff --quiet; then echo "no change this run"; exit 0; fi
+          git config user.name "dora-frame[bot]"
+          git config user.email "dora-frame@users.noreply.github.com"
+          git commit -qam "data: DORA frame $(date -u +%Y-%m-%d) (auto)"
+          git push
