@@ -46,6 +46,7 @@
       <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:999px;padding:3px 10px">metered at the membrane</span>
       <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5EC8C2;border:1px solid #2f3850;border-radius:999px;padding:3px 10px">no back-channel through the picture</span>
       <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#9A8CE6;border:1px solid #2f3850;border-radius:999px;padding:3px 10px">deterministic · rewindable · frame 3341</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#E8B566;border:1px solid #4a3e30;border-radius:999px;padding:3px 10px">watching now · {{ watchLabel }}</span>
     </div>
 
     <!-- CHANNEL 0 · the meta-cart, playing in superposition -->
@@ -198,10 +199,24 @@
     </footer>
   </div>
 </div>
+<x-import component-from-global-scope="zeta-mesh-pip" from="./edge/zeta-mesh.js" float="true" hint-size="150px,24px" style="position:fixed;right:14px;bottom:14px;z-index:70"></x-import>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;wall&quot;,&quot;single&quot;],&quot;default&quot;:&quot;wall&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
 class Component extends DCLogic {
-  state = { mode: this.props.layout ?? "wall", tuned: "alexa" };
+  state = { mode: this.props.layout ?? "wall", tuned: "alexa", meshTabs: 1 };
+
+  componentDidMount() {
+    this._meshWait = setInterval(() => {
+      if (window.ZetaMesh) {
+        clearInterval(this._meshWait);
+        this._meshSub = window.ZetaMesh.on((s) => this.setState({ meshTabs: s.tabs }));
+      }
+    }, 150);
+  }
+  componentWillUnmount() {
+    clearInterval(this._meshWait);
+    if (this._meshSub && window.ZetaMesh) window.ZetaMesh.off(this._meshSub);
+  }
 
   renderVals() {
     const TEMP = { hot: "#9A8CE6", warm: "#E8B566", cool: "#5EC8C2" };
@@ -231,7 +246,9 @@ class Component extends DCLogic {
     const isSingle = mode === "single";
     const sets = isSingle ? DWELLERS.filter((d) => d.id === tuned) : DWELLERS;
 
+    const watchTabs = this.state.meshTabs || 1;
     return {
+      watchLabel: watchTabs + (watchTabs === 1 ? " tab on the mesh" : " tabs on the mesh"),
       isSingle,
       isWall: !isSingle,
       gridCols: isSingle ? "minmax(0,560px)" : "repeat(auto-fill,minmax(300px,1fr))",

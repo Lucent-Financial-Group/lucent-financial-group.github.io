@@ -246,7 +246,7 @@ class Component extends DCLogic {
       }
       if (msg.kind !== "beacon") return null;
       if (!cur) this.log("mesh", "peer " + msg.id + " discovered via " + (via || "mesh") + " · head " + String(msg.head).slice(0, 7) + "…", "#5EC8C2");
-      return { peers: { ...s.peers, [msg.id]: { seq: msg.seq, head: msg.head || "", yin: msg.yin || 0, seen: Date.now(), sim: !!msg.sim } } };
+      return { peers: { ...s.peers, [msg.id]: { seq: msg.seq, head: msg.head || "", yin: msg.yin || 0, seen: Date.now(), sim: !!msg.sim, page: msg.page || "" } } };
     });
   }
   simulatePeer() {
@@ -627,7 +627,7 @@ class Component extends DCLogic {
         const fresh = Date.now() - p.seen < 16000;
         return {
           id, tag: p.sim ? "sim" : (p.yin ? "yin +" + p.yin : ""),
-          head: (p.head || "").slice(0, 7) + "…",
+          head: p.head ? p.head.slice(0, 7) + "…" : (p.page || "—"),
           ago: fresh ? "alive" : Math.round((Date.now() - p.seen) / 1000) + "s ago",
           color: p.sim ? "#E8B566" : fresh ? "#5EC8C2" : "#46506B",
         };

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <script src="edge/zeta-mesh.js"></script>
+  <style>
+    body{margin:0}
+    @keyframes zp-breathe{0%,100%{opacity:.4}50%{opacity:1}}
+  </style>
+</helmet>
+
+<div data-screen-label="Portal Presence" class="min-h-screen bg-background text-foreground" style="display:flex;flex-direction:column">
+
+  <!-- console top bar -->
+  <header class="border-b border-border bg-surface" style="display:flex;align-items:center;gap:20px;padding:0 24px;height:52px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="bg-primary/15 text-primary rounded-md" style="width:26px;height:26px;display:grid;place-items:center;font-weight:600;font-size:14px">ζ</div>
+      <span class="font-semibold tracking-tight text-sm" style="white-space:nowrap">zeta portal</span>
+    </div>
+    <nav style="display:flex;gap:4px" class="text-sm">
+      <span class="text-muted-foreground rounded-md" style="padding:5px 10px">Workloads</span>
+      <span class="text-muted-foreground rounded-md" style="padding:5px 10px">Settlement</span>
+      <span class="bg-accent text-accent-foreground rounded-md" style="padding:5px 10px">Presence</span>
+      <span class="text-muted-foreground rounded-md" style="padding:5px 10px">Vault</span>
+    </nav>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+      <span style="display:inline-flex;align-items:center;gap:7px" class="text-sm text-muted-foreground">
+        <span style="width:7px;height:7px;border-radius:50%;background:{{ liveDotColor }};animation:{{ liveDotAnim }}"></span>
+        {{ liveLabel }}
+      </span>
+    </div>
+  </header>
+
+  <main style="width:100%;max-width:1000px;margin:0 auto;padding:28px 24px 56px;display:flex;flex-direction:column;gap:20px">
+
+    <div style="display:flex;align-items:flex-start;gap:16px">
+      <div style="flex:1;min-width:0">
+        <h1 class="font-semibold tracking-tight" style="font-size:20px;margin:0">Mesh presence</h1>
+        <p class="text-sm text-muted-foreground" style="margin:6px 0 0;max-width:560px">Every portal tab carries a mesh node. Presence is folded from peer beacons — not queried from a server. If one tab is alive, zeta is alive.</p>
+      </div>
+      <x-import component-from-global-scope="ZetaPortalUI.Badge" variant="{{ aliveBadgeVariant }}" style="flex-shrink:0" hint-size="auto,22px"><span style="white-space:nowrap">{{ aliveBadgeText }}</span></x-import>
+    </div>
+
+    <!-- stat cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <x-import component-from-global-scope="ZetaPortalUI.Card" hint-size="100%,120px">
+        <div style="padding:18px 20px;display:flex;flex-direction:column;gap:6px">
+          <span class="text-sm text-muted-foreground">This node</span>
+          <span class="font-mono" style="font-size:22px">{{ selfId }}</span>
+          <span class="font-mono text-xs text-muted-foreground">{{ selfPage }}</span>
+        </div>
+      </x-import>
+      <x-import component-from-global-scope="ZetaPortalUI.Card" hint-size="100%,120px">
+        <div style="padding:18px 20px;display:flex;flex-direction:column;gap:6px">
+          <span class="text-sm text-muted-foreground">Tabs alive</span>
+          <span class="font-semibold tracking-tight" style="font-size:26px">{{ tabs }}</span>
+          <span class="font-mono text-xs text-muted-foreground">beacon every 5s · dark after 12.5s silence</span>
+        </div>
+      </x-import>
+      <x-import component-from-global-scope="ZetaPortalUI.Card" hint-size="100%,120px">
+        <div style="padding:18px 20px;display:flex;flex-direction:column;gap:8px">
+          <span class="text-sm text-muted-foreground">Transports</span>
+          <div style="display:flex;align-items:center;gap:8px" class="text-sm">
+            <span style="width:7px;height:7px;border-radius:50%;background:hsl(var(--success));flex-shrink:0"></span>
+            <span>tabs · broadcastchannel</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px" class="text-sm">
+            <span style="width:7px;height:7px;border-radius:50%;background:{{ wsDotColor }};flex-shrink:0"></span>
+            <span>ws gateway</span>
+            <span class="text-muted-foreground font-mono text-xs" style="margin-left:auto">{{ wsStatus }}</span>
+          </div>
+        </div>
+      </x-import>
+    </div>
+
+    <!-- roster -->
+    <x-import component-from-global-scope="ZetaPortalUI.Card" hint-size="100%,220px">
+      <div style="padding:18px 20px 8px;display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+        <div>
+          <div class="font-semibold tracking-tight text-sm">Peer roster</div>
+          <div class="text-sm text-muted-foreground" style="margin-top:3px">Fold state, not history — replayed or reordered beacons are no-ops.</div>
+        </div>
+        <x-import component-from-global-scope="ZetaPortalUI.Button" variant="outline" size="sm" on-click="{{ onBeacon }}" hint-size="auto,32px">Beacon now</x-import>
+      </div>
+      <div style="padding:8px 20px 18px">
+        <div class="text-xs text-muted-foreground font-mono border-b border-border" style="display:grid;grid-template-columns:110px 1fr 120px 80px 90px;gap:12px;padding:6px 0;text-transform:uppercase;letter-spacing:.05em">
+          <span>node</span><span>surface</span><span>via</span><span>seq</span><span style="text-align:right">last seen</span>
+        </div>
+        <div class="border-b border-border" style="display:grid;grid-template-columns:110px 1fr 120px 80px 90px;gap:12px;padding:9px 0;align-items:center">
+          <span class="font-mono text-sm text-primary">{{ selfId }}</span>
+          <span class="text-sm">{{ selfPage }} <span class="text-muted-foreground">· this tab</span></span>
+          <span class="font-mono text-xs text-muted-foreground">local</span>
+          <span class="font-mono text-xs text-muted-foreground">—</span>
+          <span class="font-mono text-xs text-success" style="text-align:right">now</span>
+        </div>
+        <sc-for list="{{ peers }}" as="peer" hint-placeholder-count="2">
+          <div class="border-b border-border" style="display:grid;grid-template-columns:110px 1fr 120px 80px 90px;gap:12px;padding:9px 0;align-items:center">
+            <span class="font-mono text-sm">{{ peer.id }}</span>
+            <span class="text-sm">{{ peer.pageLabel }}</span>
+            <span class="font-mono text-xs text-muted-foreground">{{ peer.via }}</span>
+            <span class="font-mono text-xs text-muted-foreground">{{ peer.seq }}</span>
+            <span class="font-mono text-xs text-muted-foreground" style="text-align:right">{{ peer.ago }}</span>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noPeers }}" hint-placeholder-val="{{ false }}">
+          <div class="text-sm text-muted-foreground" style="padding:14px 0 4px">No other tabs in earshot. Open any zeta page in a second tab — it will appear here within one beacon.</div>
+        </sc-if>
+      </div>
+    </x-import>
+
+    <!-- gateway -->
+    <x-import component-from-global-scope="ZetaPortalUI.Card" hint-size="100%,150px">
+      <div style="padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+        <div>
+          <div class="font-semibold tracking-tight text-sm">Wide-area gateway</div>
+          <div class="text-sm text-muted-foreground" style="margin-top:3px">Bridge this tab beyond the browser via a Reticulum ws gateway. Without one, the tabs transport stays primary. Unreachable shows an honest error — never a fake green.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="flex:1;min-width:0">
+            <x-import component-from-global-scope="ZetaPortalUI.Input" placeholder="wss://gateway.zeta.example/rns" value="{{ wsUrl }}" on-change="{{ onWsUrl }}" hint-size="100%,36px"></x-import>
+          </div>
+          <x-import component-from-global-scope="ZetaPortalUI.Button" variant="{{ wsButtonVariant }}" on-click="{{ onWsConnect }}" hint-size="auto,36px">{{ wsButtonText }}</x-import>
+        </div>
+        <sc-if value="{{ wsError }}" hint-placeholder-val="{{ false }}">
+          <div class="text-sm text-destructive">Gateway unreachable. Presence continues on the tabs transport.</div>
+        </sc-if>
+      </div>
+    </x-import>
+
+    <div class="text-xs text-muted-foreground font-mono" style="display:flex;gap:16px;flex-wrap:wrap">
+      <span>protocol-compatible with gitpull.html + discovery-beacon.ts</span>
+      <span>·</span>
+      <a href="mesh.html" class="text-primary" style="text-decoration:none">switchboard diagnostics →</a>
+      <a href="index.html" class="text-primary" style="text-decoration:none">design-fiction site →</a>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { snap: null, wsUrl: "", now: Date.now() };
+
+  componentDidMount() {
+    this.wait = setInterval(() => {
+      if (window.ZetaMesh) { clearInterval(this.wait); this.attach(); }
+    }, 120);
+  }
+  componentWillUnmount() {
+    clearInterval(this.wait); clearInterval(this.tick);
+    if (this.sub && window.ZetaMesh) window.ZetaMesh.off(this.sub);
+  }
+  attach() {
+    try { this.setState({ wsUrl: localStorage.getItem("zeta-mesh-ws-url") || "" }); } catch (_) {}
+    this.sub = window.ZetaMesh.on((s) => this.setState({ snap: s }));
+    this.tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
+  }
+  ago(t) {
+    const s = Math.max(0, Math.round((Date.now() - t) / 1000));
+    return s < 60 ? s + "s ago" : Math.round(s / 60) + "m ago";
+  }
+
+  renderVals() {
+    const M = window.ZetaMesh;
+    const s = this.state.snap || (M ? M.snapshot() : null);
+    const tabs = s ? s.tabs : 1;
+    const alive = s ? s.alive : true;
+    const wsStatus = s ? s.wsStatus : "off";
+    const wsOn = wsStatus === "open" || wsStatus === "connecting";
+    const peers = (s ? s.peers : []).map((p) => ({
+      ...p,
+      pageLabel: p.page || "unknown surface",
+      ago: this.ago(p.seen),
+    }));
+    return {
+      selfId: M ? M.id : "…",
+      selfPage: "portal · presence",
+      tabs,
+      liveLabel: alive ? (tabs > 1 ? "mesh · " + tabs + " tabs" : "mesh · solo") : "mesh unavailable",
+      liveDotColor: alive ? "hsl(var(--success))" : "hsl(var(--destructive))",
+      liveDotAnim: alive && tabs > 1 ? "zp-breathe 2s infinite" : "none",
+      aliveBadgeVariant: alive ? "success" : "destructive",
+      aliveBadgeText: alive ? "zeta alive" : "offline",
+      wsStatus,
+      wsDotColor: wsStatus === "open" ? "hsl(var(--success))" : wsStatus === "error" ? "hsl(var(--destructive))" : wsStatus === "connecting" ? "hsl(var(--warning))" : "hsl(var(--muted-foreground))",
+      wsError: wsStatus === "error",
+      wsUrl: this.state.wsUrl,
+      wsButtonVariant: wsOn ? "secondary" : "default",
+      wsButtonText: wsOn ? "Disconnect" : "Connect",
+      onWsUrl: (e) => this.setState({ wsUrl: e.target.value }),
+      onWsConnect: () => {
+        if (!M) return;
+        if (wsOn) M.gateway("");
+        else if (this.state.wsUrl.trim()) M.gateway(this.state.wsUrl);
+      },
+      onBeacon: () => { if (M) M.announce(); },
+      peers,
+      noPeers: peers.length === 0,
+    };
+  }
+}
+</script>
+</body>
+</html>

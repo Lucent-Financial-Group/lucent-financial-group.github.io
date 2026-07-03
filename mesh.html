@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/styles.css">
+  <script src="_ds/design-system-f52fe130-fd0d-4310-93c2-19b6ce2a4ecc/_ds_bundle.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#0B0E16}
+    @keyframes zx-breathe{0%,100%{opacity:.4}50%{opacity:1}}
+  </style>
+</helmet>
+
+<div data-screen-label="Mesh Switchboard" style="min-height:100vh;background:radial-gradient(900px 500px at 70% -15%,#111a2e 0%,#0B0E16 60%);color:#E7EBF4;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:0 24px 64px">
+
+  <header style="width:100%;max-width:1060px;display:flex;align-items:center;gap:16px;padding:30px 4px 18px">
+    <div style="width:54px;height:54px;flex-shrink:0;border-radius:50%;border:3px solid #7a6c58;background:radial-gradient(circle at 50% 36%,#6a5e4e,#2c2620 72%);display:grid;place-items:center;box-shadow:inset 0 0 12px rgba(0,0,0,.6)">
+      <b style="font-family:'Space Mono',monospace;font-size:20px;color:#E8B566;text-shadow:0 0 10px rgba(232,181,102,.5)">ζ</b>
+    </div>
+    <div style="flex:1;min-width:0">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#5E6B8A">zeta · reticulum-shaped discovery</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;letter-spacing:.02em;margin-top:2px">The Switchboard</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#E8B566;margin-top:4px">if one tab is alive, zeta is alive</div>
+    </div>
+    <x-import component-from-global-scope="zeta-mesh-pip" from="./edge/zeta-mesh.js" hint-size="150px,24px"></x-import>
+    <a href="index.html" style="font-family:'Space Mono',monospace;font-size:11px;color:#94A0BC;text-decoration:underline;text-underline-offset:3px;flex-shrink:0">↑ surface</a>
+  </header>
+
+  <div style="width:100%;max-width:1060px;display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:14px;align-items:stretch">
+
+    <!-- this node -->
+    <div style="border:1px solid #26304A;border-radius:12px;background:#0E1220;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5E6B8A">this node</div>
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <span style="font-family:'Space Mono',monospace;font-size:26px;color:#E8B566">{{ selfId }}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d">{{ selfPage }}</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-top:auto">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:700;color:{{ tabsColor }}">{{ tabs }}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#94A0BC">{{ tabsWord }} alive</span>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d;line-height:1.6">a tab is presumed dark after two missed beacons (12.5s) or an announced 'dark' on pagehide — pause is not death.</div>
+    </div>
+
+    <!-- transports -->
+    <div style="border:1px solid #26304A;border-radius:12px;background:#0E1220;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5E6B8A">transports · same fold, any carrier</div>
+      <div style="display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px">
+        <span style="width:8px;height:8px;border-radius:50%;background:{{ bcDotColor }};box-shadow:0 0 8px 1px {{ bcDotColor }};flex-shrink:0"></span>
+        <span style="color:#c9d2e8">tabs · broadcastchannel</span>
+        <span style="color:#565f7d;margin-left:auto">{{ bcStatus }}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px">
+        <span style="width:8px;height:8px;border-radius:50%;background:{{ wsDotColor }};flex-shrink:0"></span>
+        <span style="color:#c9d2e8">ws gateway · rns bridge</span>
+        <span style="color:{{ wsDotColor }};margin-left:auto">{{ wsStatus }}</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:auto">
+        <input value="{{ wsUrl }}" onChange="{{ onWsUrl }}" placeholder="wss:// gateway url" spellcheck="false" style="flex:1;min-width:0;background:#0B0E16;border:1px solid #26304A;border-radius:8px;color:#c9d2e8;font-family:'Space Mono',monospace;font-size:11px;padding:7px 10px;outline:none"></input>
+        <button onClick="{{ onWsConnect }}" style="background:none;border:1px solid #26304A;border-radius:8px;color:#5EC8C2;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px;cursor:pointer">{{ wsButton }}</button>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d;line-height:1.6">no gateway → tabs transport stays primary. unreachable shows an honest error, never a fake green.</div>
+    </div>
+
+    <!-- actions -->
+    <div style="border:1px solid #26304A;border-radius:12px;background:#0E1220;padding:16px 18px;display:flex;flex-direction:column;gap:9px">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5E6B8A">prove it</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <a href="mesh.html" target="_blank" style="display:block;text-align:center;text-decoration:none;border:1px solid #2a4a44;border-radius:8px;color:#5EC8C2;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 10px" style-hover="background:rgba(94,200,194,.08)">open a twin tab</a>
+        <button onClick="{{ onAnnounce }}" style="background:none;border:1px solid #26304A;border-radius:8px;color:#c9d2e8;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 10px;cursor:pointer" style-hover="background:rgba(148,160,188,.08)">beacon now</button>
+        <button onClick="{{ onSim }}" style="background:none;border:1px solid #26304A;border-radius:8px;color:#c9d2e8;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 10px;cursor:pointer" style-hover="background:rgba(148,160,188,.08)">inject sim peer</button>
+        <button onClick="{{ onReplay }}" style="background:none;border:1px solid #4a3e30;border-radius:8px;color:#E8B566;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 10px;cursor:pointer" style-hover="background:rgba(232,181,102,.08)">out-of-order replay</button>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:{{ replayColor }};line-height:1.6;margin-top:auto">replay test · {{ replayLabel }}</div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d;line-height:1.6">the fold is LWW-by-seq per id — commutative + idempotent. seq5 then seq3 must hold seq5. sim peers never re-beacon, so watch the TTL reap them.</div>
+    </div>
+  </div>
+
+  <!-- roster -->
+  <div style="width:100%;max-width:1060px;border:1px solid #26304A;border-radius:12px;background:#0E1220;margin-top:14px;overflow:hidden">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #1a2136">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5E6B8A">roster · peers this tab can hear</span>
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d">fold state, not history — replays are no-ops</span>
+    </div>
+    <sc-for list="{{ peers }}" as="peer" hint-placeholder-count="2">
+      <div style="display:grid;grid-template-columns:110px 1fr 110px 90px 90px;gap:12px;padding:9px 16px;border-bottom:1px solid #141a2b;font-family:'Space Mono',monospace;font-size:11px;align-items:baseline">
+        <span style="color:#5EC8C2">{{ peer.id }}</span>
+        <span style="color:#94A0BC">{{ peer.pageLabel }}</span>
+        <span style="color:#565f7d">via {{ peer.via }}</span>
+        <span style="color:#565f7d">seq {{ peer.seq }}</span>
+        <span style="color:#565f7d;text-align:right">{{ peer.ago }} ago</span>
+      </div>
+    </sc-for>
+    <sc-if value="{{ noPeers }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:16px;font-family:'Space Mono',monospace;font-size:11px;color:#565f7d">no other tabs yet · open a twin tab, or visit any zeta page in another tab — they all carry the node.</div>
+    </sc-if>
+  </div>
+
+  <!-- event log -->
+  <div style="width:100%;max-width:1060px;border:1px solid #26304A;border-radius:12px;background:#0A0D16;margin-top:14px;overflow:hidden">
+    <div style="padding:10px 16px;border-bottom:1px solid #1a2136;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5E6B8A">event log · newest first</div>
+    <div style="max-height:260px;overflow-y:auto;padding:8px 16px 12px">
+      <sc-for list="{{ lines }}" as="line" hint-placeholder-count="3">
+        <div style="display:flex;gap:12px;padding:3px 0;font-family:'Space Mono',monospace;font-size:11px;line-height:1.5">
+          <span style="color:#3f4763;flex-shrink:0">{{ line.t }}</span>
+          <span style="color:{{ line.color }}">{{ line.text }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- embed -->
+  <sc-if value="{{ showEmbed }}" hint-placeholder-val="{{ true }}">
+    <div style="width:100%;max-width:1060px;border:1px solid #26304A;border-radius:12px;background:#0E1220;margin-top:14px;padding:16px 18px">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5E6B8A;margin-bottom:10px">carry the node · two lines on any page</div>
+      <pre style="margin:0;background:#0B0E16;border:1px solid #1a2136;border-radius:8px;padding:12px 14px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.7;color:#c9d2e8;overflow-x:auto">&lt;script src="edge/zeta-mesh.js"&gt;&lt;/script&gt;
+&lt;zeta-mesh-pip&gt;&lt;/zeta-mesh-pip&gt;          <span style="color:#565f7d">// inline chip · add `float` to open its panel upward</span></pre>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:#565f7d;line-height:1.7;margin-top:10px">protocol-compatible with gitpull.html and src/Core.TypeScript/discovery — same channel, same identity key, same beacon shape. window.ZetaMesh: id · snapshot() · on/off · announce() · send() · inject() · gateway(url).</div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEmbed&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { snap: null, lines: [], wsUrl: "", replay: "untested", now: Date.now() };
+
+  componentDidMount() {
+    this.wait = setInterval(() => {
+      if (window.ZetaMesh) { clearInterval(this.wait); this.attach(); }
+    }, 120);
+  }
+  componentWillUnmount() {
+    clearInterval(this.wait); clearInterval(this.tick);
+    if (this.sub && window.ZetaMesh) window.ZetaMesh.off(this.sub);
+  }
+
+  attach() {
+    this.prevPeers = {};
+    try { this.setState({ wsUrl: localStorage.getItem("zeta-mesh-ws-url") || "" }); } catch (_) {}
+    this.log("node " + window.ZetaMesh.id + " up · this page carries the mesh", "#5EC8C2");
+    this.sub = window.ZetaMesh.on((s) => this.apply(s));
+    this.tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
+  }
+
+  apply(s) {
+    const prev = this.prevPeers || {};
+    const cur = {};
+    for (const p of s.peers) {
+      cur[p.id] = p;
+      if (!prev[p.id]) this.log("peer " + p.id + " discovered via " + p.via + " · " + (p.page || "?") + (p.sim ? " · sim" : ""), "#5EC8C2");
+    }
+    for (const k in prev) if (!cur[k]) this.log("peer " + k + " went dark (announced, or two beacons missed)", "#8b96b4");
+    this.prevPeers = cur;
+    this.setState({ snap: s });
+  }
+
+  log(text, color) {
+    this.setState((st) => ({
+      lines: [{ t: new Date().toLocaleTimeString(), text, color: color || "#565f7d" }, ...st.lines].slice(0, 60),
+    }));
+  }
+
+  ago(t) {
+    const s = Math.max(0, Math.round((Date.now() - t) / 1000));
+    return s < 60 ? s + "s" : Math.round(s / 60) + "m";
+  }
+
+  renderVals() {
+    const M = window.ZetaMesh;
+    const s = this.state.snap || (M ? M.snapshot() : null);
+    const tabs = s ? s.tabs : 1;
+    const wsStatus = s ? s.wsStatus : "off";
+    const alive = s ? s.alive : true;
+    const peers = (s ? s.peers : []).map((p) => ({
+      ...p,
+      pageLabel: p.page || "?",
+      ago: this.ago(p.seen),
+    }));
+    const replay = this.state.replay;
+    return {
+      selfId: M ? M.id : "…",
+      selfPage: "mesh.html · this tab",
+      tabs,
+      tabsWord: tabs === 1 ? "tab" : "tabs",
+      tabsColor: tabs > 1 ? "#5EC8C2" : "#94A0BC",
+      bcStatus: alive || wsStatus === "open" ? "live" : "unavailable",
+      bcDotColor: alive ? "#5EC8C2" : "#e0746a",
+      wsStatus,
+      wsDotColor: wsStatus === "open" ? "#5EC8C2" : wsStatus === "error" ? "#e0746a" : wsStatus === "connecting" ? "#E8B566" : "#3f4763",
+      wsButton: wsStatus === "open" || wsStatus === "connecting" ? "drop" : "connect",
+      wsUrl: this.state.wsUrl,
+      onWsUrl: (e) => this.setState({ wsUrl: e.target.value }),
+      onWsConnect: () => {
+        if (!M) return;
+        const open = (this.state.snap || {}).wsStatus === "open" || (this.state.snap || {}).wsStatus === "connecting";
+        if (open) { M.gateway(""); this.log("gateway dropped · tabs transport stays primary", "#8b96b4"); }
+        else if (this.state.wsUrl.trim()) { this.log("gateway dialing · " + this.state.wsUrl.trim(), "#E8B566"); M.gateway(this.state.wsUrl); }
+        else this.log("no gateway url — tabs transport stays primary", "#8b96b4");
+      },
+      onAnnounce: () => { if (M) { M.announce(); this.log("beacon sent · seq bumps, peers fold it once", "#94A0BC"); } },
+      onSim: () => {
+        if (!M) return;
+        const id = "sim-" + Math.random().toString(16).slice(2, 6);
+        M.inject({ v: 1, kind: "beacon", id, seq: 1, page: "simulated", t: Date.now(), sim: true });
+        this.log("sim peer " + id + " injected locally · it never re-beacons — the TTL will reap it in ~12s", "#94A0BC");
+      },
+      onReplay: () => {
+        if (!M) return;
+        const id = "rp-" + Math.random().toString(16).slice(2, 6);
+        M.inject({ v: 1, kind: "beacon", id, seq: 5, page: "replay·seq5", t: Date.now(), sim: true });
+        M.inject({ v: 1, kind: "beacon", id, seq: 3, page: "replay·seq3·stale", t: Date.now(), sim: true });
+        const p = M.snapshot().peers.find((x) => x.id === id);
+        const ok = !!p && p.seq === 5;
+        this.setState({ replay: ok ? "pass" : "fail" });
+        this.log("replay: sent seq5 then seq3 for " + id + " · roster holds seq" + (p ? p.seq : "?") + " → " + (ok ? "idempotent ✓" : "BROKEN ✗"), ok ? "#5EC8C2" : "#e0746a");
+      },
+      replayLabel: replay === "untested" ? "untested — press the amber button" : replay === "pass" ? "pass · stale seq3 was a no-op" : "FAIL · the fold regressed",
+      replayColor: replay === "pass" ? "#5EC8C2" : replay === "fail" ? "#e0746a" : "#565f7d",
+      peers,
+      noPeers: peers.length === 0,
+      lines: this.state.lines,
+      showEmbed: this.props.showEmbed ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>
