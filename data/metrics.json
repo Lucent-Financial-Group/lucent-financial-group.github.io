@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated": "2026-07-09T04:08:08Z",
+  "generated": "2026-07-10T09:15:00Z",
   "provenance": {
     "producer": "ci",
     "transport": "same-origin static fetch",
@@ -8,24 +8,19 @@
     "note": "Live frame from tools/dora/compute-dora-frame.mjs (Zeta git+PR). active_agents = distinct AgencySignature persona: trailers in the 24h window (an attributable floor). Page reads this raw over https."
   },
   "metrics": {
-    "prs_merged_24h": 94,
-    "prs_merged_1h": 5,
-    "avg_lead_time_minutes": 7,
+    "prs_merged_24h": 59,
+    "prs_merged_1h": 3,
+    "avg_lead_time_minutes": 5,
     "open_prs": 6,
-    "last_merge": "2026-07-09T04:08:08Z",
-    "commits_24h": 126,
-    "commits_1h": 10,
-    "active_agents": 2
+    "last_merge": "2026-07-10T09:15:00Z",
+    "commits_24h": 70,
+    "commits_1h": 3,
+    "active_agents": 1
   },
   "agents": [
     {
       "name": "Otto",
       "harness": "Claude Code",
-      "status": "active"
-    },
-    {
-      "name": "Vera",
-      "harness": "agent",
       "status": "active"
     }
   ]
