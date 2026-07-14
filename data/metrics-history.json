@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "updated": "2026-07-12T04:18:51Z",
+  "updated": "2026-07-13T13:14:23Z",
   "provenance": {
     "producer": "ci",
     "contract": "CI appends one frame object per scheduled run (or per merge window) and commits to main. Consumers read this file raw over same-origin https \u2014 no GitHub API, no tokens, no rate limits. Frames are append-only; the file IS the ledger.",
@@ -166,6 +166,14 @@
       "avg_lead_time_minutes": 146,
       "commits_24h": 113,
       "active_agents": 1,
+      "open_prs": 2
+    },
+    {
+      "t": "2026-07-13",
+      "prs_merged_24h": 1,
+      "avg_lead_time_minutes": 0,
+      "commits_24h": 18,
+      "active_agents": 0,
       "open_prs": 2
     }
   ]
