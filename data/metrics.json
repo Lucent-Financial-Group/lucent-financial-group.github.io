@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated": "2026-08-07T07:17:33Z",
+  "generated": "2026-08-07T20:59:50Z",
   "provenance": {
     "producer": "ci",
     "transport": "same-origin static fetch",
@@ -8,13 +8,13 @@
     "note": "Live frame from tools/dora/compute-dora-frame.mjs (Zeta git+PR). active_agents = distinct AgencySignature persona: trailers in the 24h window (an attributable floor). Page reads this raw over https."
   },
   "metrics": {
-    "prs_merged_24h": 45,
-    "prs_merged_1h": 5,
-    "avg_lead_time_minutes": 44,
-    "open_prs": 2,
-    "last_merge": "2026-08-07T07:17:33Z",
-    "commits_24h": 79,
-    "commits_1h": 9,
+    "prs_merged_24h": 75,
+    "prs_merged_1h": 4,
+    "avg_lead_time_minutes": 0,
+    "open_prs": 1,
+    "last_merge": "2026-08-07T20:59:50Z",
+    "commits_24h": 148,
+    "commits_1h": 47,
     "active_agents": 0
   },
   "agents": []
