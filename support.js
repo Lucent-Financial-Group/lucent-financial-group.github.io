@@ -1255,10 +1255,10 @@
       const bg = appTheme === "dark" ? CANVAS_BG_DARK : CANVAS_BG_LIGHT;
       canvasStyleEl.textContent = `html,body{background:${bg}}#dc-root>.sc-host{position:relative}`;
     }
-    function postDesignMode(mode) {
+    function postDesignMode(mode, targetOrigin) {
       if (window.parent === window) return;
       try {
-        window.parent.postMessage({ type: "__dc_design_mode", mode }, "*");
+        window.parent.postMessage({ type: "__dc_design_mode", mode }, targetOrigin || "*");
       } catch {
       }
     }
@@ -1279,6 +1279,21 @@
       }
     }
     window.addEventListener("message", (e) => {
+      // ONLY THE EMBEDDER MAY DRIVE THIS SURFACE (CodeQL js/missing-origin-check).
+      //
+      // This page is a framed design-canvas surface: `postDesignMode` and `notifyHost` both
+      // return early when `window.parent === window`, so the only legitimate peer is the frame
+      // that embedded us. Without a check, ANY window holding a handle to this one could flip
+      // the theme, and — worse — send `__dc_probe` and receive `designDocMode` back, which is
+      // this page's internal state disclosed to a window that was never invited.
+      //
+      // An origin ALLOWLIST is deliberately not written here: the canvas host's origin genuinely
+      // varies by environment, and a list guessed wrong would break the integration silently —
+      // which is the failure mode worth avoiding more than the one being fixed. Peer WINDOW
+      // identity is the check that is both available and exact, so messages are accepted only
+      // from the parent frame, and the probe reply below is addressed to THAT frame's origin
+      // instead of to `*`.
+      if (window.parent === window || e.source !== window.parent) return;
       const type = e.data && e.data.type;
       if (type === "__dc_theme") {
         const t = e.data.theme;
@@ -1290,7 +1305,16 @@
         return;
       }
       if (!designDocMode || type !== "__dc_probe") return;
-      postDesignMode(designDocMode);
+      // Addressed to the asker's own origin rather than `*`. SECONDARY, and worth stating
+      // honestly: `window.parent.postMessage(..., "*")` already targets exactly ONE window, so
+      // `*` was never a broadcast — it only waived the assertion that the parent still has the
+      // origin it had a moment ago. The inbound `e.source` check above is the fix; this narrows
+      // a real but much smaller window (a parent that navigates between ask and reply).
+      //
+      // A sandboxed or `file://` parent reports the opaque origin `"null"`, which postMessage
+      // rejects as a targetOrigin. Falling back to `*` there keeps the integration working and
+      // costs nothing extra, because the recipient window is pinned either way.
+      postDesignMode(designDocMode, e.origin && e.origin !== "null" ? e.origin : "*");
     });
     function compile(node) {
       const raw = [...node.children];
