@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated": "2026-11-04T07:52:38Z",
+  "generated": "2026-11-05T19:22:16Z",
   "provenance": {
     "producer": "ci",
     "transport": "same-origin static fetch",
@@ -10,9 +10,9 @@
   "metrics": {
     "prs_merged_24h": 2,
     "prs_merged_1h": 2,
-    "avg_lead_time_minutes": 4,
+    "avg_lead_time_minutes": 49,
     "open_prs": 1,
-    "last_merge": "2026-11-04T07:52:38Z",
+    "last_merge": "2026-11-05T19:22:16Z",
     "commits_24h": 2,
     "commits_1h": 2,
     "active_agents": 0
